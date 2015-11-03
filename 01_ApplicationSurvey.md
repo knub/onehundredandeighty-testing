@@ -5,7 +5,7 @@
 * no TDD
 
 ## Requirements? Specification? Documentation? Other artefacts available?
-* Specification: Studienordnung des HPI
+* Specification: Studienordnung des HPI --> TODO Vorstellung Regeln, Vertiefungsgebiete
 * Waterfall
 
 ## Current testing status, approach? Bug repositories?
@@ -15,3 +15,9 @@
 ## What is your current personal involvement in the application? Developer, tester, user, etc.?
 * 1 Developer and User
 * 2 User
+
+
+## Stakeholders
+
+* Students
+* HPI Studienverwaltung

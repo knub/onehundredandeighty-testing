@@ -6,6 +6,7 @@
 
 ## Requirements? Specification? Documentation? Other artefacts available?
 * Specification: Studienordnung des HPI --> TODO Vorstellung Regeln, Vertiefungsgebiete
+*vertrauliche Daten: kein Sharen über das Internet
 * Waterfall
 
 ## Current testing status, approach? Bug repositories?

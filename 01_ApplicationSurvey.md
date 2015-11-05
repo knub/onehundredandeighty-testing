@@ -3,7 +3,7 @@
 ## Überblick über die Anwendung
 
 ### Sinn und Zweck
-180 ist eine Web-Anwendung, die Bachelor-Studenten des Hasso-Plattner-Instituts dabei unterstuetzt, eine korrekte Belegung zu finden, und somit ihr Bachelorstudium erfolgreich zu beenden. Durch die Wahl von unterschiedlichen Vertiefungsgebieten sowie die Tatsache, dass viele Veranstaltungen mehreren Vertiefungsgebieten zuordenbar sind, kann es schwierig werden, eine korrekte Belegung zu finden. 
+180 ist eine Web-Anwendung, die Bachelor-Studenten des Hasso-Plattner-Instituts dabei unterstützt, eine korrekte Belegung zu finden, und somit ihr Bachelorstudium erfolgreich zu beenden. Durch die Wahl von unterschiedlichen Vertiefungsgebieten sowie die Tatsache, dass viele Veranstaltungen mehreren Vertiefungsgebieten zuordenbar sind, kann es schwierig werden, eine korrekte Belegung zu finden. 
 
 Der Name 180 stammt von den 180 Leistungspunkten, die erforderlich sind, um das Bachelorstudium erfolgreich abzuschließen.
 Es existiert desweiteren ein Schwesterprojekt namens 120, das von Masterstudenten des HPIs genutzt werden kann, und das den gleichen Zweck verfolgt.
@@ -33,9 +33,9 @@ Obwohl es damit keine Spezifikation im klassischen Sinne gibt, sind dennoch die 
 
 Analyse der bisherigen Issues:
 * 2 * Feature-Requests nach Berechnung der Gesamtnote --> abgelehnt
-* 1 * Syntaxfehler, der die Ausfuehrung des Programmes unmoeglich machte
+* 1 * Syntaxfehler, der die Ausführung des Programmes unmöglich machte
 * 1 * Feature-Request nach variabler Anzahl der Semester, der teilweise umgesetzt wurde.
-* 1 * (Issue)[https://github.com/knub/onehundredandeighty/pull/5] aufgrund einer Aenderung der Wirtschaftsvorlesung, die statt zwei 3-LP-Veranstaltungen ab dem WS11/12 als eine 6-LP-Veranstaltung angeboten wurden.
+* 1 * (Issue)[https://github.com/knub/onehundredandeighty/pull/5] aufgrund einer Änderung der Wirtschaftsvorlesung, die statt zwei 3-LP-Veranstaltungen ab dem WS11/12 als eine 6-LP-Veranstaltung angeboten wurden.
 
 
 ### Beziehung/Einbindung zu Applikation? Entwickler, Tester, Nutzer?

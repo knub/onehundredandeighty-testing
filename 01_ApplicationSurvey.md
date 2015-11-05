@@ -10,26 +10,30 @@ Es existiert desweiteren ein Schwesterprojekt namens 120, das von Masterstudente
 Dieses Dokument befasst sich allerdings nur mit 180.
 
 ### Entwicklungsparadigma und Programmiersprache
-<!--- Which development paradigm? Which development language(s)? --->
+<!--- Which development paradigm? Which development language(s)? -->
 * Javascript
 * no TDD
 
 ### Anforderungen, Spezifikation und Dokumentation?
-<!--- Requirements? Specification? Documentation? Other artefacts available? --->
+<!--- Requirements? Specification? Documentation? Other artefacts available? -->
 Die Anwendungen wurde aus dem persönlichen Bedarf heraus entwickelt, und es gab keinen externen Auftraggeber. Der Entwickler war Stefan Bunk.
 
 Obwohl es damit keine Spezifikation im klassischen Sinne gibt, sind dennoch die zu implementierenden Regeln genau festgelegt: In der **TODO: Titel Studienordnung**, der Studienordnung für den Bachelor- und Masterstudiengang am HPI.
 
 
 * Specification: Studienordnung des HPI --> TODO Vorstellung Regeln, Vertiefungsgebiete
-*vertrauliche Daten: kein Sharen über das Internet
+* vertrauliche Daten: kein Sharen über das Internet
 * Waterfall
 
-### Current testing status, approach? Bug repositories?
-* no tests
+### Aktueller Teststatus, Ziele der Tests? Bug Repositories?
+<!---### Current testing status, approach? Bug repositories?-->
+* keine automatisiertes Tests
+* manuelle Tests
 * [Issues from Github](https://github.com/knub/onehundredandeighty/issues?utf8=%E2%9C%93&q=is%3Aissue)
 
-### What is your current personal involvement in the application? Developer, tester, user, etc.?
+
+### Beziehung/Einbindung zu Applikation? Entwickler, Tester, Nutzer?
+<!--- ### What is your current personal involvement in the application? Developer, tester, user, etc.? -->
 * 1 Developer and User
 * 2 User
 

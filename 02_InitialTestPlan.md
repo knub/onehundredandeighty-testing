@@ -1,17 +1,24 @@
 # Initial Test Plan
 
-## 1. When do verification and validation start? When are they complete?
+## 1. Wann beginnen Verifikation und Validation? Wann sind sie beendet?
+<!--- When do verification and validation start? When are they complete? -->
 
-### Validation: Das ist richtige machen
+### Validation: Die richtige Anwendung bauen!
+
+180 wurde entwickelt unter der Annahme, dass es für jeden Studenten kompliziert ist, sein Studium entsprechend der Studienordnung zu planen. Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen. [Beispiel?] In diesem Bereich lässt die Studienordnung einen großen Spielraum zu, der entsprechend der eigenen Interesseren ausgefüllt werden kann aber auch muss. Die Menge aller gültigen Belegungen ist damit sehr groß, übersieht man allerdings eine einzige Bedingung führt dies zu einem ungültigen Belegungsplan. Merkt man dies nicht rechtzeitig, muss im schlimmsten Fall ein weiteres Semester im Bachelorstudium eingeplant werden.
+
+Daher ist die Idee von 180 diese manuelle und fehleranfällige Prüfung zu automatisieren. Da die Regeln der Studienordnung sich nicht schnell ändern (mehr zu möglichen Änderungen der Studienordnung weiter unten [vielleicht als Footnote]), genügt es, die Regeln einmal korrekt zu implementieren.
+Daher ist dies auch der wichtigste Punkt der Validierung: Die Anwendung muss genau dann ausgeben, dass ein Belegungsplan valide ist, wenn er nach den Paragraphen der Studienordnung korrekt ist. Kann die Anwendung dies nicht garantieren, ist sie nahezu nutzlos. Wird der Anwendung nicht vertraut, wird sie niemand nutzen, da sowieso eine manuelle Prüfung notwendig wird.
+
+Desweiteren gibt es ein weiteres 
 
 * nur Wünsche von Studenten erfüllt, wenn komplette Studienordnung richtig abgedeckt ist
 * Studienordnung ist eine externe Spezifikation, keine interne
-* Anwendung unter der Annahme entwickelt, dass Planung der Belegung kompliziert ist, wenn man alle Regeln beachten muss
 * Wenn alles geregelt wäre, bräuchte man die Anwendung nicht. Da es aber einen großen Spielraum und eine große Menge an gültigen Belegungen gibt,da jedes Semester neue Fächer mit eigenen Vertiefungsregeln dazu kommen (**TODO exemplar* ist eine Anwendung zur Unterstützung hilfreich.
 * Start: PEM 
 * End: 
 
-### Verification: 
+### Verifikation: Die Anwendung richtig bauen! 
 Das was gemacht wird, richtig gemacht wird -- Specification erfüllen
 
 * Anwendung muss mit Studienordnung übereinstimmen (alle Regeln richtig abdecken)

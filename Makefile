@@ -1,7 +1,26 @@
+PDFVIEWER=evince
+FILE=testing
 
 show: build
-	evince *.pdf
+	$(PDFVIEWER) $(FILE).pdf &
+
+plot:
+	cd plots && build
+
+convert:
+	cd plots && make convert
 
 build:
-	pandoc -S -f markdown -o output.pdf  *.md
+	@mkdir -p .output
+	@pdflatex -interaction=nonstopmode -halt-on-error -output-directory .output -jobname=$(FILE) $(FILE).tex 1>&2 > .output/error
+	@mv .output/$(FILE).pdf .
 
+error:
+	@vim + .output/error
+
+
+bibtex:
+	@cp $(FILE).bib .output/ && cd .output && bibtex $(FILE) && cd ..
+
+clean:
+	rm .output/*.aux .output/*.log

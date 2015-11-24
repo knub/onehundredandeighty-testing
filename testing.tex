@@ -1,0 +1,374 @@
+\documentclass[]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{0}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{180: Testen, Verifizieren,
+Analysieren}\label{testen-verifizieren-analysieren}
+
+\subsection{Überblick über die
+Anwendung}\label{uxfcberblick-uxfcber-die-anwendung}
+
+\subsubsection{Sinn und Zweck}\label{sinn-und-zweck}
+
+180 ist eine Web-Anwendung, die Bachelor-Studenten des
+Hasso-Plattner-Instituts dabei unterstützt, eine korrekte Belegung zu
+finden, und somit ihr Bachelorstudium erfolgreich zu beenden. Durch die
+Wahl von unterschiedlichen Vertiefungsgebieten sowie die Tatsache, dass
+viele Veranstaltungen mehreren Vertiefungsgebieten zuordenbar sind, kann
+es schwierig werden, eine korrekte Belegung zu finden.
+
+Der Name 180 stammt von den 180 Leistungspunkten, die erforderlich sind,
+um das Bachelorstudium erfolgreich abzuschließen. Es existiert
+desweiteren ein Schwesterprojekt namens 120, das von Masterstudenten des
+HPIs genutzt werden kann, und das den gleichen Zweck verfolgt. Dieses
+Dokument befasst sich allerdings nur mit 180.
+
+\subsubsection{Entwicklungsparadigma und
+Programmiersprache}\label{entwicklungsparadigma-und-programmiersprache}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Javascript
+\item
+  no TDD
+\end{itemize}
+
+\subsubsection{Anforderungen, Spezifikation und
+Dokumentation?}\label{anforderungen-spezifikation-und-dokumentation}
+
+Die Anwendungen wurde aus dem persönlichen Bedarf heraus entwickelt, und
+es gab keinen externen Auftraggeber. Der Entwickler war Stefan Bunk.
+
+Obwohl es damit keine Spezifikation im klassischen Sinne gibt, sind
+dennoch die zu implementierenden Regeln genau festgelegt: In der
+\textbf{TODO: Titel Studienordnung}, der Studienordnung für den
+Bachelor- und Masterstudiengang am HPI.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Specification: Studienordnung des HPI --\textgreater{} TODO
+  Vorstellung Regeln, Vertiefungsgebiete
+\item
+  vertrauliche Daten: kein Sharen über das Internet
+\item
+  Waterfall
+\end{itemize}
+
+\subsubsection{Aktueller Teststatus, Ziele der Tests? Bug
+Repositories?}\label{aktueller-teststatus-ziele-der-tests-bug-repositories}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  keine automatisiertes Tests
+\item
+  manuelle Tests
+\item
+  \href{https://github.com/knub/onehundredandeighty/issues?utf8=\%E2\%9C\%93\&q=is\%3Aissue}{Issues
+  from Github}
+\end{itemize}
+
+Analyse der bisherigen Issues: * 2 * Feature-Requests nach Berechnung
+der Gesamtnote --\textgreater{} abgelehnt * 1 * Syntaxfehler, der die
+Ausführung des Programmes unmöglich machte * 1 * Feature-Request nach
+variabler Anzahl der Semester, der teilweise umgesetzt wurde. * 1 *
+(Issue){[}https://github.com/knub/onehundredandeighty/pull/5{]} aufgrund
+einer Änderung der Wirtschaftsvorlesung, die statt zwei
+3-LP-Veranstaltungen ab dem WS11/12 als eine 6-LP-Veranstaltung
+angeboten wurden.
+
+\subsubsection{Beziehung/Einbindung zu Applikation? Entwickler, Tester,
+Nutzer?}\label{beziehungeinbindung-zu-applikation-entwickler-tester-nutzer}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  1 Developer and User
+\item
+  2 User
+\end{itemize}
+
+\subsubsection{Stakeholders}\label{stakeholders}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Students
+\item
+  HPI Studienverwaltung
+\end{itemize}
+
+\section{Initial Test Plan}\label{initial-test-plan}
+
+\subsection{1. Wann beginnen Verifikation und Validation? Wann sind sie
+beendet?}\label{wann-beginnen-verifikation-und-validation-wann-sind-sie-beendet}
+
+\subsubsection{Validation: Die richtige Anwendung
+bauen!}\label{validation-die-richtige-anwendung-bauen}
+
+180 wurde entwickelt unter der Annahme, dass es für jeden Studenten
+kompliziert ist, sein Studium entsprechend der Studienordnung zu planen.
+Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist
+kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen.
+{[}Beispiel?{]} In diesem Bereich lässt die Studienordnung einen großen
+Spielraum zu, der entsprechend der eigenen Interesseren ausgefüllt
+werden kann aber auch muss. Die Menge aller gültigen Belegungen ist
+damit sehr groß, übersieht man allerdings eine einzige Bedingung führt
+dies zu einem ungültigen Belegungsplan. Merkt man dies nicht
+rechtzeitig, muss im schlimmsten Fall ein weiteres Semester im
+Bachelorstudium eingeplant werden.
+
+Daher ist die Idee von 180 diese manuelle und fehleranfällige Prüfung zu
+automatisieren. Da die Regeln der Studienordnung sich nicht schnell
+ändern (mehr zu möglichen Änderungen der Studienordnung weiter unten
+{[}vielleicht als Footnote{]}), genügt es, die Regeln einmal korrekt zu
+implementieren. Daher ist dies auch der zentrale Punkt der Validierung:
+Die Anwendung muss genau dann ausgeben, dass ein Belegungsplan valide
+ist, wenn er nach den Paragraphen der Studienordnung korrekt ist. Kann
+die Anwendung dies nicht garantieren, ist sie nahezu nutzlos. Wird der
+Anwendung nicht vertraut, wird sie niemand nutzen, da sowieso eine
+manuelle Prüfung notwendig wird.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  nur Wünsche von Studenten erfüllt, wenn komplette Studienordnung
+  richtig abgedeckt ist
+\item
+  Start: PEM, End:
+\end{itemize}
+
+\subsubsection{Verifikation: Die Anwendung richtig
+bauen!}\label{verifikation-die-anwendung-richtig-bauen}
+
+Um die Anwendung richtig zu bauen, folgt man der Spezifikation. In
+diesem Fall gibt es keine interne, von den Entwicklern gemeinsam mit den
+Anwendern festgelegte Spezifikation. Allerdings gibt es eine externe
+Spezifikation: die Studienordnung. Diese wurde zwar nicht mit dem Ziel
+geschrieben, als Grundlage für die Entwicklung einer Anwendung zu
+stehen, doch definiert sie sehr genau die Anforderungen an einen
+korrekten Belegungsplan. Wir betrachen daher im Folgenden die
+Studienordnung als die Spezifikation für 180. Erfüllt 180 am Ende alle
+Paragraphen der Studienordnung mit im Programm implementierten Regeln,
+ist das Programm korrekt.
+
+{[}folgenden Absatz an einen besseren Platz verschieben{]} Die
+Studienordnung ist als Artefakt sehr statisch, sie ändert sich nahezu
+nie. Zusätzlich zur Studienordnung sind aber die halbjährlich
+erscheinenden Vorlesungsverzeichnisse relevante Artefakte für 180.
+
+\begin{itemize}
+\item
+  niemals komplett, da jedes Semester neue Fächer mit eigenen
+  Vertiefungsregeln dazu kommen (\textbf{TODO exemplar})
+\item
+  Start: manuell zu Begin des Projektes
+\item
+  Tests sollten eher sein, sind aber erst am Ende der Entwicklung
+\item
+  permanente V\&V notwenig, Grund für TestProjekt
+\end{itemize}
+
+\subsection{2. Welche Technologien sollen während der Entwicklung
+angewandt
+werden?}\label{welche-technologien-sollen-wuxe4hrend-der-entwicklung-angewandt-werden}
+
+\begin{itemize}
+\item
+  TDD
+\item
+  static analysis --\textgreater{} bis jetzt gar nicht umgesetzt
+\item
+  Randomisierte Tests bieten sich nicht an, Zuverlässigkeit am besten
+  über genau Tests.
+\end{itemize}
+
+Laut dem ursprünglichen Paper von D. Hamlet über Random Testing.
+\textgreater{} The {[}..{]} meaning of ``random testing'' refers to an
+explicit lack of ``system'' in the choice of test data, so that there is
+no correlation among different tests.
+
+In unserem Fall müssen die Testfälle aber sehr genau auspezifiert sein,
+um bestimmte Grenzfälle abzudecken. Eine zufällige Belegung wird nahezu
+immer falsch sein.
+
+Tradeoff Kosten-Korrektheit: Bei uns ganz klar in Richtung Korrektheit.
+Korrektheit ist oberstes Gut, weil eine fälschlicherweise korrekte
+Belegung unschöne Folgen haben kann.
+
+Macht die Anwendung unnnutzbar, wenn man sich nicht darauf verlassen
+kann.
+
+\subsection{3. Wann ist die Anwendung bereit für eine
+Veröffentlichung?}\label{wann-ist-die-anwendung-bereit-fuxfcr-eine-veruxf6ffentlichung}
+
+Wir definieren Fertigkeit (``readiness'') auf Basis von drei Faktoren: *
+\textbf{Korrektheit}: Wie bereits im ersten Abschnitt erwähnt ist die
+Korrektheit der Anwendung das wichtigste Kriterium. Alle Regeln der
+Studienordung müssen korrekt implementiert und abgedeckt sein. *
+\textbf{Vertraulichkeit}: Die Daten des Nutzers verbleiben immer auf dem
+lokalen Rechner und werden insbesondere nicht in einer Datenbank
+gespeichert. Der Belegungsplan eines Nutzers sollte privat bleiben und
+für den Betreiber des Servers niemals einsehbar sein. *
+\textbf{Usability}: Die Webseite sollte gut zu benutzen sein.
+Insbesondere muss zu jedem Zeitpunkt klar sein, was die aktuelle
+Belegung ist, und ob diese korrekt ist oder nicht.
+
+Von den drei Fertigkeits-Kritieren ist die Usability am schwierigsten zu
+erfassen.
+
+Vertraulichkeit \textbf{TODO}.
+
+Die Korrektheit der Anwendung zeigen wir im \textbf{TODO} Teil. Dort
+ordnen wir den Paragraphen der Studienordnung die implementierten
+Programmregeln zu, und zeigen, dass jede Anforderung der Studienordnung
+erfüllt ist.
+
+Desweiteren ist Verlässlichkeit (``reliability'') kein Problem, weil es
+sich um eine statische Webseite handelt, und damit keinerlei Ressourcen
+des Server über das Ausliefern der Daten hinaus benötigt werden.
+Desweiteren kann sich der Nutzer die Anwendung auch lokal auf seinen
+Rechner herunterladen, und die Anwendung so nutzen. Selbst wenn der
+Nutzer auf die Online-Anwendung vertraut und diese für eine kurze Zeit
+nicht erreichbar ist, stellt dies auch kein Problem dar, da eine
+Studien- und Belegungsplanung üblicherweise über einen Zeitraum von
+mind. 3 Jahren erfolgt.
+
+\subsection{4. Wie wird die Qualität in zukünftigen Releases
+sichergestellt?}\label{wie-wird-die-qualituxe4t-in-zukuxfcnftigen-releases-sichergestellt}
+
+{[}Beispiel aus data.json zeigen?{]} Das Hauptproblem der Aktualisierung
+sind die halbjährlich veröffentlichten Lehrveranstaltungsverzeichnisse.
+Diese müssen manuell in das 180 übertragen werden. Hierbei ist
+insbesondere auf die Vertiefungsgebiete einer Veranstaltung zu achten.
+Wird bei einer Veranstaltung ein falsches Vertiefungsgebiet eingetragen,
+macht dies eigentlich gültige Belegungen ungültig, oder erlaubt
+Belegungen, die nicht erlaubt werden sollten.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  jedes Semester neue Veranstaltungen müssen per Hand in das System
+  übertragen werden --\textgreater{} sehr fehleranfällig
+\item
+  TODO: wie macht man das richtig?
+\end{itemize}
+
+Veranstaltungspflege
+
+Ein offensichtliches Problem stellt die Änderung oder Neuverfassung der
+Studienordnung dar. In diesem Fall muss die Anwendung entweder behutsam
+angepasst werden, oder komplett neu entwickelt werden. Deswegen ist es
+wichtig, von einer Änderung der Studienordnung so schnell wie möglich zu
+erfahren. Es lässt sich dafür aber keine gute technische Lösung
+implementieren. Da Änderungen der Studienordnung aber öffentlich
+angekündigt werden müssen, und oft auch mit Diskussionen zwischen den
+Studierenden und Lehrenden einhergehen, verlassen wir uns auf schnelles
+Feedback des Fachschaftsrates oder der Studierendenschaft.
+
+Technologien Nutzt allerdings moderne Webtechnologien wie HTML5.
+Deswegen ist in den nächsten Jahren keine Inkompatibiliät oder
+Beendigung der Unterstützung durch Browser-Hersteller zu erwarten.
+
+\subsection{5. Wie kann der Entwicklungsprozess selbst verbessert
+werden?}\label{wie-kann-der-entwicklungsprozess-selbst-verbessert-werden}
+
+Wie bereits erwähnt ist das Hauptproblem die Aktualisierung der
+Veranstaltungsdatenbank.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Code Reviews (insebesondere von nachträglichen Änderungen)
+\item
+  2 unabhängige Änderungseingabe (neue Veranstaltung) --\textgreater{}
+  erst dann in System
+\end{itemize}
+
+Vorher manuelles, fehleranfälliges Testen. Durch die von uns zu
+entwickelnden Tests wird das manuelle Testen unnötig. Durch eine hohe
+Testabdeckung steigt desweiteren
+
+\subsection{Klassifizierung nach verschiedenen
+Test-Kriterien}\label{klassifizierung-nach-verschiedenen-test-kriterien}
+
+\subsection{Zusammenfassung}\label{zusammenfassung}
+
+Im Folgenden fassen wir zusammen, wie wir den Status quo durch unseren
+initialen Test-Plan verbessern möchten.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Mapping zwischen Regeln und Paragraphen, zeigen dass vollständig
+  (Validation-Testing)
+\item
+  Defekt-Testing: Hier werden wir ein Test-Skript entwickeln, dass die
+  data.js, die schon mehrfach Syntax-Fehler enthielt, auf ebendiese
+  überprueft
+\item
+  Unit-Tests für jede Regel im Programm
+\item
+  System-Tests mit kompletten, echten Belegungsplänen
+\item
+  Kleine User-Study mit folgenden Fragen: ** dfasdf ** dfasdf
+\end{itemize}
+
+\textbf{TODO} Development, Release- und Usertesting (wir haben nur das
+erste) \textbf{TODO} Unit/Component, Integration, System Testing
+
+\subsection{onehundredandeighty-testing}\label{onehundredandeighty-testing}
+
+As part of our lecture
+\texttt{Testing, Verification and Analysis of Software} at the
+Hasso-Plattner-Institute, we will apply the learned techniques to the
+\href{https://github.com/knub/onehundredandeighty}{180 project}.
+
+\end{document}

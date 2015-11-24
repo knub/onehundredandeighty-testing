@@ -18,7 +18,7 @@
 %\setcounter{secnumdepth}{0}
 
 \title{180: Testen, Verifizieren, Analysieren}
-\author{Ricarda Sch"uler und Stefan Bunk}
+\author{Ricarda Schüler und Stefan Bunk}
 \date{24.01.2016}
 
 \begin{document}
@@ -294,25 +294,22 @@ Time Rule mit Pseudocode und graph diagram -- Edge-Pair Coverage
 \caption{Time Rule}
 \algsetup{indent=2em}
 \begin{algorithmic}[1]
-    \REQUIRE Array a von ganzen Zahlen a mit Länge $n \geq 1$
-    \ENSURE Array a' und unsortedness $\in \mathbb{N}$
-    \IF{n==1}
-        \RETURN (a,0)
+    \REQUIRE 1 Course
+    \ENSURE Boolean (offered in this semester)
+    \STATE semester = getSemester(course)
+    \IF{Semester is in past}
+        \RETURN course offered in semester?
+    \ELSE 
+    		\IF{semester is Sommersemester}
+    			\RETURN course offered in this semester or offered in past sommersemester
+    		\ELSE
+    			\IF{semester is Wintersemester}
+    				\RETURN course offered in this semester or offered in past Wintersemester 
+    			\ELSE 
+    				\RETURN Error
+    			\ENDIF
+    		\ENDIF
     \ENDIF
-    \STATE links,u1 = MergeUnsortedness(a[1,$\lfloor\frac{n}{2}\rfloor$])
-    \STATE rechts,u2 = MergeUnsortedness(a[$\lfloor\frac{n}{2}\rfloor+1$,n])
-    \STATE unsortedness = u1 + u2
-    \FOR{i=1 to n}
-        \IF{rechts.empty() \OR links[1] $\leq$ rechts[1]}
-            \STATE a'[i] = links[1]
-            \STATE links = links[2,len(links)]
-        \ELSE
-            \STATE a'[i] = rechts[1]
-            \STATE rechts = rechts[2,len(rechts)]
-            \STATE unsortedness = unsortedness + len(links)
-        \ENDIF
-    \ENDFOR
-    \RETURN (a',unsortedness)
 \end{algorithmic}
 \end{algorithm}
 

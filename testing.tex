@@ -18,7 +18,7 @@
 %\setcounter{secnumdepth}{0}
 
 \title{180: Testen, Verifizieren, Analysieren}
-\author{Ricarda Sch"uler und Stefan Bunk}
+\author{Ricarda Schüler und Stefan Bunk}
 \date{24.01.2016}
 
 \begin{document}
@@ -75,13 +75,18 @@ In der \todo{TODO: Titel Studienordnung}, der Studienordnung für den Bachelor- 
 
 Analyse der bisherigen Issues:
 
-* 2 * Feature-Requests nach Berechnung der Gesamtnote -- abgelehnt
-* 1 * Syntaxfehler, der die Ausführung des Programmes unmöglich machte
-* 1 * Feature-Request nach variabler Anzahl der Semester, der teilweise umgesetzt wurde.
-* 1 * (Issue){[}https://github.com/knub/onehundredandeighty/pull/5{]} aufgrund
-einer Änderung der Wirtschaftsvorlesung, die statt zwei
-3-LP-Veranstaltungen ab dem WS11/12 als eine 6-LP-Veranstaltung
-angeboten wurden.
+\begin{itemize}
+    \item
+        2 * Feature-Requests nach Berechnung der Gesamtnote -- abgelehnt
+    \item
+        1 * Syntaxfehler, der die Ausführung des Programmes unmöglich machte
+    \item
+        1 * Feature-Request nach variabler Anzahl der Semester, der teilweise umgesetzt wurde.
+    \item
+        1 * \href{https://github.com/knub/onehundredandeighty/pull/5}{Issue} aufgrund einer Änderung
+        der Wirtschaftsvorlesung, die statt zwei 3-LP-Veranstaltungen ab dem WS11/12 als eine
+        6-LP-Veranstaltung angeboten wurden.
+\end{itemize}
 
 \subsection{Rollenverteilung der Tester}
 
@@ -103,10 +108,8 @@ angeboten wurden.
 
 \subsubsection{Validation: Die richtige Anwendung bauen!}
 
-180 wurde entwickelt unter der Annahme, dass es für jeden Studenten
-kompliziert ist, sein Studium entsprechend der Studienordnung zu planen.
-Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist
-kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen.
+180 wurde entwickelt unter der Annahme, dass es für jeden Studenten kompliziert ist, sein Studium entsprechend der Studienordnung zu planen.
+Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen.
 \todo{Beispiel hinzufuegen}
 
 In diesem Bereich lässt die Studienordnung einen großen Spielraum zu, der entsprechend der eigenen Interesseren ausgefüllt werden kann aber auch muss.
@@ -114,7 +117,7 @@ Die Menge aller gültigen Belegungen ist damit sehr groß, übersieht man allerd
 Merkt man dies nicht rechtzeitig, muss im schlimmsten Fall ein weiteres Semester im Bachelorstudium eingeplant werden.
 
 Daher ist die Idee von 180 diese manuelle und fehleranfällige Prüfung zu automatisieren.
-Da die Regeln der Studienordnung sich nicht schnell ändern (mehr zu möglichen Änderungen der Studienordnung weiter unten {[}vielleicht als Footnote{]}), genügt es, die Regeln einmal korrekt zu implementieren.
+Da die Regeln der Studienordnung sich nicht schnell ändern (mehr zu möglichen Änderungen der Studienordnung weiter unten \todo{vielleicht als Footnote}), genügt es, die Regeln einmal korrekt zu implementieren.
 Daher ist dies auch der zentrale Punkt der Validierung:
 Die Anwendung muss genau dann ausgeben, dass ein Belegungsplan valide ist, wenn er nach den Paragraphen der Studienordnung korrekt ist.
 Kann die Anwendung dies nicht garantieren, ist sie nahezu nutzlos.
@@ -127,16 +130,12 @@ Wird der Anwendung nicht vertraut, wird sie niemand nutzen, da sowieso eine manu
 
 \subsubsection{Verifikation: Die Anwendung richtig bauen!}
 
-Um die Anwendung richtig zu bauen, folgt man der Spezifikation. In
-diesem Fall gibt es keine interne, von den Entwicklern gemeinsam mit den
-Anwendern festgelegte Spezifikation. Allerdings gibt es eine externe
-Spezifikation: die Studienordnung. Diese wurde zwar nicht mit dem Ziel
-geschrieben, als Grundlage für die Entwicklung einer Anwendung zu
-stehen, doch definiert sie sehr genau die Anforderungen an einen
-korrekten Belegungsplan. Wir betrachen daher im Folgenden die
-Studienordnung als die Spezifikation für 180. Erfüllt 180 am Ende alle
-Paragraphen der Studienordnung mit im Programm implementierten Regeln,
-ist das Programm korrekt.
+Um die Anwendung richtig zu bauen, folgt man der Spezifikation.
+In diesem Fall gibt es keine interne, von den Entwicklern gemeinsam mit den Anwendern festgelegte Spezifikation.
+Allerdings gibt es eine externe Spezifikation: die Studienordnung.
+Diese wurde zwar nicht mit dem Ziel geschrieben, als Grundlage für die Entwicklung einer Anwendung zu stehen, doch definiert sie sehr genau die Anforderungen an einen korrekten Belegungsplan.
+Wir betrachen daher im Folgenden die Studienordnung als die Spezifikation für 180.
+Erfüllt 180 am Ende alle Paragraphen der Studienordnung mit im Programm implementierten Regeln, ist das Programm korrekt.
 
 \todo{Folgenden Absatz an einen besseren Platz verschieben}
 Die Studienordnung ist als Artefakt sehr statisch, sie ändert sich nahezu nie.
@@ -169,50 +168,36 @@ Laut dem ursprünglichen Paper von D. Hamlet über Random Testing.
 explicit lack of ``system'' in the choice of test data, so that there is
 no correlation among different tests.
 
-In unserem Fall müssen die Testfälle aber sehr genau auspezifiert sein,
-um bestimmte Grenzfälle abzudecken. Eine zufällige Belegung wird nahezu
-immer falsch sein.
+In unserem Fall müssen die Testfälle aber sehr genau auspezifiert sein, um bestimmte Grenzfälle abzudecken. Eine zufällige Belegung wird nahezu immer falsch sein.
 
 Tradeoff Kosten-Korrektheit: Bei uns ganz klar in Richtung Korrektheit.
-Korrektheit ist oberstes Gut, weil eine fälschlicherweise korrekte
-Belegung unschöne Folgen haben kann.
+Korrektheit ist oberstes Gut, weil eine fälschlicherweise korrekte Belegung unschöne Folgen haben kann.
 
-Macht die Anwendung unnnutzbar, wenn man sich nicht darauf verlassen
-kann.
+Macht die Anwendung unnnutzbar, wenn man sich nicht darauf verlassen kann.
 
 \subsection{Wann ist die Anwendung bereit für eine Veröffentlichung?}
 
-Wir definieren Fertigkeit (``readiness'') auf Basis von drei Faktoren: *
-\textbf{Korrektheit}: Wie bereits im ersten Abschnitt erwähnt ist die
-Korrektheit der Anwendung das wichtigste Kriterium. Alle Regeln der
-Studienordung müssen korrekt implementiert und abgedeckt sein. *
-\textbf{Vertraulichkeit}: Die Daten des Nutzers verbleiben immer auf dem
-lokalen Rechner und werden insbesondere nicht in einer Datenbank
-gespeichert. Der Belegungsplan eines Nutzers sollte privat bleiben und
-für den Betreiber des Servers niemals einsehbar sein. *
-\textbf{Usability}: Die Webseite sollte gut zu benutzen sein.
-Insbesondere muss zu jedem Zeitpunkt klar sein, was die aktuelle
-Belegung ist, und ob diese korrekt ist oder nicht.
+Wir definieren Fertigkeit (``readiness'') auf Basis von drei Faktoren:
 
-Von den drei Fertigkeits-Kritieren ist die Usability am schwierigsten zu
-erfassen.
+\begin{itemize}
+    \item \textbf{Korrektheit}:
+        Wie bereits im ersten Abschnitt erwähnt ist die Korrektheit der Anwendung das wichtigste Kriterium.
+        Alle Regeln der Studienordung müssen korrekt implementiert und abgedeckt sein.
+    \item \textbf{Vertraulichkeit}:
+        Die Daten des Nutzers verbleiben immer auf dem lokalen Rechner und werden insbesondere nicht in einer Datenbank gespeichert.
+        Der Belegungsplan eines Nutzers sollte privat bleiben und für den Betreiber des Servers niemals einsehbar sein.
+    \item \textbf{Usability}:
+        Die Webseite sollte gut zu benutzen sein.
+        Insbesondere muss zu jedem Zeitpunkt klar sein, was die aktuelle Belegung ist, und ob diese korrekt ist oder nicht.
 
-Vertraulichkeit \textbf{TODO}.
+Von den drei Fertigkeits-Kritieren ist die Usability am schwierigsten zu erfassen.
+Vertraulichkeit \todo{Vertraulichkeit ausfuehren}.
+Die Korrektheit der Anwendung zeigen wir im \todo{Korrektheit ausfuehren} Teil.
+Dort ordnen wir den Paragraphen der Studienordnung die implementierten Programmregeln zu, und zeigen, dass jede Anforderung der Studienordnung erfüllt ist.
 
-Die Korrektheit der Anwendung zeigen wir im \textbf{TODO} Teil. Dort
-ordnen wir den Paragraphen der Studienordnung die implementierten
-Programmregeln zu, und zeigen, dass jede Anforderung der Studienordnung
-erfüllt ist.
-
-Desweiteren ist Verlässlichkeit (``reliability'') kein Problem, weil es
-sich um eine statische Webseite handelt, und damit keinerlei Ressourcen
-des Server über das Ausliefern der Daten hinaus benötigt werden.
-Desweiteren kann sich der Nutzer die Anwendung auch lokal auf seinen
-Rechner herunterladen, und die Anwendung so nutzen. Selbst wenn der
-Nutzer auf die Online-Anwendung vertraut und diese für eine kurze Zeit
-nicht erreichbar ist, stellt dies auch kein Problem dar, da eine
-Studien- und Belegungsplanung üblicherweise über einen Zeitraum von
-mind. 3 Jahren erfolgt.
+Desweiteren ist Verlässlichkeit (``reliability'') kein Problem, weil es sich um eine statische Webseite handelt, und damit keinerlei Ressourcen des Server über das Ausliefern der Daten hinaus benötigt werden.
+Desweiteren kann sich der Nutzer die Anwendung auch lokal auf seinen Rechner herunterladen, und die Anwendung so nutzen.
+Selbst wenn der Nutzer auf die Online-Anwendung vertraut und diese für eine kurze Zeit nicht erreichbar ist, stellt dies auch kein Problem dar, da eine Studien- und Belegungsplanung üblicherweise über einen Zeitraum von mind. 3 Jahren erfolgt.
 
 \subsection{Wie wird die Qualität in zukünftigen Releases sichergestellt?}
 
@@ -231,24 +216,18 @@ Wird bei einer Veranstaltung ein falsches Vertiefungsgebiet eingetragen, macht d
 
 Veranstaltungspflege
 
-Ein offensichtliches Problem stellt die Änderung oder Neuverfassung der
-Studienordnung dar. In diesem Fall muss die Anwendung entweder behutsam
-angepasst werden, oder komplett neu entwickelt werden. Deswegen ist es
-wichtig, von einer Änderung der Studienordnung so schnell wie möglich zu
-erfahren. Es lässt sich dafür aber keine gute technische Lösung
-implementieren. Da Änderungen der Studienordnung aber öffentlich
-angekündigt werden müssen, und oft auch mit Diskussionen zwischen den
-Studierenden und Lehrenden einhergehen, verlassen wir uns auf schnelles
-Feedback des Fachschaftsrates oder der Studierendenschaft.
+Ein offensichtliches Problem stellt die Änderung oder Neuverfassung der Studienordnung dar.
+In diesem Fall muss die Anwendung entweder behutsam angepasst werden, oder komplett neu entwickelt werden.
+Deswegen ist es wichtig, von einer Änderung der Studienordnung so schnell wie möglich zu erfahren.
+Es lässt sich dafür aber keine gute technische Lösung implementieren.
+Da Änderungen der Studienordnung aber öffentlich angekündigt werden müssen, und oft auch mit Diskussionen zwischen den Studierenden und Lehrenden einhergehen, verlassen wir uns auf schnelles Feedback des Fachschaftsrates oder der Studierendenschaft.
 
-Technologien Nutzt allerdings moderne Webtechnologien wie HTML5.
-Deswegen ist in den nächsten Jahren keine Inkompatibiliät oder
-Beendigung der Unterstützung durch Browser-Hersteller zu erwarten.
+\todo{Technologien} Nutzt allerdings moderne Webtechnologien wie HTML5.
+Deswegen ist in den nächsten Jahren keine Inkompatibiliät oder Beendigung der Unterstützung durch Browser-Hersteller zu erwarten.
 
 \subsection{Wie kann der Entwicklungsprozess selbst verbessert werden?}
 
-Wie bereits erwähnt ist das Hauptproblem die Aktualisierung der
-Veranstaltungsdatenbank.
+Wie bereits erwähnt ist das Hauptproblem die Aktualisierung der Veranstaltungsdatenbank.
 
 \begin{itemize}
     \item
@@ -267,8 +246,7 @@ Testabdeckung steigt desweiteren
 \subsection{Zusammenfassung}
 \label{sec:zusammenfassung}
 
-Im Folgenden fassen wir zusammen, wie wir den Status quo durch unseren
-initialen Test-Plan verbessern möchten.
+Im Folgenden fassen wir zusammen, wie wir den Status quo durch unseren initialen Test-Plan verbessern möchten.
 
 \begin{itemize}
     \item Mapping zwischen Regeln und Paragraphen, zeigen dass vollständig (Validation-Testing)
@@ -282,7 +260,8 @@ initialen Test-Plan verbessern möchten.
         Kleine User-Study mit folgenden Fragen: ** dfasdf ** dfasdf
 \end{itemize}
 
-\textbf{TODO} Development, Release- und Usertesting (wir haben nur das erste) \textbf{TODO} Unit/Component, Integration, System Testing
+\todo{Development, Release, Uesrtesting (wir haben nur das erste)}
+\todo{Unit/Component, Integration, System Testing}
 
 \section{Testing}
 

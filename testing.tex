@@ -6,7 +6,7 @@
 \usepackage{ifxetex,ifluatex}
 
 \usepackage[german]{todonotes}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 
 % Folgende Zeilen waren im orignalen Markdown Export, ich hab sie erstmal auskommentiert.
 %\setlength{\parindent}{0pt}
@@ -26,52 +26,40 @@
 \section{Überblick über die Anwendung}
 \label{sec:ueberblick}
 
-\section{Sinn und Zweck}\label{sinn-und-zweck}
+\subsection{Sinn und Zweck}
 
-180 ist eine Web-Anwendung, die Bachelor-Studenten des
-Hasso-Plattner-Instituts dabei unterstützt, eine korrekte Belegung zu
-finden, und somit ihr Bachelorstudium erfolgreich zu beenden. Durch die
-Wahl von unterschiedlichen Vertiefungsgebieten sowie die Tatsache, dass
-viele Veranstaltungen mehreren Vertiefungsgebieten zuordenbar sind, kann
-es schwierig werden, eine korrekte Belegung zu finden.
+180 ist eine Web-Anwendung, die Bachelor-Studenten des Hasso-Plattner-Instituts dabei unterstützt, eine korrekte Belegung zu finden, und somit ihr Bachelorstudium erfolgreich zu beenden.
+Durch die Wahl von unterschiedlichen Vertiefungsgebieten sowie die Tatsache, dass viele Veranstaltungen mehreren Vertiefungsgebieten zuordenbar sind, kann es schwierig werden, eine korrekte Belegung zu finden.
 
-Der Name 180 stammt von den 180 Leistungspunkten, die erforderlich sind,
-um das Bachelorstudium erfolgreich abzuschließen. Es existiert
-desweiteren ein Schwesterprojekt namens 120, das von Masterstudenten des
-HPIs genutzt werden kann, und das den gleichen Zweck verfolgt. Dieses
-Dokument befasst sich allerdings nur mit 180.
+Der Name 180 stammt von den 180 Leistungspunkten, die erforderlich sind, um das Bachelorstudium erfolgreich abzuschließen.
+Es existiert desweiteren ein Schwesterprojekt namens 120, das von Masterstudenten des HPIs genutzt werden kann, und das den gleichen Zweck verfolgt.
+Dieses Dokument befasst sich allerdings nur mit 180.
 
-\section{Entwicklungsparadigma und
-Programmiersprache}\label{entwicklungsparadigma-und-programmiersprache}
+\subsection{Entwicklungsparadigma und Programmiersprache}
 
 \begin{itemize}
     \item Javascript
     \item no TDD
 \end{itemize}
 
-\section{Anforderungen, Spezifikation und Dokumentation?}
+\subsection{Anforderungen, Spezifikation und Dokumentation?}
 
-Die Anwendungen wurde aus dem persönlichen Bedarf heraus entwickelt, und
-es gab keinen externen Auftraggeber. Der Entwickler war Stefan Bunk.
+Die Anwendungen wurde aus dem persönlichen Bedarf heraus entwickelt, und es gab keinen externen Auftraggeber.
+Der Entwickler war Stefan Bunk.
 
-Obwohl es damit keine Spezifikation im klassischen Sinne gibt, sind
-dennoch die zu implementierenden Regeln genau festgelegt: In der
-\textbf{TODO: Titel Studienordnung}, der Studienordnung für den
-Bachelor- und Masterstudiengang am HPI.
+Obwohl es damit keine Spezifikation im klassischen Sinne gibt, sind dennoch die zu implementierenden Regeln genau festgelegt:
+In der \todo{TODO: Titel Studienordnung}, der Studienordnung für den Bachelor- und Masterstudiengang am HPI.
 
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Specification: Studienordnung des HPI --\textgreater{} TODO
-  Vorstellung Regeln, Vertiefungsgebiete
-\item
-  vertrauliche Daten: kein Sharen über das Internet
-\item
-  Waterfall
+    \item
+        Spezification: Studienordnung des HPI -- \todo{Vorstellung Regeln, Vertiefungsgebiete}
+    \item
+        Vertrauliche Daten: kein Sharen über das Internet
+    \item
+        Waterfall
 \end{itemize}
 
-\subsubsection{Aktueller Teststatus, Ziele der Tests? Bug
-Repositories?}\label{aktueller-teststatus-ziele-der-tests-bug-repositories}
+\subsection{Aktueller Teststatus, Ziele der Tests? Bug Repositories?}
 
 \begin{itemize}
     \item
@@ -79,27 +67,27 @@ Repositories?}\label{aktueller-teststatus-ziele-der-tests-bug-repositories}
     \item
         manuelle Tests
     \item
-      \url{https://github.com/knub/onehundredandeighty/issues?utf8=\%E2\%9C\%93\&q=is\%3Aissue}{Issues from Github}
-%      \url{https://github.com/knub/onehundredandeighty/issues}{Issues from Github}
+        \url{https://github.com/knub/onehundredandeighty/issues?q=is:issue}
 \end{itemize}
 
-Analyse der bisherigen Issues: * 2 * Feature-Requests nach Berechnung
-der Gesamtnote --\textgreater{} abgelehnt * 1 * Syntaxfehler, der die
-Ausführung des Programmes unmöglich machte * 1 * Feature-Request nach
-variabler Anzahl der Semester, der teilweise umgesetzt wurde. * 1 *
-(Issue){[}https://github.com/knub/onehundredandeighty/pull/5{]} aufgrund
+Analyse der bisherigen Issues:
+
+* 2 * Feature-Requests nach Berechnung der Gesamtnote -- abgelehnt
+* 1 * Syntaxfehler, der die Ausführung des Programmes unmöglich machte
+* 1 * Feature-Request nach variabler Anzahl der Semester, der teilweise umgesetzt wurde.
+* 1 * (Issue){[}https://github.com/knub/onehundredandeighty/pull/5{]} aufgrund
 einer Änderung der Wirtschaftsvorlesung, die statt zwei
 3-LP-Veranstaltungen ab dem WS11/12 als eine 6-LP-Veranstaltung
 angeboten wurden.
 
-\section{Beziehung/Einbindung zu Applikation? Entwickler, Tester, Nutzer?}
+\subsection{Rollenverteilung der Tester}
 
 \begin{itemize}
     \item 1 Developer and User
     \item 2 User
 \end{itemize}
 
-\section{Stakeholders}
+\subsection{Stakeholders}
 
 \begin{itemize}
     \item Students
@@ -108,7 +96,7 @@ angeboten wurden.
 
 \section{Initialer Test Plan}
 
-\subsection{1. Wann beginnen Verifikation und Validation? Wann sind sie beendet?}
+\subsection{Wann beginnen Verifikation und Validation? Wann sind sie beendet?}
 
 \subsubsection{Validation: Die richtige Anwendung bauen!}
 
@@ -162,7 +150,7 @@ Zusätzlich zur Studienordnung sind aber die halbjährlich erscheinenden Vorlesu
         permanente V\&V notwenig, Grund für TestProjekt
 \end{itemize}
 
-\subsection{2. Welche Technologien sollen während der Entwicklung angewandt werden?}
+\subsection{Welche Technologien sollen während der Entwicklung angewandt werden?}
 
 \begin{itemize}
     \item
@@ -189,7 +177,7 @@ Belegung unschöne Folgen haben kann.
 Macht die Anwendung unnnutzbar, wenn man sich nicht darauf verlassen
 kann.
 
-\subsection{3. Wann ist die Anwendung bereit für eine Veröffentlichung?}
+\subsection{Wann ist die Anwendung bereit für eine Veröffentlichung?}
 
 Wir definieren Fertigkeit (``readiness'') auf Basis von drei Faktoren: *
 \textbf{Korrektheit}: Wie bereits im ersten Abschnitt erwähnt ist die
@@ -223,7 +211,7 @@ nicht erreichbar ist, stellt dies auch kein Problem dar, da eine
 Studien- und Belegungsplanung üblicherweise über einen Zeitraum von
 mind. 3 Jahren erfolgt.
 
-\subsection{4. Wie wird die Qualität in zukünftigen Releases sichergestellt?}
+\subsection{Wie wird die Qualität in zukünftigen Releases sichergestellt?}
 
 \todo{Beispiel aus data.json zeigen?}
 Das Hauptproblem der Aktualisierung sind die halbjährlich veröffentlichten Lehrveranstaltungsverzeichnisse.
@@ -254,7 +242,7 @@ Technologien Nutzt allerdings moderne Webtechnologien wie HTML5.
 Deswegen ist in den nächsten Jahren keine Inkompatibiliät oder
 Beendigung der Unterstützung durch Browser-Hersteller zu erwarten.
 
-\subsection{5. Wie kann der Entwicklungsprozess selbst verbessert werden?}
+\subsection{Wie kann der Entwicklungsprozess selbst verbessert werden?}
 
 Wie bereits erwähnt ist das Hauptproblem die Aktualisierung der
 Veranstaltungsdatenbank.

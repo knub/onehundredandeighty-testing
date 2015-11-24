@@ -8,6 +8,9 @@
 \usepackage[german]{todonotes}
 \usepackage[hidelinks]{hyperref}
 
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
 % Folgende Zeilen waren im orignalen Markdown Export, ich hab sie erstmal auskommentiert.
 %\setlength{\parindent}{0pt}
 %\setlength{\parskip}{6pt plus 2pt minus 1pt}
@@ -285,8 +288,33 @@ initialen Test-Plan verbessern möchten.
 
 \subsection{Graph Coverage}
 
-\subsubsection{Source Code}
+\subsubsection{Control Flow Graph}
 Time Rule mit Pseudocode und graph diagram -- Edge-Pair Coverage
+\begin{algorithm}
+\caption{Time Rule}
+\algsetup{indent=2em}
+\begin{algorithmic}[1]
+    \REQUIRE Array a von ganzen Zahlen a mit Länge $n \geq 1$
+    \ENSURE Array a' und unsortedness $\in \mathbb{N}$
+    \IF{n==1}
+        \RETURN (a,0)
+    \ENDIF
+    \STATE links,u1 = MergeUnsortedness(a[1,$\lfloor\frac{n}{2}\rfloor$])
+    \STATE rechts,u2 = MergeUnsortedness(a[$\lfloor\frac{n}{2}\rfloor+1$,n])
+    \STATE unsortedness = u1 + u2
+    \FOR{i=1 to n}
+        \IF{rechts.empty() \OR links[1] $\leq$ rechts[1]}
+            \STATE a'[i] = links[1]
+            \STATE links = links[2,len(links)]
+        \ELSE
+            \STATE a'[i] = rechts[1]
+            \STATE rechts = rechts[2,len(rechts)]
+            \STATE unsortedness = unsortedness + len(links)
+        \ENDIF
+    \ENDFOR
+    \RETURN (a',unsortedness)
+\end{algorithmic}
+\end{algorithm}
 
 \subsubsection{Finite State Machines}
 Veranstaltungsstatus: gewählt, wählbar, gefiltert...

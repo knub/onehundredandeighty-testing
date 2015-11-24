@@ -1,2 +1,3 @@
 *.pdf
 .output/
+figures/backup_*

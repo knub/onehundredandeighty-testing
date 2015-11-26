@@ -6,7 +6,10 @@
 \usepackage{ifxetex,ifluatex}
 
 \usepackage[german]{todonotes}
-\usepackage[hidelinks]{hyperref}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=,urlcolor=blue}
+%\hypersetup{colorlinks=true,linkcolor=,urlcolor=black}
+%\hypersetup{colorlinks=false}%,linkbordercolor=red,linkcolor=green}
 
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -29,84 +32,76 @@
 \section{Überblick über die Anwendung}
 \label{sec:ueberblick}
 
-\subsection{Sinn und Zweck}
+\paragraph{Sinn und Zweck}
 
 180 ist eine Web-Anwendung, die Bachelor-Studenten des Hasso-Plattner-Instituts dabei unterstützt, eine korrekte Belegung zu finden, und somit ihr Bachelorstudium erfolgreich zu beenden.
 Durch die Wahl von unterschiedlichen Vertiefungsgebieten sowie die Tatsache, dass viele Veranstaltungen mehreren Vertiefungsgebieten zuordenbar sind, kann es schwierig werden, eine korrekte Belegung zu finden.
 
-Der Name 180 stammt von den 180 Leistungspunkten, die erforderlich sind, um das Bachelorstudium erfolgreich abzuschließen.
+Der Name 180 entstammt den 180 Leistungspunkten, die erforderlich sind, um das Bachelorstudium erfolgreich abzuschließen.
 Es existiert desweiteren ein Schwesterprojekt namens 120, das von Masterstudenten des HPIs genutzt werden kann, und das den gleichen Zweck verfolgt.
 Dieses Dokument befasst sich allerdings nur mit 180.
 
-\subsection{Entwicklungsparadigma und Programmiersprache}
+\paragraph{Entwicklungsparadigma und Programmiersprache}
 
-\begin{itemize}
-    \item Javascript
-    \item no TDD
-\end{itemize}
+Also typische Webanwendung wurde 180 in HTML, CSS und JavaScript geschrieben.
+Dabei funktioniert es als rein clientseitige Anwendung, d.h. es ben"otigt keine weitere serverseitige Programmiersprache.
+Es existieren keine automatisierten Tests, daher eignet sich das Projekt gut, um eine breite Testbasis in einem bestehenden Projekt aufzubauen.
+Die Entwicklung folgt dem Wasserfallmodell.
+Zunächst wurden die Anforderungen gesammelt, allerdings nicht formal, sondern in einer losen Liste.
+Nach einer Planungsphase wurde das Projekt dann implementiert.
+Nach der erfolgreichen Ver"offentlichung ist das Projekt zurzeit in der Wartungsphase.
 
-\subsection{Anforderungen, Spezifikation und Dokumentation?}
+\paragraph{Anforderungen, Spezifikation und Dokumentation}
 
 Die Anwendungen wurde aus dem persönlichen Bedarf heraus entwickelt, und es gab keinen externen Auftraggeber.
-Der Entwickler war Stefan Bunk.
-
+Alleiniger Entwickler war Stefan Bunk, einer der Autoren dieses Dokuments.
 Obwohl es damit keine Spezifikation im klassischen Sinne gibt, sind dennoch die zu implementierenden Regeln genau festgelegt:
-In der \todo{TODO: Titel Studienordnung}, der Studienordnung für den Bachelor- und Masterstudiengang am HPI.
+In der \href{http://www.uni-potsdam.de/ambek/ambek2010/15/Seite3.pdf}{Fachspezifischen Ordnung für das Bachelor- und Masterstudium im Fach IT-Systems Engineering an der Universität Potsdam}, der Studienordnung, wird genau festgelegt, wie ein Student seinen Belegungsplan zusammenstellen muss, um den Bachelorabschluss vom HPI zu erhalten.
 
 \begin{itemize}
     \item
         Spezification: Studienordnung des HPI -- \todo{Vorstellung Regeln, Vertiefungsgebiete}
     \item
         Vertrauliche Daten: kein Sharen über das Internet
-    \item
-        Waterfall
 \end{itemize}
 
-\subsection{Aktueller Teststatus, Ziele der Tests? Bug Repositories?}
+\paragraph{Aktueller Teststatus und Bug Repositories}
 
-\begin{itemize}
-    \item
-        keine automatisiertes Tests
-    \item
-        manuelle Tests
-    \item
-        \url{https://github.com/knub/onehundredandeighty/issues?q=is:issue}
-\end{itemize}
+Wie bereits erw"ahnt existieren keine automatisierten Tests.
+Bei der Enwicklung wurde der Code wiederholt manuell getestet.
+
+Als \href{https://github.com/knub/onehundredandeighty/issues?q=is:issue}{Bug Repository} wird die von Github bereitgestellte Funktion der \emph{Issues} verwendet.
+Dort kann der Entwickler, aber auch Nutzer der Anwender, Bug-Berichte oder Feature-W"unsche abgeben, die dann eine eindeutige Nummer erhalten.
+Wurde der Fehler behoben, oder entschieden, den Wunsch nicht zu implementieren, kann das Issue geschlossen werden.
+
+Bisher wurden f"unf Issues 
 
 Analyse der bisherigen Issues:
 
 \begin{itemize}
     \item
-        2 * Feature-Requests nach Berechnung der Gesamtnote -- abgelehnt
+        \href{https://github.com/knub/onehundredandeighty/issues/30}{2 Feature-Requests} nach Berechnung der Gesamtnote -- wird nicht implementiert
     \item
-        1 * Syntaxfehler, der die Ausführung des Programmes unmöglich machte
+        \href{https://github.com/knub/onehundredandeighty/issues/20}{1 Syntaxfehler}, der die Ausführung des Programmes unmöglich machte
     \item
-        1 * Feature-Request nach variabler Anzahl der Semester, der teilweise umgesetzt wurde.
+        \href{https://github.com/knub/onehundredandeighty/issues/4}{1 Feature-Request} nach variabler Anzahl der Semester, der teilweise umgesetzt wurde.
     \item
-        1 * \href{https://github.com/knub/onehundredandeighty/pull/5}{\underline{Issue}} aufgrund einer Änderung
+        \href{https://github.com/knub/onehundredandeighty/pull/5}{1 Issue} aufgrund einer Änderung
         der Wirtschaftsvorlesung, die statt zwei 3-LP-Veranstaltungen ab dem WS11/12 als eine
         6-LP-Veranstaltung angeboten wurden.
 \end{itemize}
 
-\subsection{Rollenverteilung der Tester}
+\paragraph{Rollenverteilung der Tester}
 
-\begin{itemize}
-    \item 1 Developer and User
-    \item 2 User
-\end{itemize}
-
-\subsection{Stakeholders}
-
-\begin{itemize}
-    \item Students
-    \item HPI Studienverwaltung
-\end{itemize}
+Einer der Autoren dieses Dokumentes war der Entwickler von 180.
+Beide Autoren sind bzw. waren in ihrem Bachelorstudium aktive Nutzer der Anwendung.
+Im Folgenden werden beide auch noch die Rolle der Tester einnehmen.
 
 \section{Initialer Test Plan}
 
 \subsection{Wann beginnen Verifikation und Validation? Wann sind sie beendet?}
 
-\subsubsection{Validation: Die richtige Anwendung bauen!}
+\paragraph{Validation: Die richtige Anwendung bauen!}
 
 180 wurde entwickelt unter der Annahme, dass es für jeden Studenten kompliziert ist, sein Studium entsprechend der Studienordnung zu planen.
 Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen.
@@ -128,7 +123,7 @@ Wird der Anwendung nicht vertraut, wird sie niemand nutzen, da sowieso eine manu
     \item Start: PEM, End:
 \end{itemize}
 
-\subsubsection{Verifikation: Die Anwendung richtig bauen!}
+\paragraph{Verifikation: Die Anwendung richtig bauen!}
 
 Um die Anwendung richtig zu bauen, folgt man der Spezifikation.
 In diesem Fall gibt es keine interne, von den Entwicklern gemeinsam mit den Anwendern festgelegte Spezifikation.

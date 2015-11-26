@@ -1,13 +1,27 @@
 \documentclass[ngerman]{article}
 \usepackage[utf8]{inputenc}
 %\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
+%\usepackage{lmodern}
+%\usepackage{amssymb,amsmath}
+%\usepackage{ifxetex,ifluatex}
 
 \usepackage[german]{todonotes}
 \usepackage{hyperref}
 \hypersetup{colorlinks,linkcolor=,urlcolor=blue}
+
+\usepackage{csquotes}
+\usepackage{paracol}
+
+%\usepackage{float}
+%\newfloat{floatquote}{tbp}{loq}
+%\floatname{floatquote}{Zitat}
+%\usepackage{caption}
+%\captionsetup{font = small, format = hang}
+% Um Zitate zu referenzieren
+%\usepackage{cleveref}
+%\crefname{floatquote}{Zitat}{Zitate}
+%\Crefname{floatquote}{Zitat}{Zitate}
+
 %\hypersetup{colorlinks=true,linkcolor=,urlcolor=black}
 %\hypersetup{colorlinks=false}%,linkbordercolor=red,linkcolor=green}
 
@@ -74,10 +88,7 @@ Als \href{https://github.com/knub/onehundredandeighty/issues?q=is:issue}{Bug Rep
 Dort kann der Entwickler, aber auch Nutzer der Anwender, Bug-Berichte oder Feature-W"unsche abgeben, die dann eine eindeutige Nummer erhalten.
 Wurde der Fehler behoben, oder entschieden, den Wunsch nicht zu implementieren, kann das Issue geschlossen werden.
 
-Bisher wurden f"unf Issues 
-
-Analyse der bisherigen Issues:
-
+Bisher wurden f"unf Issues gemeldet:
 \begin{itemize}
     \item
         \href{https://github.com/knub/onehundredandeighty/issues/30}{2 Feature-Requests} nach Berechnung der Gesamtnote -- wird nicht implementiert
@@ -86,9 +97,7 @@ Analyse der bisherigen Issues:
     \item
         \href{https://github.com/knub/onehundredandeighty/issues/4}{1 Feature-Request} nach variabler Anzahl der Semester, der teilweise umgesetzt wurde.
     \item
-        \href{https://github.com/knub/onehundredandeighty/pull/5}{1 Issue} aufgrund einer Änderung
-        der Wirtschaftsvorlesung, die statt zwei 3-LP-Veranstaltungen ab dem WS11/12 als eine
-        6-LP-Veranstaltung angeboten wurden.
+        \href{https://github.com/knub/onehundredandeighty/pull/5}{1 Issue} aufgrund einer Änderung der Wirtschaftsvorlesung, die statt zwei 3-LP-Veranstaltungen ab dem WS11/12 als eine 6-LP-Veranstaltung angeboten wurden.
 \end{itemize}
 
 \paragraph{Rollenverteilung der Tester}
@@ -99,13 +108,21 @@ Im Folgenden werden beide auch noch die Rolle der Tester einnehmen.
 
 \section{Initialer Test Plan}
 
-\subsection{Wann beginnen Verifikation und Validation? Wann sind sie beendet?}
+\subsection{Verifikation und Validation}
 
 \paragraph{Validation: Die richtige Anwendung bauen!}
 
 180 wurde entwickelt unter der Annahme, dass es für jeden Studenten kompliziert ist, sein Studium entsprechend der Studienordnung zu planen.
 Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen.
 \todo{Beispiel hinzufuegen}
+
+%\begin{quote}
+%    \begin{displayquote}
+%        Das Bachelorstudium im Fach IT-Systems Engineering wird an der Universität Potsdam als Ein-Fach-Studium angeboten.
+%        Es umfasst 180 LP inklusive Bachelorarbeit, Softwareprojekttätigkeit und 30 LP fachintegrativer Schlüsselqualifikationen.
+%    \end{displayquote}
+%    \captionof{floatquote}{Output of the Program}\label{quo1}
+%\end{quote}
 
 In diesem Bereich lässt die Studienordnung einen großen Spielraum zu, der entsprechend der eigenen Interesseren ausgefüllt werden kann aber auch muss.
 Die Menge aller gültigen Belegungen ist damit sehr groß, übersieht man allerdings eine einzige Bedingung führt dies zu einem ungültigen Belegungsplan.
@@ -118,10 +135,34 @@ Die Anwendung muss genau dann ausgeben, dass ein Belegungsplan valide ist, wenn 
 Kann die Anwendung dies nicht garantieren, ist sie nahezu nutzlos.
 Wird der Anwendung nicht vertraut, wird sie niemand nutzen, da sowieso eine manuelle Prüfung notwendig wird.
 
-\begin{itemize}
-    \item nur Wünsche von Studenten erfüllt, wenn komplette Studienordnung richtig abgedeckt ist
-    \item Start: PEM, End:
-\end{itemize}
+Wir beginnen mit der Validation, indem wir jeden Paragraphen der Studienordnung analysieren, und daraus \todo{}.
+
+\setlength{\parindent}{0cm}
+
+\begin{paracol}{2}[\section{TEST}]
+\textbf{§1 Geltungsbereich}
+\switchcolumn
+\emph{Keine Tests notwendig}
+\\
+\switchcolumn*
+
+\textbf{§2 Gliederung des Studiums}
+\switchcolumn
+Es müssen mind. 180 LP erreicht werden.
+\\
+\switchcolumn*
+
+\textbf{§3 Dauer des Studiums}
+\switchcolumn
+Das Studium darf nicht länger als 12 Semester dauern.
+\switchcolumn*
+
+\textbf{§4 Nachteilsausgleich}
+\switchcolumn
+Das Studium darf nicht länger als 12 Semester dauern.
+\switchcolumn*
+
+\end{paracol}
 
 \paragraph{Verifikation: Die Anwendung richtig bauen!}
 
@@ -274,16 +315,16 @@ Time Rule mit Pseudocode und graph diagram -- Edge-Pair Coverage
     \STATE semester = getSemester(course)
     \IF{Semester is in past}
         \RETURN course offered in semester?
-    \ELSE 
-    		\IF{semester is Sommersemester}
-    			\RETURN course offered in this semester or offered in past sommersemester
-    		\ELSE
-    			\IF{semester is Wintersemester}
-    				\RETURN course offered in this semester or offered in past Wintersemester 
-    			\ELSE 
-    				\RETURN Error
-    			\ENDIF
-    		\ENDIF
+    \ELSE
+            \IF{semester is Sommersemester}
+                \RETURN course offered in this semester or offered in past sommersemester
+            \ELSE
+                \IF{semester is Wintersemester}
+                    \RETURN course offered in this semester or offered in past Wintersemester
+                \ELSE
+                    \RETURN Error
+                \ENDIF
+            \ENDIF
     \ENDIF
 \end{algorithmic}
 \end{algorithm}
@@ -312,7 +353,7 @@ Veranstaltungsstatus: gewählt, wählbar, gefiltert...
 Source Code
 Wirtschaftsregel -- Cacc
 
-Specifikation: Vertiefungsgebiete 
+Specifikation: Vertiefungsgebiete
 
 
 \subsection{Input}

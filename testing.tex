@@ -11,6 +11,7 @@
 
 \usepackage{csquotes}
 \usepackage{paracol}
+\usepackage{listings}
 
 \usepackage{enumitem}
 
@@ -137,7 +138,8 @@ Die Anwendung muss genau dann ausgeben, dass ein Belegungsplan valide ist, wenn 
 Kann die Anwendung dies nicht garantieren, ist sie nahezu nutzlos.
 Wird der Anwendung nicht vertraut, wird sie niemand nutzen, da sowieso eine manuelle Prüfung notwendig wird.
 
-Wir beginnen mit der Validation, indem wir jeden Paragraphen der Studienordnung analysieren, und daraus \todo{}.
+Wir beginnen mit der Validation, indem wir jeden Paragraphen der Studienordnung analysieren, und daraus zu testende Eigenschaften eines korrekten Belegungsplans ableiten.
+Sind aus einem Paragraphen keine Tests ableitbar, stellen wir dies in kursiver Schrift dar.
 
 \setlength{\parindent}{0cm}
 
@@ -218,6 +220,27 @@ Zusätzlich müssen 6 weitere LP im Gebiet Softskills belegt werden.
 \\
 \switchcolumn*
 
+\textbf{§~10 Softskills}
+\switchcolumn
+\emph{Keine Tests notwendig, lediglich Information über Notenvergabe}
+\\
+
+\textbf{§~11 Softwareprojekttätigkeit}
+\switchcolumn
+Das Bachelorprojekt muss im Umfang von 30 LP belegt werden.
+\\
+
+\textbf{§~12 Bachelorarbeit}
+\switchcolumn
+Es muss eine Bachelorarbeit im Umfang von 12 LP geschrieben werden.
+\\
+\switchcolumn*
+
+\textbf{§~13 -- §~19}
+\switchcolumn
+\emph{Keine weiteren Tests notwendig}
+\\
+\switchcolumn*
 \end{paracol}
 
 \paragraph{Verifikation: Die Anwendung richtig bauen!}
@@ -229,20 +252,15 @@ Diese wurde zwar nicht mit dem Ziel geschrieben, als Grundlage für die Entwickl
 Wir betrachen daher im Folgenden die Studienordnung als die Spezifikation für 180.
 Erfüllt 180 am Ende alle Paragraphen der Studienordnung mit im Programm implementierten Regeln, ist das Programm korrekt.
 
-\todo{Folgenden Absatz an einen besseren Platz verschieben}
 Die Studienordnung ist als Artefakt sehr statisch, sie ändert sich nahezu nie.
 Zusätzlich zur Studienordnung sind aber die halbjährlich erscheinenden Vorlesungsverzeichnisse relevante Artefakte für 180.
+In diesen wird festgelegt, welche Veranstaltungen angeboten werden und welchen Gebieten sie zugeordnet werden können.
+Damit ist die Anwendung auch niemals fertig, da diese Pflege der Daten halbjährlich vorgenommen werden muss.
 
-\begin{itemize}
-    \item
-        niemals komplett, da jedes Semester neue Fächer mit eigenen Vertiefungsregeln dazu kommen \todo{Beispiel}
-    \item
-        Start: manuell zu Begin des Projektes
-    \item
-        Tests sollten eher sein, sind aber erst am Ende der Entwicklung
-    \item
-        permanente V\&V notwenig, Grund für TestProjekt
-\end{itemize}
+In unserem Fall reicht es, die Validation einmalig durchzuführen, da sich die Studienordnung nicht ändert.
+Mit der Abdeckung aller Paragraphen ist sichergestellt, dass 180 auch wirklich den Anforderungen der Studenten genügt.
+Die Verifikation, u.a. die korrekte Implementierung der Regeln sowie die korrekte Aktualisierung der Semesterdaten, muss permanent durchgeführt werden.
+Dies geschieht auch im Rahmen dieses Projektes, indem wir Tests entwickeln.
 
 \subsection{Welche Technologien sollen während der Entwicklung angewandt werden?}
 
@@ -250,13 +268,13 @@ Zusätzlich zur Studienordnung sind aber die halbjährlich erscheinenden Vorlesu
     \item
         TDD
     \item
-        static analysis --\textgreater{} bis jetzt gar nicht umgesetzt
+        static analysis -- bis jetzt gar nicht umgesetzt
     \item
         Randomisierte Tests bieten sich nicht an, Zuverlässigkeit am besten über genau Tests.
 \end{itemize}
 
 Laut dem ursprünglichen Paper von D. Hamlet über Random Testing.
-\textgreater{} The {[}..{]} meaning of ``random testing'' refers to an
+The [..] meaning of ``random testing'' refers to an
 explicit lack of ``system'' in the choice of test data, so that there is
 no correlation among different tests.
 
@@ -283,31 +301,51 @@ Wir definieren Fertigkeit (``readiness'') auf Basis von drei Faktoren:
         Insbesondere muss zu jedem Zeitpunkt klar sein, was die aktuelle Belegung ist, und ob diese korrekt ist oder nicht.
 \end{itemize}
 
-Von den drei Fertigkeits-Kritieren ist die Usability am schwierigsten zu erfassen.
-Vertraulichkeit \todo{Vertraulichkeit ausfuehren}.
-Die Korrektheit der Anwendung zeigen wir im \todo{Korrektheit ausfuehren} Teil.
-Dort ordnen wir den Paragraphen der Studienordnung die implementierten Programmregeln zu, und zeigen, dass jede Anforderung der Studienordnung erfüllt ist.
+Von den drei Fertigkeits-Kritieren ist die Usability am schwierigsten zu erfassen, da dieses subjektive Empfinden nur über eine User-Study ermittelt werden kann.
+Dies geschieht nicht im Rahmen dieses Projektes.
+Bei der Vertraulichkeit geht es darum, dass wir sensibel mit den Daten des Nutzers.
+Insbesondere ist wichtig, dass wir den Belegungsplan des Nutzers nicht auf dem Server speichern.
+Dies erreichen wir, indem wir per Design die Daten nur auf dem Rechner des Nutzers speichern, und sie nie über das Netzwerk schicken.
+Daher erfordert diese Anforderung keine expliziten Tests.
 
-Desweiteren ist Verlässlichkeit (``reliability'') kein Problem, weil es sich um eine statische Webseite handelt, und damit keinerlei Ressourcen des Server über das Ausliefern der Daten hinaus benötigt werden.
+Die Korrektheit der Anwendung testen wir im folgenden Kapitel ausführlich über automatisierte Tests.
+Das wir die richtigen Regeln implementieren, haben wir bereits im Abschnitt zur Validierung beschrieben.
+
+Ein weiterer üblicherweise gewählter Faktor um die ``readiness'' zu definieren ist die Verlässlichkeit (``reliability'') der Anwendung.
+Dies ist aber in unserem Fall kein Problem, weil es sich um eine statische Webseite handelt, und damit keinerlei Ressourcen des Server über das Ausliefern der Seite hinaus benötigt werden.
 Desweiteren kann sich der Nutzer die Anwendung auch lokal auf seinen Rechner herunterladen, und die Anwendung so nutzen.
 Selbst wenn der Nutzer auf die Online-Anwendung vertraut und diese für eine kurze Zeit nicht erreichbar ist, stellt dies auch kein Problem dar, da eine Studien- und Belegungsplanung üblicherweise über einen Zeitraum von mind. 3 Jahren erfolgt.
 
 \subsection{Wie wird die Qualität in zukünftigen Releases sichergestellt?}
 
-\todo{Beispiel aus data.json zeigen?}
 Das Hauptproblem der Aktualisierung sind die halbjährlich veröffentlichten Lehrveranstaltungsverzeichnisse.
-Diese müssen manuell in das 180 übertragen werden.
+Diese müssen manuell in 180 eingepflegt werden.
+Listing~\ref{lst:data} zeigt einen Ausschnitt aus der Daten-Datei.
 Hierbei ist insbesondere auf die Vertiefungsgebiete einer Veranstaltung zu achten.
 Wird bei einer Veranstaltung ein falsches Vertiefungsgebiet eingetragen, macht dies eigentlich gültige Belegungen ungültig, oder erlaubt Belegungen, die nicht erlaubt werden sollten.
 
-\begin{itemize}
-    \item
-        jedes Semester neue Veranstaltungen müssen per Hand in das System übertragen werden -- sehr fehleranfällig
-    \item
-        TODO: wie macht man das richtig?
-\end{itemize}
+Da die Pflege dieser Daten manuell geschieht, ist sie sehr fehleranfällig.
+In der Vergangenheit kam es bereits zu Fehlern in diesen Daten\footnote{Siehe z.B. \url{https://github.com/knub/onehundredandeighty/issues/20}}.
+Solche Fälle durch Tests abzudecken ist kompliziert.
 
-Veranstaltungspflege
+\begin{lstlisting}[caption=Ausschnitt aus \texttt{data.js},label={lst:data},frame=single]
+/* .. weitere Veranstaltungen .. */
+    swq: {
+        kurz: "SW-Qualitaet",
+        lehrform: ["Vorlesung", "Projekt"],
+        modul: ["Vertiefungsgebiete"],
+        semester: ["SS14", "WS15/16"],
+        pflicht: false,
+        empfohlen: "",
+        vertiefung: ["OSIS", "SAMT"],
+        cp: 6,
+        vorher: [],
+        dozent: ["Prof. Dr. Holger Giese"],
+        nameLV: "Softwarequalitaet"
+    },
+/* .. weitere Veranstaltungen .. */
+\end{lstlisting}
+
 
 Ein offensichtliches Problem stellt die Änderung oder Neuverfassung der Studienordnung dar.
 In diesem Fall muss die Anwendung entweder behutsam angepasst werden, oder komplett neu entwickelt werden.
@@ -315,7 +353,8 @@ Deswegen ist es wichtig, von einer Änderung der Studienordnung so schnell wie m
 Es lässt sich dafür aber keine gute technische Lösung implementieren.
 Da Änderungen der Studienordnung aber öffentlich angekündigt werden müssen, und oft auch mit Diskussionen zwischen den Studierenden und Lehrenden einhergehen, verlassen wir uns auf schnelles Feedback des Fachschaftsrates oder der Studierendenschaft.
 
-\todo{Technologien} Nutzt allerdings moderne Webtechnologien wie HTML5.
+Technologisch sind keine Inkompatibilitäten in den nächsten Jahren zu erwarten.
+180 nutzt moderne Webtechnologien wie HTML5, CSS3 und JavaScript.
 Deswegen ist in den nächsten Jahren keine Inkompatibiliät oder Beendigung der Unterstützung durch Browser-Hersteller zu erwarten.
 
 \subsection{Wie kann der Entwicklungsprozess selbst verbessert werden?}
@@ -370,23 +409,24 @@ Time Rule mit Pseudocode und graph diagram -- Edge-Pair Coverage
     \ENSURE Boolean (offered in this semester)
     \STATE semester = getSemester(course)
 
+
     \IF{course chosen}
-    		\RETURN true
-    	\ELSE
-  		\IF{Semester is in past}
-    			\RETURN course offered in semester?
-   	  	\ELSE 
-    			\IF{semester is Sommersemester}
-    				\RETURN course offered in this semester or offered in past sommersemester
-    			\ELSE
-    				\IF{semester is Wintersemester}
-    					\RETURN course offered in this semester or offered in past Wintersemester 
-    				\ELSE 
-    					\RETURN Error
-    				\ENDIF
-    			\ENDIF
-    		\ENDIF
-    	\ENDIF
+        \RETURN true
+    \ELSE
+        \IF{Semester is in past}
+            \RETURN course offered in semester?
+        \ELSE 
+            \IF{semester is Sommersemester}
+                \RETURN course offered in this semester or offered in past sommersemester
+            \ELSE
+                \IF{semester is Wintersemester}
+                    \RETURN course offered in this semester or offered in past Wintersemester 
+                \ELSE 
+                    \RETURN Error
+                \ENDIF
+            \ENDIF
+       \ENDIF
+   \ENDIF
 \end{algorithmic}
 \end{algorithm}
 

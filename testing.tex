@@ -403,11 +403,11 @@ Nachfolgend sind alle Test Requirements und Testpfade abgebildet.
 
 
 \vspace{1em}
+
+
 \begin{paracol}{2}
-
- \centering\textbf{TR}
-
-\begin {enumerate}[label=\Alph*]
+ \textbf{TR}
+\begin{enumerate}[label=\Alph*]
 \item $\lbrack 1,2,10 \rbrack$
 \item $\lbrack 1,3,4\rbrack$
 \item $\lbrack 1,3,9\rbrack$
@@ -420,14 +420,32 @@ Nachfolgend sind alle Test Requirements und Testpfade abgebildet.
 \item $\lbrack 5,6,10\rbrack$
 \item $\lbrack 5,7,10\rbrack$
 \end{enumerate}
+\switchcolumn*
 
+\paragraph{Test Paths}
+\begin{enumerate}[label=(\roman*)]
+\item $\lbrack 1, 2, 10 \rbrack$
+\item $\lbrack 1, 3, 4, 5, 6, 10\rbrack$
+\item $\lbrack 1, 3, 4, 5, 6, 7, 10\rbrack$
+\item $\lbrack 1, 3, 4, 8, 10\rbrack$
+\item $\lbrack 1, 3, 9, 10\rbrack$
+\end{enumerate}
 
-\switchcolumn
-\textbf{Test Paths}
-
-
-
+\switchcolumn*
 \end{paracol}
+
+
+\begin{table}
+\begin{tabular}{|l|l|}
+Test Paths & TR toured \\ \hline \hline
+(i) & A\\ \hline
+(ii)  & B, D, G, J \\ \hline
+(iii) & B, D, H, K\\ \hline
+(iv) & B, E, I\\ \hline
+(v) & C, F\\ \hline \hline
+Coverage & A, B, C, D, E, F, G, H, I, J, K, H\\ \hline
+\end{tabular}
+\end{table}
 
 
 \subsubsection{Finite State Machines}
@@ -459,5 +477,7 @@ Specifikation: Vertiefungsgebiete
 
 \subsection{Input}
 Input von verschiedenen Helfermethoden, wie Kartesisches Produkt mit richtiger Partitionierung
+
+mutation coverage: testen von verschiedenen Inputs (auch invalide Belegungspläne)
 
 \end{document}

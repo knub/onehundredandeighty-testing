@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[T1]{fontenc}
 %\usepackage{lmodern}
-%\usepackage{amssymb,amsmath}
+\usepackage{amssymb,amsmath}
 %\usepackage{ifxetex,ifluatex}
 
 \usepackage[german]{todonotes}
@@ -224,11 +224,13 @@ Zusätzlich müssen 6 weitere LP im Gebiet Softskills belegt werden.
 \switchcolumn
 \emph{Keine Tests notwendig, lediglich Information über Notenvergabe}
 \\
+\switchcolumn*
 
 \textbf{§~11 Softwareprojekttätigkeit}
 \switchcolumn
 Das Bachelorprojekt muss im Umfang von 30 LP belegt werden.
 \\
+\switchcolumn*
 
 \textbf{§~12 Bachelorarbeit}
 \switchcolumn
@@ -445,7 +447,7 @@ Es gibt die sogenannte Time Rule. Diese prüft, ob eine bestimmte Lehrveranstalt
 
 Wir möchten Edge-Pair-Coverage für diese Regel erreichen, da damit alle Fälle abgedeckt sind. 
 Dazu müssen Kanten-Kanten-Kombinationen in der Testsuit enthalten sein.
-Nachfolgend sind alle Test Requirements und Testpfade abgebildet. Die Testpfade, welche zusammen alle Fälle abdecken, wurden mit automatistierten Tests umgesetzt \footnote{GITHUB} \todo{github verweis}
+Nachfolgend sind alle Test Requirements und Testpfade abgebildet. Die Testpfade, welche zusammen alle Fälle abdecken, wurden mit automatistierten Tests umgesetzt \footnote{Tests siehe \url{https://github.com/knub/onehundredandeighty/blob/testing/test/cfg_test.js}}.
 
 
 \vspace{1em}
@@ -480,7 +482,7 @@ Nachfolgend sind alle Test Requirements und Testpfade abgebildet. Die Testpfade,
 \begin{table}
 \begin{tabular}{|l|p{2.5cm}|}
 \hline
-\textbf{Test Paths} & \textbf{TR toured} \\ \hline \hline
+\textbf{Test Pfade} & \textbf{Abgedeckte TR} \\ \hline \hline
 (i) & A\\ \hline
 (ii)  & B, D, G, J \\ \hline
 (iii) & B, D, H, K\\ \hline
@@ -516,11 +518,47 @@ Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus g
 \end{figure}
 
 \subsection{Logik Coverage}
-Source Code
-Wirtschaftsregel -- Cacc
 
-Specifikation: Vertiefungsgebiete
+Die Veranstaltung Wirtschaftliche Grundlagen wurde traditionell als zwei Veranstaltungen mit jeweils 3LP durchgeführt.
+Zum Wintersemester WS13/14 wurde dies geäendert, und die Veranstaltung wurde fortan als eine Veranstaltung mit 6LP angeboten.
+Da 180 für unabhängig vom Jahrgang funktionieren soll, gibt es daher zwei mögliche gültige Belegungen: entweder man belegt beide 3LP Veranstaltungen oder eine 6LP Veranstaltung.
+Die entsprechende Bedingung ist int Listing~\ref{lst:wirtschaft} zu sehen.
 
+Wir wollen im Folgenden diese Regel mit \emph{Correlated Active Clause Coverage (CaCC)} abdecken.
+Wir wissen, dass man in einem solchen auch einfach \emph{Combinatorial Coverage} durchführen kann, indem man alle $2^n = 2^3 = 8$ mögliche Belegungen manuell prüft.
+Wir werden allerdings hier zur Übung dennoch \emph{CaCC} testen.
+Vereinfacht stellen wir die Formel als $(a \land b) \lor c$ dar.
+\begin{lstlisting}[caption=Wirtschafts-Regel,label={lst:wirtschaft},frame=single]
+return (selectedWirtschaftI && selectedWirtschaftII) ||
+        selectedWirtschaftI_II;
+\end{lstlisting}
+
+\begin{table}
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\textbf{Row \#} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{P} & \textbf{$P_a$} & \textbf{$P_b$} & \textbf{$P_c$} \\
+\hline \hline
+ 1              & T          & T          & T          & \textbf{T} &                &                &                \\
+ 2              & T          & T          & F          & \textbf{T} & T              &   T            &                \\
+ 3              & T          & F          & T          & \textbf{T} &                &                & T              \\
+ 4              & T          & F          & F          & \textbf{F} &                &   T            & T              \\
+ 5              & F          & T          & T          & \textbf{T} &                &                & T              \\
+ 6              & F          & T          & F          & \textbf{F} & T              &                & T              \\
+ 7              & F          & F          & T          & \textbf{T} &                &                & T              \\
+ 8              & F          & F          & F          & \textbf{F} &                &                & T              \\
+\end{tabular}
+\end{table}
+
+Es ergeben sich folgende Fälle, in denen die Variablen jeweils aktiv werden:
+\begin{align}
+    P_a &= \{ (2, 6) \} \\
+    P_b &= \{ (2, 4) \} \\
+    P_c &= \{ 3, 5, 7 \} \times \{ 4, 6, 8 \} \\
+\end{align}
+Mit den Test Paths $TP = \{ 2, 3, 4, 6 \}$ decken wir alle Klauseln ab\footnote{Tests siehe \url{https://github.com/knub/onehundredandeighty/blob/testing/test/wirtschafts_rule_coverage.js}}.
+Dies ist gleichzeitig auch die kleinste Menge die \emph{CaCC} erreicht.
+
+\todo{Specifikation: Vertiefungsgebiete}
 
 \subsection{Input}
 Input von verschiedenen Helfermethoden, wie Kartesisches Produkt mit richtiger Partitionierung

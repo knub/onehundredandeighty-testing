@@ -15,11 +15,12 @@
 
 \usepackage{enumitem}
 
-%\usepackage{float}
-%\newfloat{floatquote}{tbp}{loq}
-%\floatname{floatquote}{Zitat}
-%\usepackage{caption}
-%\captionsetup{font = small, format = hang}
+\usepackage{float}
+\newfloat{floatquote}{tbp}{loq}
+\floatname{floatquote}{Zitat}
+\usepackage{caption}
+\captionsetup{font = small, format = hang}
+
 % Um Zitate zu referenzieren
 %\usepackage{cleveref}
 %\crefname{floatquote}{Zitat}{Zitate}
@@ -499,13 +500,13 @@ Veranstaltungsstatus: gewählt, wählbar, gefiltert...
 
 
 \subsubsection{Use Cases}
-Für \emph{Onehundretandeighty} haben wir die folgenden Use Cases ermittelt:
+Für \emph{Onehundredandeighty} haben wir die folgenden Use Cases ermittelt:
 
 \begin{itemize}
     \item Semester wählen
     \item Semesteranzahl verändern
     \item Belegung wählen
-    \item Prüfung Validieren
+    \item Prüfung validieren
     \item Filtern nach verfügbaren Kursen
 \end{itemize}
 
@@ -518,6 +519,8 @@ Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus g
 \end{figure}
 
 \subsection{Logik Coverage}
+
+\subsubsection{Regel für Wirtschaftliche Grundlagen}
 
 Die Veranstaltung Wirtschaftliche Grundlagen wurde traditionell als zwei Veranstaltungen mit jeweils 3LP durchgeführt.
 Zum Wintersemester WS13/14 wurde dies geäendert, und die Veranstaltung wurde fortan als eine Veranstaltung mit 6LP angeboten.
@@ -553,12 +556,34 @@ Es ergeben sich folgende Fälle, in denen die Variablen jeweils aktiv werden:
 \begin{align}
     P_a &= \{ (2, 6) \} \\
     P_b &= \{ (2, 4) \} \\
-    P_c &= \{ 3, 5, 7 \} \times \{ 4, 6, 8 \} \\
+    P_c &= \{ 3, 5, 7 \} \times \{ 4, 6, 8 \}
 \end{align}
 Mit den Test Paths $TP = \{ 2, 3, 4, 6 \}$ decken wir alle Klauseln ab\footnote{Tests siehe \url{https://github.com/knub/onehundredandeighty/blob/testing/test/wirtschafts_rule_coverage.js}}.
 Dies ist gleichzeitig auch die kleinste Menge die \emph{CaCC} erreicht.
 
-\todo{Specifikation: Vertiefungsgebiete}
+\subsubsection{Regeln für Vertiefungsgebiete}
+
+Die Regeln für Vertiefungsgebiete sind der komplizierteste Teil der Studienordnung.
+\begin{quote}
+    \begin{displayquote}
+Die Modulgruppen ``Vertiefungsgebiet 1'' (VT1) und ``Vertiefungsgebiet 2'' (VT2) verfolgen die vertiefende Beschäftigung mit fachwissenschaftliche Themen des IT-Systems Engineering.
+Es werden die folgenden Vertiefungsgebiete angeboten:
+\begin{itemize}
+    \item \emph{BPET}: Business Process \& Enterprise Technologies
+    \item \emph{HCT}: Human Computer Interaction \& Computer Graphics Technology
+    \item \emph{IST}: Internet \& Security Technology
+    \item \emph{OSIS}: Operating Systems \& Information Systems Technology
+    \item \emph{SAMT}: Software Architecture \& Modeling Technology
+\end{itemize}
+Es sind Module in zwei Vertiefungsgebieten in einem Gesamtumfang von 24 LP zu absolvieren, wobei in VT1
+bzw. VT2 jeweils mindestens 9 LP zu erbringen sind. In VT1 und VT2 müssen mindestens je eine Vorlesung
+(VT1-V und VT2-V) im Umfang von 6 LP erbracht werden. Weiter müssen ergänzende Lehrveranstaltungen
+(VT1-E, VT2-E, VT1/2-E) im Umfang von 12 LP absolviert werden, die sich auf beide Vertiefungsgebiete in
+den möglichen Kombinationen 3+9 LP, 6+6 LP oder 9+3 LP verteilen. 
+    \end{displayquote}
+    \captionof{floatquote}{§~9 (3) der Studienordnung}
+    \label{quo:vertiefungsgebiete}
+\end{quote}
 
 \subsection{Input}
 Input von verschiedenen Helfermethoden, wie Kartesisches Produkt mit richtiger Partitionierung

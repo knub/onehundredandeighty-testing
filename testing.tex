@@ -409,7 +409,7 @@ GUI-Testing haben wir in diesem Abschnitt erst einmal nicht betrachtet, sondern 
 Es gibt die sogenannte Time Rule. Diese prüft, ob eine bestimmte Lehrveranstaltung in einem bestimmten Semester angeboten wurde beziehungsweise wahrscheinlich angeboten wird. Der Algorithmus zur Prüfung ist in Pseudocode in Algorithmus \ref{algo:time_rule} dargestellt. Der daraus resultierende Graph ist in Abbildung \ref{Fig:graph_time_rule} zu sehen.
 
 
-\begin{algorithm}
+\begin{algorithm}[h!]
 \caption{Time Rule}
 \label{algo:time_rule}
 \algsetup{indent=2em}
@@ -510,13 +510,23 @@ Für \emph{Onehundredandeighty} haben wir die folgenden Use Cases ermittelt:
     \item Filtern nach verfügbaren Kursen
 \end{itemize}
 
-Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus gesucht. Dieser Use Case ist ein sehr zentraler Bestandteil der Anwendung, welcher für den Nutzer eine relativ hohe Komplexität aufweist. In Abbildung \ref{fig:graph_belegung_waehlen} ist das Aktivitätsdiagram dargestellt.
+Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus gesucht. Dieser Use Case ist ein sehr zentraler Bestandteil der Anwendung, welcher für den Nutzer eine relativ hohe Komplexität aufweist. In Abbildung \ref{fig:aktivity_belegung_waehlen} ist das Aktivitätsdiagram dargestellt. Dieses Aktivitätsdiagram interpretieren wir nun als Graph, welcher in Abbildung \ref{fig:graph_belegung_waehlen}.
 
-\begin{figure}
+\begin{figure}[h!]
 \includegraphics[width=0.8\textwidth]{figures/180_Belegungaendern_aktivitaet.pdf}
 \caption{Aktivitätsdiagram vom Use Case Belegung wählen}
+\label{fig:aktivity_belegung_waehlen}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics[width=0.8\textwidth]{figures/belegung_waehlen_use_case.pdf}
+\caption{Graph vom Use Case Belegung wählen}
 \label{fig:graph_belegung_waehlen}
 \end{figure}
+
+In diesem Use Case ist es theoretisch möglich, dass ein Nutzer alle einzelnen Teile oder auch eine Auswahl davon benutzt. Im Regenfall werden die Nutzer mit einem Plan herum spielen und alle einzelnen Aktionen ausführen.
+Daher werden wir einen Testfall aufstellen, welcher alle Kanten und alle Knoten des Graphens mindestens einmal ausführt: 1, 2, 5, 1, 2, 4, 7, 1, 2, 4, 6, 9, 1, 2, 4, 8, 10, 1, 3
+
 
 \subsection{Logik Coverage}
 
@@ -524,8 +534,8 @@ Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus g
 
 Die Veranstaltung Wirtschaftliche Grundlagen wurde traditionell als zwei Veranstaltungen mit jeweils 3LP durchgeführt.
 Zum Wintersemester WS13/14 wurde dies geäendert, und die Veranstaltung wurde fortan als eine Veranstaltung mit 6LP angeboten.
-Da 180 für unabhängig vom Jahrgang funktionieren soll, gibt es daher zwei mögliche gültige Belegungen: entweder man belegt beide 3LP Veranstaltungen oder eine 6LP Veranstaltung.
-Die entsprechende Bedingung ist int Listing~\ref{lst:wirtschaft} zu sehen.
+Da 180 unabhängig vom Jahrgang funktionieren soll, gibt es daher zwei mögliche gültige Belegungen: entweder man belegt beide 3LP Veranstaltungen oder eine 6LP Veranstaltung.
+Die entsprechende Bedingung ist in Listing~\ref{lst:wirtschaft} zu sehen.
 
 Wir wollen im Folgenden diese Regel mit \emph{Correlated Active Clause Coverage (CaCC)} abdecken.
 Wir wissen, dass man in einem solchen auch einfach \emph{Combinatorial Coverage} durchführen kann, indem man alle $2^n = 2^3 = 8$ mögliche Belegungen manuell prüft.
@@ -536,7 +546,7 @@ return (selectedWirtschaftI && selectedWirtschaftII) ||
         selectedWirtschaftI_II;
 \end{lstlisting}
 
-\begin{table}
+\begin{table}[h!]
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
 \textbf{Row \#} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{P} & \textbf{$P_a$} & \textbf{$P_b$} & \textbf{$P_c$} \\
@@ -549,7 +559,9 @@ return (selectedWirtschaftI && selectedWirtschaftII) ||
  6              & F          & T          & F          & \textbf{F} & T              &                & T              \\
  7              & F          & F          & T          & \textbf{T} &                &                & T              \\
  8              & F          & F          & F          & \textbf{F} &                &                & T              \\
+ \hline
 \end{tabular}
+\caption{Wahrheitstabelle für Wirtschaftsregel}
 \end{table}
 
 Es ergeben sich folgende Fälle, in denen die Variablen jeweils aktiv werden:
@@ -586,11 +598,38 @@ den möglichen Kombinationen 3+9 LP, 6+6 LP oder 9+3 LP verteilen.
 \end{quote}
 
 \subsection{Input}
-Input von verschiedenen Helfermethoden, wie Kartesisches Produkt mit richtiger Partitionierung
+Der Input kann von Methoden, Modulen und dem ganzen System getestet werden. Das System hat als Input ganze Belegungspläne. Diese sind sehr verschienen und können sehr komplex ausfallen. Diese werden hier nicht weiter betrachtet. 
+Es gibt in 180 Helfermethoden, welche in vielen Programmteilen benötigt werden. Eine Methode ist die \emph{cartesianProduct}-Methode, welche das kartesische Produkt zweier Mengen berechnet. 
+Für diese Methode werden wir beispielhaft den Input testen.
+
+Als Eingabe werden 2 Arrays erwartet, welche jeweils eine Menge darstellen.
+
+Wir haben uns für eine Partitionierung nach der Größe der Inputarrays entschieden. Dabei haben wir versucht die Randfälle wie keine Elemente oder nur 1 Element eine Partition zu widmen, da diese oftmals die Fehler führen. Im folgenden sind alle Partintionen dargestellt, wobei \emph{$|A1|$} die Größe vom ersten Inputarray und \emph{$|A2|$} die Größe vom zweiten Inputarray darstellt.
+\begin{itemize}
+\item $|A1|$ undefined und $|A2|$ undefined
+\item $|A1| \geq$ 0 und $|A2|$ = undefined
+\item $|A1|$ undefined und $|A2| \geq$ 0
+\item $|A1|$ = 0 und $|A2|$ = 0
+\item $|A1|$ = 1 und $|A2|$ = 0
+\item $|A1| \geq$ 2 und $|A2|$ = 0
+\item $|A1|$ = 0 und $|A2|$ = 1
+\item $|A1|$ = 1 und $|A2|$ = 1
+\item $|A1| \geq$ 2 und $|A2|$ = 1
+\item $|A1|$ = 0 und $|A2| \geq$ 2
+\item $|A1|$ = 1 und $|A2| \geq$  2
+\item $|A1| \geq 2$ und $|A2| \geq $ 2
+\end{itemize}
+
+Diese Partitionierung erfüllt die Kriterien für eine gültige Partitionierung zum Inputtesten, in dem sie paarweise disjunkt sind und zusammen alle möglichen Eingaben der Methode abbilden.
+
+Andere Partitionierungen, wie zum Beispiel die Reihenfolge der Elemente haben wir nicht als sinnvoll erachtet, da ins besondere die Reihenfolge überhaupt keine Rolle spielt.
+
+Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementiert \footnote{https://github.com/knub/onehundredandeighty/blob/testing/test/input.js}.
+
 
 
 \subsection{Mutation Coverage}
-Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} haben wir die Mutation Coverage der von uns geschriebenen Tests ermittelt.
-Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. Es wurden alle möglichen Mutationsarten angewandt.
+Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} die Mutation Coverage der von uns geschriebenen Tests ermittelt.
+Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. Es wurden alle möglichen Mutationsarten angewandt. Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden. In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt. Bei vielen der Vergleichen ist die gleich Beziehung allerdings auch kaum relevant.
 
 \end{document}

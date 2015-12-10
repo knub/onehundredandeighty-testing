@@ -632,4 +632,20 @@ Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementi
 Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} die Mutation Coverage der von uns geschriebenen Tests ermittelt.
 Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. Es wurden alle möglichen Mutationsarten angewandt. Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden. In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt. Bei vielen der Vergleichen ist die gleich Beziehung allerdings auch kaum relevant.
 
+
+
+\section{Statische Analyse}
+
+Bisher wurden nur bei neuen Pull-Requests manuelle Inspektionen durchgeführt. Dies hat allerdings auch schon mehrfach du Syntaxfehlern in zum Beispiel der oft aktualisierten Datendatei, data.js, geführt. Umso wichtiger ist es automatische statische Analyse zu benutzen.
+
+focus auf wie asa testing unterstützt und wie testing asa unterstützt
+statische analyse nicht nur code basiert, sondern auch spezifikation/dokumentation
+
+jshint: 60 warnings
+google code closure compiler: compiled code zu effizienteren code und überprüft dabei auf verschiedene sachen:
+ ERROR - Parse error. IE8 (and below) will parse trailing commas in array and object literals incorrectly. If you are targeting newer versions of JS, set the appropriate language in option.
+	message: "Die Vorlesung 'Wirtschaftliche Grundlagen' muss besucht werden.",
+	
+	mit höherer Sprache keine probleme
+
 \end{document}

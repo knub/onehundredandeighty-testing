@@ -638,14 +638,31 @@ Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. Es wurden alle mögli
 
 Bisher wurden nur bei neuen Pull-Requests manuelle Inspektionen durchgeführt. Dies hat allerdings auch schon mehrfach du Syntaxfehlern in zum Beispiel der oft aktualisierten Datendatei, data.js, geführt. Umso wichtiger ist es automatische statische Analyse zu benutzen.
 
-focus auf wie asa testing unterstützt und wie testing asa unterstützt
+Wir haben uns 3 Tools angeschaut, welche statische Analyse für Javascript durchführen.
+
+\paragraph{jshint}
+Dieses Tool prüft die angegebenen javascript-Dateien auf mögliche Syntaxfehler. Wir haben von ihm die grunt integration benutzt, welches es ermöglicht die Analyse automatisch auszuführen und zusätzliche Parameter einfach einzustellen.
+Dabei haben wir insgesamt 17 Warnungen erhalten, welche unter anderem folgende waren:
+
+\begin{itemize}
+\item Missing semicolon.
+\item Unnecessary semicolon.
+\item 'i' is already defined
+\end{itemize}
+
+Von diesen Fehlern konnten wir X beheben.
+
+
+\paragraph{jslint}
+
+
+
+\paragraph{google code closure}
+\emph{google code closure} ist kein klassisches Code Analyse Tool. Die eigentliche Funktion des Tools ist es, javascript code so zu compilieren, dass er schneller ausführbar ist. Dieses compilieren benutzt allerdings auch eine statische Analyses des Codes auf Korrektheit. Wir haben dieses Teil benutzt um unsere Anwendung überprüfen zu lassen.
+Dabei kam heraus, dass die Anwendung nicht kompatibel zu IE8 geschrieben wurde. Neuere Versionen stellen allerdings kein Problem dar. Dies zeigt, dass die Anwendung auch vermehrt unter verschiedenen Nutzerbedingungen getestet werden sollte.
+
+focus auf wie das testing unterstützt und wie testing das unterstützt
 statische analyse nicht nur code basiert, sondern auch spezifikation/dokumentation
 
-jshint: 60 warnings
-google code closure compiler: compiled code zu effizienteren code und überprüft dabei auf verschiedene sachen:
- ERROR - Parse error. IE8 (and below) will parse trailing commas in array and object literals incorrectly. If you are targeting newer versions of JS, set the appropriate language in option.
-	message: "Die Vorlesung 'Wirtschaftliche Grundlagen' muss besucht werden.",
-	
-	mit höherer Sprache keine probleme
 
 \end{document}

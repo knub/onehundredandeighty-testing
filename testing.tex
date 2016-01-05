@@ -643,7 +643,7 @@ Für diese Methode werden wir nun beispielhaft den Input testen.
 Als Eingabe werden 2 Arrays erwartet, welche jeweils eine Menge darstellen.
 
 Wir haben uns für eine Partitionierung nach der Größe der Inputarrays entschieden.
-Dabei haben wir versucht die Randfälle wie keine Elemente oder nur 1 Element eine Partition zu widmen, da diese oftmals die Fehler führen.
+Dabei haben wir versucht die Randfälle wie keine Elemente oder nur 1 Element eine Partition zu widmen, da diese oftmals zu Fehler führen.
 Im Folgenden sind alle Partintionen dargestellt, wobei \emph{$|A1|$} die Größe vom ersten Inputarray und \emph{$|A2|$} die Größe vom zweiten Inputarray darstellt.
 \begin{itemize}
 \item $|A1|$ undefined und $|A2|$ undefined
@@ -661,27 +661,37 @@ Im Folgenden sind alle Partintionen dargestellt, wobei \emph{$|A1|$} die Größe
 \end{itemize}
 
 Diese Partitionierung erfüllt die Kriterien für eine gültige Partitionierung zum Inputtesten, in dem sie paarweise disjunkt sind und zusammen alle möglichen Eingaben der Methode abbilden.
-
-Andere Partitionierungen, wie zum Beispiel die Reihenfolge der Elemente haben wir nicht als sinnvoll erachtet, da ins besondere die Reihenfolge überhaupt keine Rolle spielt.
-
+Andere Partitionierungen, wie zum Beispiel die Reihenfolge der Elemente haben wir nicht betrachtet, da die Reihenfolge überhaupt keine Rolle spielt.
 Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementiert \footnote{https://github.com/knub/onehundredandeighty/blob/testing/test/input.js}.
 
 
 
 \subsection{Mutation Coverage}
 Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} die Mutation Coverage der von uns geschriebenen Tests ermittelt.
-Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. Es wurden alle möglichen Mutationsarten angewandt. Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden. In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt. Bei vielen der Vergleichen ist die gleich Beziehung allerdings auch kaum relevant.
+Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. \todo{Add number}
+Es wurden alle möglichen Mutationsarten angewandt. Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden. In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt. Bei vielen der Vergleichen ist die gleich Beziehung allerdings auch kaum relevant.
 
 
 
 \section{Statische Analyse}
 
-Bisher wurden nur bei neuen Pull-Requests manuelle Inspektionen durchgeführt. Dies hat allerdings auch schon mehrfach du Syntaxfehlern in zum Beispiel der oft aktualisierten Datendatei, data.js, geführt. Umso wichtiger ist es automatische statische Analyse zu benutzen.
+Es existieren eine Vielzahl von Tools zur statischen Analyse von JavaScript Code.
+Wir haben uns 3 Tools angeschaut, die sich auf die statische Analyse spezialisiert haben: \emph{JSLint}, \emph{JSHint} und \emph{ESLint}.
+Desweiteren haben wir uns den \emph{Google Closure Compiler} angeschaut, welcher keine klassische statische Analyse durchführt, allerdings trotzdem für diesen Zweck verwendet werden kann.
 
-Wir haben uns 3 Tools angeschaut, welche statische Analyse für Javascript durchführen.
+Bisher wurde im Projekt keine statische Analyse automatisiert in den Entwicklungsprozess eingeführt.
+Allerdings wurde der Code bei der Entwicklung sporadisch manuell getestet, in dem er online auf \url{http://jslint.com/} kopiert wurde.
+Wie bereits erwähnt, geschah dies allerdings nicht systematisch.
 
-\paragraph{jshint}
-Dieses Tool prüft die angegebenen javascript-Dateien auf mögliche Syntaxfehler. Wir haben von ihm die grunt integration benutzt, welches es ermöglicht die Analyse automatisch auszuführen und zusätzliche Parameter einfach einzustellen.
+Eine automatische statische Analyse hätte bereits einmal einen Fehler verhindern können.
+Wie bereits weiter oben erwähnt, wurde Mitte 2014 ein Issue\footnote{\url{https://github.com/knub/onehundredandeighty/issues/20}} gemeldet, der von allen vier oben erwähnten Tools entdeckt worden wäre.
+Durch die Integration dieser Tools erhoffen wir uns also insbesondere in der oft aktualisierten Datendatei \texttt{data.js} eine bessere und schnellere Erkennung von Fehlern.
+
+\subsection{Ergebnisse der statischen Analyse}
+\subsubsection{JSLint, JSHint und ESLint}
+Wie bereits erwähnt sind diese drei Tools klassische Tools der statischen Analyse.
+Wir werden im Folgenden eine Zusammenstellung der von den Tools gefunden Fehler präsentieren.
+
 Dabei haben wir insgesamt 17 Warnungen erhalten, welche unter anderem folgende waren:
 
 \begin{itemize}
@@ -693,15 +703,19 @@ Dabei haben wir insgesamt 17 Warnungen erhalten, welche unter anderem folgende w
 Von diesen Fehlern konnten wir X beheben.
 
 
-\paragraph{jslint}
-
-
-
-\paragraph{google code closure}
-\emph{google code closure} ist kein klassisches Code Analyse Tool. Die eigentliche Funktion des Tools ist es, javascript code so zu compilieren, dass er schneller ausführbar ist. Dieses compilieren benutzt allerdings auch eine statische Analyses des Codes auf Korrektheit. Wir haben dieses Teil benutzt um unsere Anwendung überprüfen zu lassen.
+\subsubsection{Google Closure Compiler}
+Der \emph{Google Closure Compiler} ist kein klassisches Code Analyse Tool.
+Die eigentliche Funktion des Tools ist es, JavaScript code so zu compilieren, dass er schneller herunterlad- und ausführbar ist.
+Dieses compilieren benutzt allerdings auch eine statische Analyses des Codes auf Korrektheit. Wir haben dieses Teil benutzt um unsere Anwendung überprüfen zu lassen.
 Dabei kam heraus, dass die Anwendung nicht kompatibel zu IE8 geschrieben wurde. Neuere Versionen stellen allerdings kein Problem dar. Dies zeigt, dass die Anwendung auch vermehrt unter verschiedenen Nutzerbedingungen getestet werden sollte.
 
 focus auf wie das testing unterstützt und wie testing das unterstützt
 statische analyse nicht nur code basiert, sondern auch spezifikation/dokumentation
+
+\subsubsection{Einbindung in den Entwicklungsprozess}
+Nach Testen aller Tools haben wir uns entschieden, JSHint und ESLint automatisiert in den Entwicklungsprozess zu integrieren.
+Dies beinhaltet eine fertige Konfiguration der zu testenden Regeln und Dateien.
+Die statische Analyse kann nun automatisch mit dem Befehl \texttt{grunt jshint} bzw. \texttt{eslint js/} aus dem Root-Verzeichnis des Repositories gestartet werden.
+
 
 \end{document}

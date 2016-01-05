@@ -407,7 +407,7 @@ GUI-Testing haben wir in diesem Abschnitt erst einmal nicht betrachtet, sondern 
 \subsection{Graph Coverage}
 \todo{warum hilft graph coverage tests die testplanziele zu erfüllen (bzw. teilweise)}
 \subsubsection{Control Flow Graph}
-Es gibt die sogenannte Time Rule. Diese prüft, ob eine bestimmte Lehrveranstaltung in einem bestimmten Semester angeboten wurde beziehungsweise wahrscheinlich angeboten wird. Der Algorithmus zur Prüfung ist in Pseudocode in Algorithmus \ref{algo:time_rule} dargestellt. Der daraus resultierende Graph ist in Abbildung \ref{Fig:graph_time_rule} zu sehen.
+Es gibt die sogenannte Time Rule. Diese prüft, ob eine bestimmte Lehrveranstaltung in einem bestimmten Semester angeboten wurde beziehungsweise wahrscheinlich angeboten wird. Der Algorithmus zur Prüfung ist in Pseudocode in Algorithmus \ref{algo:time_rule} dargestellt. Der daraus resultierende Graph ist in Abbildung \ref{fig:graph_time_rule} zu sehen.
 
 
 \begin{algorithm}[h!]
@@ -444,7 +444,7 @@ Es gibt die sogenannte Time Rule. Diese prüft, ob eine bestimmte Lehrveranstalt
 \begin{figure}[h!]
 \includegraphics[width=0.8\textwidth]{figures/time_rule.pdf}
 \caption{Graph der Time Rule}
-\label{Fig:graph_time_rule}
+\label{fig:graph_time_rule}
 \end{figure}
 
 Wir möchten Edge-Pair-Coverage für diese Regel erreichen, da damit alle Fälle abgedeckt sind.
@@ -692,13 +692,45 @@ Durch die Integration dieser Tools erhoffen wir uns also insbesondere in der oft
 Wie bereits erwähnt sind diese drei Tools klassische Tools der statischen Analyse.
 Wir werden im Folgenden eine Zusammenstellung der von den Tools gefunden Fehler präsentieren.
 
-Dabei haben wir insgesamt 17 Warnungen erhalten, welche unter anderem folgende waren:
+\begin{table}[h!]
+\begin{tabular}{|l|l|c|}
+\hline
+\textbf{Fehler} & \textbf{Problem} & \textbf{Nr. of occurrences} \\
+\hline \hline
+I    & \texttt{\emph{var} is already defined}           & 17          \\
+II   & \texttt{Better use dot notation}                 & 11          \\
+III  & \texttt{Missing semicolon}                       & 6          \\
+IV   & \texttt{Unnecessary semicolon}                   & 3          \\
+V    & \texttt{Use function form of "use strict"}       & 3          \\
+VI   & \texttt{Don't define functions in loops}         & 1          \\
+VII  & \texttt{Use !== to check for 0}                  & 1          \\
+\hline
+     &                                                  & \textbf{42 insgesamt} \\
+\hline
+\hline
+\end{tabular}
+\caption{Zusammenfassung der von den Analyse-Tools gemeldeten Fehler}
+\end{table}
 
-\begin{itemize}
-\item Missing semicolon.
-\item Unnecessary semicolon.
-\item 'i' is already defined
-\end{itemize}
+\paragraph{\texttt{Fehler I: Bereits definierte Variablen.}}
+Diesen Fehler haben wir in 16 der 17 Fälle ignoriert, weil die Regel weitgehend interpretiert wird.
+Enthält eine Methode zwei Schleifen, in denen in beiden Fällen die gleiche Schleifenvariable verwendet wird, wird ein Fehler geworfen.
+Da \texttt{i} eine gängige Schleifenvariable ist, sehr oft verwendet wird und daher den Code besser lesbar macht als künstlich eingeführte andere Buchstaben, haben wir die diese Regel in diesen Fällen ignoriert.
+In einem Fall wurde allerdings wirklich eine Variable an einer späteren Stelle überschrieben, und mit einer neuen Bedeutung neu eingeführt.
+Hier hat das Tool geholfen.
+
+\paragraph{\texttt{Fehler II, III und IV:}}
+Diese Fehler bemängeln von der typischen JavaScript Konvention abweichende Notationen und Semikolons an falschen Ständen.
+Dies führt nicht direkt zu Fehlern, aber im Sinne der Lesbarkeit und Konsistenz wurden diese Fehler behoben.
+
+\paragraph{\texttt{Fehler VII: Benutze !== um auf 0 zu prüfen.}}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/javascript_truth_table.pdf}
+\caption{JavaScript Wahrheitstabelle: Bei Prüfung mit == sind zum Beispiel die Werte \texttt{0} (Zahl Null) und \texttt{[[]]} (ein Array, welches ein leeres Array enthält) identisch. Um solchen Unwägbarkeiten zu entgehen, sollte man immer mit === prüfen, welches keine Typ-Umwandlungen durchführt.}
+\label{fig:javascript_truth_table}
+\end{figure}
 
 Von diesen Fehlern konnten wir X beheben.
 
@@ -714,8 +746,8 @@ statische analyse nicht nur code basiert, sondern auch spezifikation/dokumentati
 
 \subsubsection{Einbindung in den Entwicklungsprozess}
 Nach Testen aller Tools haben wir uns entschieden, JSHint und ESLint automatisiert in den Entwicklungsprozess zu integrieren.
-Dies beinhaltet eine fertige Konfiguration der zu testenden Regeln und Dateien.
+Diese Integration beinhaltet eine fertige Konfiguration der zu testenden Regeln und Dateien.
+Eine weitere Integration von JSLint wurde nicht durchgeführt, da die beiden erst genannten Projekte besser nutzbar sind und bereits alle statischen Analysemöglichkeiten abdecken.
 Die statische Analyse kann nun automatisch mit dem Befehl \texttt{grunt jshint} bzw. \texttt{eslint js/} aus dem Root-Verzeichnis des Repositories gestartet werden.
-
 
 \end{document}

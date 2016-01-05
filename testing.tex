@@ -697,15 +697,15 @@ Wir werden im Folgenden eine Zusammenstellung der von den Tools gefunden Fehler 
 \hline
 \textbf{Fehler} & \textbf{Problem} & \textbf{Nr. of occurrences} \\
 \hline \hline
-I    & \texttt{\emph{var} is already defined}           & 17          \\
-II   & \texttt{Better use dot notation}                 & 11          \\
-III  & \texttt{Missing semicolon}                       & 6          \\
-IV   & \texttt{Unnecessary semicolon}                   & 3          \\
-V    & \texttt{Use function form of "use strict"}       & 3          \\
-VI   & \texttt{Don't define functions in loops}         & 1          \\
-VII  & \texttt{Use !== to check for 0}                  & 1          \\
+I    & \texttt{\emph{var} ist bereits definiert}            & 17          \\
+II   & \texttt{Benutze besser die Punkt-Schreibweise}       & 11          \\
+III  & \texttt{Semikolon fehlt}                             & 6          \\
+IV   & \texttt{Überflüssiges Semikolon}                     & 3          \\
+V    & \texttt{Benutze die Funktions-Form von "use strict"} & 3          \\
+VI   & \texttt{Definiere keine Funktionen in Schleifen}     & 1          \\
+VII  & \texttt{Benutze !== um auf 0 zu prüfen}              & 1          \\
 \hline
-     &                                                  & \textbf{42 insgesamt} \\
+     &                                                      & \textbf{42 insgesamt} \\
 \hline
 \hline
 \end{tabular}
@@ -723,7 +723,44 @@ Hier hat das Tool geholfen.
 Diese Fehler bemängeln von der typischen JavaScript Konvention abweichende Notationen und Semikolons an falschen Ständen.
 Dies führt nicht direkt zu Fehlern, aber im Sinne der Lesbarkeit und Konsistenz wurden diese Fehler behoben.
 
-\paragraph{\texttt{Fehler VII: Benutze !== um auf 0 zu prüfen.}}
+\paragraph{\texttt{Fehler V: Benutze die Funktions-Form von "use strict"}}
+Schreibt man an den Anfang einer JavaScript-Datei einer Datei oder Funktion den String "use strict", wird ein strengerer JavaScript-Modus angestellt, der weniger Fehler durchgehen lässt und damit ein saubereres Programmieren erzwingt.
+Aus eben diesen Gründen wurde dieser Modus bei der Entwicklung gewählt.
+Da das Schreiben an den Anfang der Datei Probleme verursachen kann, wenn Dateien aneinander gehangen werden (und somit der strikte Modus für alle Dateien aktiviert wird), wird empfohlen, ihn nur für bestimmte Funktionen zu aktivieren \footnote{siehe \url{https://jslinterrors.com/use-the-function-form-of-use-strict}}).
+Dieses Problem besteht allerdings bei 180 nicht, da alle verwendeten Bibliotheken ebenfalls den strikten Modus verwenden, und Dateien auch nicht aneinandergehangen werden.
+Daher ignorieren wir diese Meldung.
+
+\paragraph{\texttt{Fehler VI: Definiere keine Funktionen in Schleifen}}
+In der bemängelten Code-Stelle, siehe Listing \ref{lst:error_6}, wurde eine Funktion innerhalb einer Schleife definiert.
+Dies ist nicht gut, da in JavaScript die Funktion nicht nur einmal definiert wird, sondern wirklich in jedem Schleifendurchlauf eine neue Funktion mit identischem Code erzeugt wird.
+Desweiteren kann es zu unerwarteten Seiteneffekten zwischen den Funktionen kommen \footnote{siehe \url{https://jslinterrors.com/dont-make-functions-within-a-loop}}.
+
+\begin{lstlisting}[caption=Ausschnitt aus \texttt{data.js},numbers=left,label={lst:error_6},frame=single]
+// removes `number` semesters from the selection,
+// e.g. if number = 2 and there initially were 8 semesters
+// to choose from, then there are only 6 left
+removeSemester: function(number) {
+  for (var i = 0; i < number; i += 1) {
+    var num = semesterManager.numberDisplayed;
+    $("#semester" + num).find("li").each(function() {
+      /* .. Remove list element li from the web page .. */
+    });
+    $("#semester" + num).remove();
+    semesterManager.numberDisplayed -= 1;
+  }
+}
+\end{lstlisting}
+
+Dementsprechen haben wir dieses Problem behoben, in dem wir die Funktion als eigenständige Funktion ausgelagert haben.
+Die betreffende Codezeile 7 liest sich nach der Änderung wie folgt:
+\texttt{[...].each(removeListFromSemester);}
+
+\paragraph{\texttt{Behler VII: Benutze !== um auf 0 zu prüfen}}
+
+Dies ist ein typischer Fehler in JavaScript, der zu schwer zu debuggenden Programmen führen kann.
+JavaScript zwischen zwei Vergleichsoperatoren == (!=) und === (!==).
+Ersterer führt vor der Gleichheit eventuell Typumwandlungen um, um die beiden Operanden vergleichbar zu machen.
+Das führt zu mitunder merkwürdigen Ergebnissen, wie Abbildung \ref{fig:javascript_truth_table} zeigt.
 
 \begin{figure}[h!]
 \centering
@@ -732,7 +769,9 @@ Dies führt nicht direkt zu Fehlern, aber im Sinne der Lesbarkeit und Konsistenz
 \label{fig:javascript_truth_table}
 \end{figure}
 
-Von diesen Fehlern konnten wir X beheben.
+Dieser Fall ist leicht zu beheben, indem einfach === verwendet wird.
+
+\todo{Von diesen Fehlern konnten wir X beheben.}
 
 
 \subsubsection{Google Closure Compiler}

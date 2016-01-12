@@ -68,7 +68,7 @@ Es existieren keine automatisierten Tests, daher eignet sich das Projekt gut, um
 Die Entwicklung folgt dem Wasserfallmodell.
 Zunächst wurden die Anforderungen gesammelt, allerdings nicht formal, sondern in einer losen Liste.
 Nach einer Planungsphase wurde das Projekt dann implementiert.
-Nach der erfolgreichen Ver"offentlichung ist das Projekt zurzeit in der Wartungsphase.
+Nach der erfolgreichen Veröffentlichung ist das Projekt zurzeit in der Wartungsphase.
 
 \paragraph{Anforderungen, Spezifikation und Dokumentation}
 
@@ -76,24 +76,18 @@ Die Anwendungen wurde aus dem persönlichen Bedarf heraus entwickelt, und es gab
 Alleiniger Entwickler war Stefan Bunk, einer der Autoren dieses Dokuments.
 Obwohl es damit keine Spezifikation im klassischen Sinne gibt, sind dennoch die zu implementierenden Regeln genau festgelegt:
 In der \href{http://www.uni-potsdam.de/ambek/ambek2010/15/Seite3.pdf}{Fachspezifischen Ordnung für das Bachelor- und Masterstudium im Fach IT-Systems Engineering an der Universität Potsdam}, der Studienordnung, wird genau festgelegt, wie ein Student seinen Belegungsplan zusammenstellen muss, um den Bachelorabschluss vom HPI zu erhalten.
-
-\begin{itemize}
-    \item
-        Spezifikation: Studienordnung des HPI -- \todo{Vorstellung Regeln, Vertiefungsgebiete}
-    \item
-        Vertrauliche Daten: kein Sharen über das Internet
-\end{itemize}
+Die Studienordnung wird in Abschnitt~\ref{sec:verification_and_validation} vorgestellt.
 
 \paragraph{Aktueller Teststatus und Bug Repositories}
 
-Wie bereits erw"ahnt existieren keine automatisierten Tests.
+Wie bereits erwähnt existieren keine automatisierten Tests.
 Bei der Enwicklung wurde der Code wiederholt manuell getestet.
 
 Als \href{https://github.com/knub/onehundredandeighty/issues?q=is:issue}{Bug Repository} wird die von Github bereitgestellte Funktion der \emph{Issues} verwendet.
-Dort kann der Entwickler, aber auch Nutzer der Anwender, Bug-Berichte oder Feature-W"unsche abgeben, die dann eine eindeutige Nummer erhalten.
+Dort kann der Entwickler, aber auch Nutzer der Anwender, Bug-Berichte oder Feature-Wünsche abgeben, die dann eine eindeutige Nummer erhalten.
 Wurde der Fehler behoben, oder entschieden, den Wunsch nicht zu implementieren, kann das Issue geschlossen werden.
 
-Bisher wurden f"unf Issues gemeldet:
+Bisher wurden fünf Issues gemeldet:
 \begin{itemize}
     \item
         \href{https://github.com/knub/onehundredandeighty/issues/30}{2 Feature-Requests} nach Berechnung der Gesamtnote -- wird nicht implementiert
@@ -116,10 +110,11 @@ Im Folgenden werden beide auch noch die Rolle der Tester einnehmen.
 \subsection{Verifikation und Validation}
 
 \paragraph{Validation: Die richtige Anwendung bauen!}
+\label{sec:verification_and_validation}
 
 180 wurde entwickelt unter der Annahme, dass es für jeden Studenten kompliziert ist, sein Studium entsprechend der Studienordnung zu planen.
 Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen.
-\todo{Beispiel hinzufuegen}
+Daher widmen wir uns dieser Regel auch in einem eigenen Abschnitt (\ref{sec:vertiefungsgebiete}).
 
 %\begin{quote}
 %    \begin{displayquote}
@@ -134,7 +129,7 @@ Die Menge aller gültigen Belegungen ist damit sehr groß, übersieht man allerd
 Merkt man dies nicht rechtzeitig, muss im schlimmsten Fall ein weiteres Semester im Bachelorstudium eingeplant werden.
 
 Daher ist die Idee von 180 diese manuelle und fehleranfällige Prüfung zu automatisieren.
-Da die Regeln der Studienordnung sich nicht schnell ändern (mehr zu möglichen Änderungen der Studienordnung weiter unten \todo{vielleicht als Footnote}), genügt es, die Regeln einmal korrekt zu implementieren.
+Da die Regeln der Studienordnung sich nicht schnell ändern\footnote{Mehr zu möglichen Änderungen der Studienordnung im Abschnitt über die Sicherung der Qualität zukünftiger Releases}, genügt es, die Regeln einmalig korrekt zu implementieren.
 Daher ist dies auch der zentrale Punkt der Validierung:
 Die Anwendung muss genau dann ausgeben, dass ein Belegungsplan valide ist, wenn er nach den Paragraphen der Studienordnung korrekt ist.
 Kann die Anwendung dies nicht garantieren, ist sie nahezu nutzlos.
@@ -268,26 +263,31 @@ Dies geschieht auch im Rahmen dieses Projektes, indem wir Tests entwickeln.
 
 \subsection{Welche Technologien sollen während der Entwicklung angewandt werden?}
 
-\begin{itemize}
-    \item
-        TDD
-    \item
-        static analysis -- bis jetzt gar nicht umgesetzt
-    \item
-        Randomisierte Tests bieten sich nicht an, Zuverlässigkeit am besten über genau Tests.
-\end{itemize}
+180 ist ein abgeschlossenes Projekt für das bisher keine Tests existieren.
+Insofern können keine Technologien oder Entwicklungsparadigmen wie TDD mehr während der Entwicklung angewandt werden.
 
-Laut dem ursprünglichen Paper von D. Hamlet über Random Testing.
-The [..] meaning of ``random testing'' refers to an
-explicit lack of ``system'' in the choice of test data, so that there is
-no correlation among different tests.
+Wir werden aber im folgenden einige Technologien vorstellen, die wir nun im Nachhinein anwenden werden, um 180 auf mögliche Fehler zu überprüfen.
+Zunächst sprechen wir dabei natürlich von Tests.
+Wir werden uns dabei insbesondere auf Tests der Kern-Logik des Programms konzentrieren, also ob ein Belegungsplan valide ist oder nicht (und warum nicht).
+Dabei werden im Rahmen dieses Dokuments auch Mutation Tests ausprobieren.
+Dabei werden minimale Änderungen im Programm vorgenommen und geschaut, ob ein Test die entsprechende Änderung abfängt.
+Wir denken, dies ist eine gute Möglichkeit um einzuschätzen, wie abdeckend unsere Tests sind.
+Randomisiertes Testing bietet sich bei dem Projekt nicht an.
+Die Testfälle, also konkrete Belegungspläne, müssen sehr genau auspezifiert sein, um bestimmte Grenzfälle abzudecken.
+Eine zufällige Belegung wird nahezu immer nicht valide sein.
 
-In unserem Fall müssen die Testfälle aber sehr genau auspezifiert sein, um bestimmte Grenzfälle abzudecken. Eine zufällige Belegung wird nahezu immer falsch sein.
+Statische Analyse kann ebenfalls helfen Bugs oder Unsauberkeiten im Programm zu finden.
+Daher werden wir verschiedene Tools zur statischen Analyse in JavaScript ausprobieren.
+Einer der oben erwähnten Issues wäre mit statischer Analyse zum Beispiel leicht zu entdecken gewesen.
 
-Tradeoff Kosten-Korrektheit: Bei uns ganz klar in Richtung Korrektheit.
-Korrektheit ist oberstes Gut, weil eine fälschlicherweise korrekte Belegung unschöne Folgen haben kann.
+% Laut dem ursprünglichen Paper von D. Hamlet über Random Testing.
+% The [..] meaning of ``random testing'' refers to an
+% explicit lack of ``system'' in the choice of test data, so that there is
+% no correlation among different tests.
 
-Macht die Anwendung unnnutzbar, wenn man sich nicht darauf verlassen kann.
+Beim Tradeoff zwischen Kosten und Korrektheit liegt bei uns der Fokus ganz klar auf der Korrektheit.
+Die Korrektheit der implementierten Regeln ist oberstes Gut, weil eine fälschlicherweise korrekte Belegung schwere Konsequenzen für den jeweiligen Studenten haben kann, z.B. wenn ein Semester länger studiert werden muss.
+
 
 \subsection{Wann ist die Anwendung bereit für eine Veröffentlichung?}
 
@@ -312,7 +312,7 @@ Insbesondere ist wichtig, dass wir den Belegungsplan des Nutzers nicht auf dem S
 Dies erreichen wir, indem wir per Design die Daten nur auf dem Rechner des Nutzers speichern, und sie nie über das Netzwerk schicken.
 Daher erfordert diese Anforderung keine expliziten Tests.
 
-Die Korrektheit der Anwendung testen wir im folgenden Kapitel ausführlich über automatisierte Tests.
+Die Korrektheit der Anwendung überprüfen wir im folgenden Kapitel ausführlich über automatisierte Tests sowie statische Analyse.
 Das wir die richtigen Regeln implementieren, haben wir bereits im Abschnitt zur Validierung beschrieben.
 
 Ein weiterer üblicherweise gewählter Faktor um die ``readiness'' zu definieren ist die Verlässlichkeit (``reliability'') der Anwendung.
@@ -355,7 +355,7 @@ Ein offensichtliches Problem stellt die Änderung oder Neuverfassung der Studien
 In diesem Fall muss die Anwendung entweder behutsam angepasst werden, oder komplett neu entwickelt werden.
 Deswegen ist es wichtig, von einer Änderung der Studienordnung so schnell wie möglich zu erfahren.
 Es lässt sich dafür aber keine gute technische Lösung implementieren.
-Da Änderungen der Studienordnung aber öffentlich angekündigt werden müssen, und oft auch mit Diskussionen zwischen den Studierenden und Lehrenden einhergehen, verlassen wir uns auf schnelles Feedback des Fachschaftsrates oder der Studierendenschaft.
+Da Änderungen der Studienordnung aber öffentlich angekündigt werden müssen, und oft auch mit Diskussionen zwischen den Studierenden und Lehrenden einhergehen, verlassen wir uns auf schnelles Feedback des Fachschaftsrates oder der Studierendenschaft, auch wenn die Autoren selbst nicht mehr studieren werden.
 
 Technologisch sind keine Inkompatibilitäten in den nächsten Jahren zu erwarten.
 180 nutzt moderne Webtechnologien wie HTML5, CSS3 und JavaScript.
@@ -364,20 +364,32 @@ Deswegen ist in den nächsten Jahren keine Inkompatibiliät oder Beendigung der 
 \subsection{Wie kann der Entwicklungsprozess selbst verbessert werden?}
 
 Wie bereits erwähnt ist das Hauptproblem die Aktualisierung der Veranstaltungsdatenbank.
+Dabei kommt es desöfteren zu Fehlern.
+Technisch gesehen ist eine Kontrolle hier schwierig.
+Wenn eine neue Veranstaltung angeboten wird, ist nicht direkt zu erkennen, dass diese zum Beispiel fälscherlicherweise dem Vertiefungsgebiet BPET statt HCT zugeordnet wurde, oder das die Anzahl der Credit Points falsch ist.
+Insofern ist dieses Problem nur durch die Einführung eines Korrekturprozesses möglich.
+Zwei Ideen dafür wären:
 
 \begin{itemize}
-    \item
-        Code Reviews (insebesondere von nachträglichen Änderungen)
-    \item
-        2 unabhängige Änderungseingabe (neue Veranstaltung) -- erst dann in System
+    \item Code Reviews: Jede Änderung an den Daten muss von mindestens zwei weiteren Personen manuell überprüft werden.
+    \item Unabhängige Updates: Zwei Personen aktualisieren unabhängig voneinander die Veranstaltungsdatenbank. Erst wenn beide Updates semantisch identisch sind, werden die Änderungen in das System übernommen.
 \end{itemize}
-
-Vorher manuelles, fehleranfälliges Testen. Durch die von uns zu
-entwickelnden Tests wird das manuelle Testen unnötig. Durch eine hohe
-Testabdeckung steigt desweiteren
 
 \subsection{Klassifizierung nach verschiedenen Test-Kriterien}
 
+\paragraph{Validation- oder Defekt-Testen}
+Unsere Tests lassen sich hauptsächlich der Kategorie Validation-Testing zuordnen, da wir immer von einen oder mehreren Paragraphen der Studienordnung ausgehen und schauen, ob dessen Anforderungen implementiert sind.
+Dabei geschieht zwar implizit auch Defect-Testing, da die Tests ja auch fehlschlagen, wenn es einen Bug im System gibt, aber von der Sichtweise her betrachten wir Validation-Tests.
+
+\paragraph{Unit-, Integration- und System-Testen}
+Wir betrachten nur Unit- und Integrationstests.
+Erstere betrachten wir, indem wir einzelne Regeln, wie z.B. ``ein Kurs kann nur in einem Semester belegt werden, in dem er angeboten wird'' testen.
+Schlussendlich testen wir aber auch die Integration aller Regel-Komponenten, indem wir fertige Belegungspläne mit allen Regeln überprüfen.
+Lediglich System-Testing werden bei uns nicht durchgeführt, da wir keine Frontend-Tests schreiben und damit nicht das System dem User Interface testen.
+
+\paragraph{Development-, Release- oder Usertesting}
+Unsere Tests lassen sich all als Development-Tests kategorisieren.
+Spezielle Tests vor einem Deployment werden nicht durchgeführt, ebenso keine Tests mit echten Nutzern.
 
 \subsection{Zusammenfassung}
 \label{sec:zusammenfassung}
@@ -392,12 +404,8 @@ Im Folgenden fassen wir zusammen, wie wir den Status quo durch unseren initialen
         Unit-Tests für jede Regel im Programm
     \item
         System-Tests mit kompletten, echten Belegungsplänen
-    \item
-        Kleine User-Study mit folgenden Fragen: ** dfasdf ** dfasdf
 \end{itemize}
 
-\todo{Development, Release, Uesrtesting (wir haben nur das erste)}
-\todo{Unit/Component, Integration, System Testing}
 
 \section{Testing}
 
@@ -405,10 +413,11 @@ In diesem Kapitel werden Beispiele für verschiedene Testarten dargestellt. Dabe
 GUI-Testing haben wir in diesem Abschnitt erst einmal nicht betrachtet, sondern uns auf die Logik im Hintergrund konzentriert.
 
 \subsection{Graph Coverage}
-\todo{warum hilft graph coverage tests die testplanziele zu erfüllen (bzw. teilweise)}
-\subsubsection{Control Flow Graph}
-Es gibt die sogenannte Time Rule. Diese prüft, ob eine bestimmte Lehrveranstaltung in einem bestimmten Semester angeboten wurde beziehungsweise wahrscheinlich angeboten wird. Der Algorithmus zur Prüfung ist in Pseudocode in Algorithmus \ref{algo:time_rule} dargestellt. Der daraus resultierende Graph ist in Abbildung \ref{fig:graph_time_rule} zu sehen.
 
+\subsubsection{Control Flow Graph}
+Es gibt die sogenannte Time Rule.
+Diese prüft, ob eine bestimmte Lehrveranstaltung in einem bestimmten Semester angeboten wurde beziehungsweise wahrscheinlich angeboten werden wird.
+Der Algorithmus zur Prüfung ist in Pseudocode in Algorithmus \ref{algo:time_rule} dargestellt. Der daraus resultierende Graph ist in Abbildung \ref{fig:graph_time_rule} zu sehen.
 
 \begin{algorithm}[h!]
 \caption{Time Rule}
@@ -664,12 +673,12 @@ Diese Partitionierung erfüllt die Kriterien für eine gültige Partitionierung 
 Andere Partitionierungen, wie zum Beispiel die Reihenfolge der Elemente haben wir nicht betrachtet, da die Reihenfolge überhaupt keine Rolle spielt.
 Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementiert \footnote{https://github.com/knub/onehundredandeighty/blob/testing/test/input.js}.
 
-
-
 \subsection{Mutation Coverage}
 Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} die Mutation Coverage der von uns geschriebenen Tests ermittelt.
 Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. \todo{Add number}
-Es wurden alle möglichen Mutationsarten angewandt. Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden. In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt. Bei vielen der Vergleichen ist die gleich Beziehung allerdings auch kaum relevant.
+Es wurden alle möglichen Mutationsarten angewandt.
+Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden. In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt.
+Bei vielen der Vergleichen ist die gleich Beziehung allerdings auch kaum relevant.
 
 
 

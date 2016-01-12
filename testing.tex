@@ -45,7 +45,6 @@
 
 \begin{document}
 
-\listoftodos
 \tableofcontents
 
 \section{Überblick über die Anwendung}
@@ -505,8 +504,8 @@ Coverage & A, B, C, D, E, F, G, H, I, J, K, H\\ \hline
 
 \end{paracol}
 
-\subsubsection{Finite State Machines}
-Veranstaltungsstatus: gewählt, wählbar, gefiltert...
+% \subsubsection{Finite State Machines}
+% Veranstaltungsstatus: gewählt, wählbar, gefiltert...
 
 
 \subsubsection{Use Cases}
@@ -520,7 +519,7 @@ Für \emph{onehundredandeighty} haben wir die folgenden Use Cases ermittelt:
     \item Filtern nach verfügbaren Kursen
 \end{itemize}
 
-Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus gesucht. Dieser Use Case ist ein sehr zentraler Bestandteil der Anwendung, welcher für den Nutzer eine relativ hohe Komplexität aufweist. In Abbildung \ref{fig:aktivity_belegung_waehlen} ist das Aktivitätsdiagram dargestellt. Dieses Aktivitätsdiagram interpretieren wir nun als Graph, welcher in Abbildung \ref{fig:graph_belegung_waehlen}.
+Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus gesucht. Dieser Use Case ist ein sehr zentraler Bestandteil der Anwendung, welcher für den Nutzer eine relativ hohe Komplexität aufweist. In Abbildung \ref{fig:aktivity_belegung_waehlen} ist das Aktivitätsdiagram dargestellt. Dieses Aktivitätsdiagram interpretieren wir nun als Graph, welcher in Abbildung \ref{fig:graph_belegung_waehlen} dargestellt ist.
 
 \begin{figure}[h!]
 \includegraphics[width=0.8\textwidth]{figures/180_Belegungaendern_aktivitaet.pdf}
@@ -534,8 +533,10 @@ Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus g
 \label{fig:graph_belegung_waehlen}
 \end{figure}
 
-In diesem Use Case ist es theoretisch möglich, dass ein Nutzer alle einzelnen Teile oder auch eine Auswahl davon benutzt. Im Regenfall werden die Nutzer mit einem Plan herum spielen und alle einzelnen Aktionen ausführen.
-Daher werden wir einen Testfall aufstellen, welcher alle Kanten und alle Knoten des Graphens mindestens einmal ausführt: 1, 2, 5, 1, 2, 4, 7, 1, 2, 4, 6, 9, 1, 2, 4, 8, 10, 1, 3
+In diesem Use Case ist es theoretisch möglich, dass ein Nutzer alle einzelnen Teile oder auch eine Auswahl davon benutzt. Im Regelfall werden die Nutzer explorativ einen Plan zusammenstellen und alle Aktionen früher oder später nacheinander ausführen.
+Daher werden wir alle Pfade in einem einzigen großen Testfall abdecken, welcher alle Kanten und alle Knoten des Graphens mindestens einmal ausführt.
+Es ergibt sich folgende Reihenfolge von Knoten:
+\texttt{1, 2, 5, 1, 2, 4, 7, 1, 2, 4, 6, 9, 1, 2, 4, 8, 10, 1, 3}.
 
 
 \subsection{Logik Coverage}
@@ -675,11 +676,18 @@ Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementi
 
 \subsection{Mutation Coverage}
 Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} die Mutation Coverage der von uns geschriebenen Tests ermittelt.
-Dabei haben wurde die Coverage von 0\% auf x\% gesteigert. \todo{Add number}
-Es wurden alle möglichen Mutationsarten angewandt.
-Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden. In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt.
-Bei vielen der Vergleichen ist die gleich Beziehung allerdings auch kaum relevant.
+Dabei haben wurde die Coverage von 0~\% auf 45~\% gesteigert (siehe Abbildung~\ref{fig:mutation}).
+Das von uns verwendete Tool \texttt{grunt-mutation-testing} bietet folgende Mutationen an: Austauschen/Verändern von arithmetischen, logischen oder Vergleichs-Operatoren, Entfernen von Elementen eines Arrays, Entfernen von Statements, Verändern von Funktionsparamtern, Ändern von Literalen, sowie das Entfernen von Eigenschaften eines Objektes.
+Wir haben alle diese Mutationarten angewandt.
+Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden.
+In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/mutation_tests.pdf}
+\caption{Ergebnisse der Mutations-Tests mit \texttt{grunt-mutation-testing}: Es wurden direkt 45 \% aller Mutanten getötet.}
+\label{fig:mutation_truth_table}
+\end{figure}
 
 
 \section{Statische Analyse}
@@ -780,17 +788,15 @@ Das führt zu mitunder merkwürdigen Ergebnissen, wie Abbildung \ref{fig:javascr
 
 Dieser Fall ist leicht zu beheben, indem einfach === verwendet wird.
 
-\todo{Von diesen Fehlern konnten wir X beheben.}
-
-
 \subsubsection{Google Closure Compiler}
 Der \emph{Google Closure Compiler} ist kein klassisches Code Analyse Tool.
 Die eigentliche Funktion des Tools ist es, JavaScript code so zu compilieren, dass er schneller herunterlad- und ausführbar ist.
-Dieses compilieren benutzt allerdings auch eine statische Analyses des Codes auf Korrektheit. Wir haben dieses Teil benutzt um unsere Anwendung überprüfen zu lassen.
-Dabei kam heraus, dass die Anwendung nicht kompatibel zu IE8 geschrieben wurde. Neuere Versionen stellen allerdings kein Problem dar. Dies zeigt, dass die Anwendung auch vermehrt unter verschiedenen Nutzerbedingungen getestet werden sollte.
-
-focus auf wie das testing unterstützt und wie testing das unterstützt
-statische analyse nicht nur code basiert, sondern auch spezifikation/dokumentation
+Dieses Compilieren benutzt allerdings auch eine statische Analyse, welche analysiert, zu welchen Browser-Versionen das JavaScript kompatibel ist.
+Wir haben dieses Teil benutzt um unsere Anwendung überprüfen zu lassen.
+Dabei kam heraus, dass die Anwendung nicht kompatibel zum Internet Explorer 8 oder älter geschrieben wurde, da inkompatibles JavaScript verwendet wird.
+Neuere Versionen stellen allerdings kein Problem dar.
+Wir haben dies nicht weiter verfolgt, da wir keine solch alten Versionen unterstützen möchten.
+Mitgenommen haben wir allerdings die Erkenntnis, dass der Code problemlos auf neueren Browsern laufen sollte.
 
 \subsubsection{Einbindung in den Entwicklungsprozess}
 Nach Testen aller Tools haben wir uns entschieden, JSHint und ESLint automatisiert in den Entwicklungsprozess zu integrieren.

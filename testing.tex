@@ -43,9 +43,11 @@
 \author{Ricarda Schüler und Stefan Bunk}
 \date{24.01.2016}
 
-\begin{document}
 
+\begin{document}
+\maketitle
 \tableofcontents
+
 
 \section{Überblick über die Anwendung}
 \label{sec:ueberblick}
@@ -111,8 +113,8 @@ Im Folgenden werden beide auch noch die Rolle der Tester einnehmen.
 \paragraph{Validation: Die richtige Anwendung bauen!}
 \label{sec:verification_and_validation}
 
-180 wurde entwickelt unter der Annahme, dass es für jeden Studenten kompliziert ist, sein Studium entsprechend der Studienordnung zu planen.
-Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist kompliziert und erfordert mehrfaches Überprüfen aller Bedingungen.
+180 wurde entwickelt unter der Annahme, dass es für jeden Studenten kompliziert ist, sein Studium ent\-sprech\-end der Studienordnung zu planen.
+Insbesondere die Beachtung aller Regeln der Vertiefungsgebiete ist kompliziert und erfordert mehrfaches Über\-prü\-fen aller Bedingungen.
 Daher widmen wir uns dieser Regel auch in einem eigenen Abschnitt (\ref{sec:vertiefungsgebiete}).
 
 %\begin{quote}
@@ -128,7 +130,7 @@ Die Menge aller gültigen Belegungen ist damit sehr groß, übersieht man allerd
 Merkt man dies nicht rechtzeitig, muss im schlimmsten Fall ein weiteres Semester im Bachelorstudium eingeplant werden.
 
 Daher ist die Idee von 180 diese manuelle und fehleranfällige Prüfung zu automatisieren.
-Da die Regeln der Studienordnung sich nicht schnell ändern\footnote{Mehr zu möglichen Änderungen der Studienordnung im Abschnitt über die Sicherung der Qualität zukünftiger Releases}, genügt es, die Regeln einmalig korrekt zu implementieren.
+Da die Regeln der Studienordnung sich nicht schnell ändern\footnote{Mehr zu möglichen Änderungen der Studienordnung im Abschnitt über die Sicherung der Qualität zukünftiger Releases, Abschnitt \ref{sec:releases}}, genügt es, die Regeln einmalig korrekt zu implementieren.
 Daher ist dies auch der zentrale Punkt der Validierung:
 Die Anwendung muss genau dann ausgeben, dass ein Belegungsplan valide ist, wenn er nach den Paragraphen der Studienordnung korrekt ist.
 Kann die Anwendung dies nicht garantieren, ist sie nahezu nutzlos.
@@ -176,7 +178,7 @@ Das Studium darf nicht länger als 12 Semester dauern.
 \\
 \switchcolumn*
 
-\textbf{§~7 Studienverwaltung; Leistungserfassungsprozess}
+\textbf{§~7 Studienverwaltung; Leis\-tungs\-er\-fas\-sungs\-pro\-zess}
 \switchcolumn
 \emph{Keine Tests notwendig, lediglich Information über Notenvergabe}
 \\
@@ -184,13 +186,13 @@ Das Studium darf nicht länger als 12 Semester dauern.
 
 \textbf{§~8 Freiversuche}
 \switchcolumn
-Prüfungen dürfen maximal dreimal wiederholt werden.
+Prüfungen dürfen maximal dreimal wie\-der\-holt werden.
 \\
 \switchcolumn*
 
 \textbf{§~9(1) Module des Bachelorstudiums}
 \switchcolumn
-Die Veranstaltungen PT1\footnote{Erläuterung der Abkürzungen im Anhang}, PT2, GDS, SWA, MOD1, MOD2, SWT1, Mathe1, Mathe2, TI1, TI2 müssen belegt werden.
+Die Veranstaltungen PT1\footnote{Erläuterung der Abkürzungen im Anhang} \todo{Abkürzungsanhang}, PT2, GDS, SWA, MOD1, MOD2, SWT1, Mathe1, Mathe2, TI1, TI2 müssen belegt werden.
 Das gleiche gilt für die Veranstaltungen ``Wirtschaftliche Grundlagen'' und ``Rechtliche Grundlagen''.
 \\
 \switchcolumn*
@@ -198,7 +200,7 @@ Das gleiche gilt für die Veranstaltungen ``Wirtschaftliche Grundlagen'' und ``R
 \textbf{§~9(2) Softwarebasissysteme}
 \switchcolumn
 Die Veranstaltungen BS1 muss belegt werden.
-Ebenso müssen von den Veranstaltungen CG1, DBS1, POIS1, HCI1 sowie WWW mindestens drei belegt werden.
+Ebenso müssen von den  Veranstaltungen CG1, DBS1, POIS1, HCI1 sowie WWW mindestens drei belegt werden.
 \\
 \switchcolumn*
 
@@ -266,7 +268,7 @@ Dies geschieht auch im Rahmen dieses Projektes, indem wir Tests entwickeln.
 Insofern können keine Technologien oder Entwicklungsparadigmen wie TDD mehr während der Entwicklung angewandt werden.
 
 Wir werden aber im folgenden einige Technologien vorstellen, die wir nun im Nachhinein anwenden werden, um 180 auf mögliche Fehler zu überprüfen.
-Zunächst sprechen wir dabei natürlich von Tests.
+Zu\-nächst sprechen wir dabei natürlich von Tests.
 Wir werden uns dabei insbesondere auf Tests der Kern-Logik des Programms konzentrieren, also ob ein Belegungsplan valide ist oder nicht (und warum nicht).
 Dabei werden im Rahmen dieses Dokuments auch Mutation Tests ausprobieren.
 Dabei werden minimale Änderungen im Programm vorgenommen und geschaut, ob ein Test die entsprechende Änderung abfängt.
@@ -320,6 +322,7 @@ Desweiteren kann sich der Nutzer die Anwendung auch lokal auf seinen Rechner her
 Selbst wenn der Nutzer auf die Online-Anwendung vertraut und diese für eine kurze Zeit nicht erreichbar ist, stellt dies auch kein Problem dar, da eine Studien- und Belegungsplanung üblicherweise über einen Zeitraum von mind. 3 Jahren erfolgt.
 
 \subsection{Wie wird die Qualität in zukünftigen Releases sichergestellt?}
+\label{sec:releases}
 
 Das Hauptproblem der Aktualisierung sind die halbjährlich veröffentlichten Lehrveranstaltungsverzeichnisse.
 Diese müssen manuell in 180 eingepflegt werden.
@@ -374,6 +377,9 @@ Zwei Ideen dafür wären:
     \item Unabhängige Updates: Zwei Personen aktualisieren unabhängig voneinander die Veranstaltungsdatenbank. Erst wenn beide Updates semantisch identisch sind, werden die Änderungen in das System übernommen.
 \end{itemize}
 
+Geht man davon aus, dass eine solche Anwendung neu entwickelt witd, würden wir den Entwicklungsprozess des Testdrivendevelopments(TDD) vorschlagen. 
+Dadurch würde jede Anforderung direkt mit einem Test geprüft und die Korrektheit der Anwendung sicher gestellt. Wie bereits beschrieben ist, die Korrektheit der wichtigste Punkt in der Anwendung, so dass TDD die Validation und die Readiness aktiv unterstützt.
+
 \subsection{Klassifizierung nach verschiedenen Test-Kriterien}
 
 \paragraph{Validation- oder Defekt-Testen}
@@ -384,7 +390,7 @@ Dabei geschieht zwar implizit auch Defect-Testing, da die Tests ja auch fehlschl
 Wir betrachten nur Unit- und Integrationstests.
 Erstere betrachten wir, indem wir einzelne Regeln, wie z.B. ``ein Kurs kann nur in einem Semester belegt werden, in dem er angeboten wird'' testen.
 Schlussendlich testen wir aber auch die Integration aller Regel-Komponenten, indem wir fertige Belegungspläne mit allen Regeln überprüfen.
-Lediglich System-Testing werden bei uns nicht durchgeführt, da wir keine Frontend-Tests schreiben und damit nicht das System dem User Interface testen.
+Lediglich System-Testing werden bei uns nicht durchgeführt, da wir keine Front\-end-Tests schreiben und damit nicht das System dem User Interface testen.
 
 \paragraph{Development-, Release- oder Usertesting}
 Unsere Tests lassen sich all als Development-Tests kategorisieren.
@@ -396,9 +402,9 @@ Spezielle Tests vor einem Deployment werden nicht durchgeführt, ebenso keine Te
 Im Folgenden fassen wir zusammen, wie wir den Status quo durch unseren initialen Test-Plan verbessern möchten.
 
 \begin{itemize}
-    \item Mapping zwischen Regeln und Paragraphen, zeigen dass vollständig (Validation-Testing)
+    \item Mapping zwischen Regeln und Paragraphen, zeigen dass vollständig (Va\-li\-da\-tion-Testing)
     \item
-        Defekt-Testing: Hier werden wir ein Test-Skript entwickeln, dass die data.js, die schon mehrfach Syntax-Fehler enthielt, auf ebendiese überprueft
+        Defekt-Testing: Durch statische Analyse erkennen, ob die data.js, die schon mehrfach Syntax-Fehler enthielt, diese behinhaltet
     \item
         Unit-Tests für jede Regel im Programm
     \item
@@ -504,6 +510,8 @@ Coverage & A, B, C, D, E, F, G, H, I, J, K, H\\ \hline
 
 \end{paracol}
 
+Die Methode ging sehr gut mit Control Flow Coverage zu testen. Es gibt noch viele weitere logische Programmabschnitte, welche ähnlich aufgebaut sind und damit gut mit Control Flow Coverage die Testpfade und Requirements gefunden werden können. Allerdings ist diese Methode auch recht aufwendig durchzuführen. 
+
 % \subsubsection{Finite State Machines}
 % Veranstaltungsstatus: gewählt, wählbar, gefiltert...
 
@@ -519,6 +527,7 @@ Für \emph{onehundredandeighty} haben wir die folgenden Use Cases ermittelt:
     \item Filtern nach verfügbaren Kursen
 \end{itemize}
 
+Alle Use Cases sollten hinreichend getestet werden, allerdings haben wir uns im Rahmen des Seminares auf einen Use Case beschränkt.
 Für eine genaue Prüfung haben wir uns den Use Case "Belegung wählen" heraus gesucht. Dieser Use Case ist ein sehr zentraler Bestandteil der Anwendung, welcher für den Nutzer eine relativ hohe Komplexität aufweist. In Abbildung \ref{fig:aktivity_belegung_waehlen} ist das Aktivitätsdiagram dargestellt. Dieses Aktivitätsdiagram interpretieren wir nun als Graph, welcher in Abbildung \ref{fig:graph_belegung_waehlen} dargestellt ist.
 
 \begin{figure}[h!]
@@ -637,11 +646,13 @@ Wir werden also im Folgenden pro Klausel zwei Testfälle entwickeln, einmal ist 
 
 Mit dieser Menge an Testpfaden spielt jede Bedingung einmal eine aktive Rolle.
 
+Die Anwendung der Logic Coverage ist für \emph{onehundreteighty} sinnvoll. Es gibt viele Regeln welche richtig geprüft werden müssen. Allerdings sind die meisten Regeln mit einem "Und" verbunden, so dass es keine richtig komplizierten zu prüfenden Klauseln gibt.
+
 \subsection{Input}
 Der Input kann von Methoden, Modulen und dem ganzen System getestet werden.
 Das System hat als Input ganze Belegungspläne.
 Diese sind sehr verschienen und können sehr komplex ausfallen.
-Diese werden hier nicht weiter betrachtet.
+Diese werden hier nicht weiter betrachtet, könnten aber eine interessante Prüfung des kompletten Eingabebereiches sein.
 
 Es gibt in 180 Helfermethoden, welche in vielen Programmteilen benötigt werden. Eine Methode ist die \emph{cartesianProduct}-Methode, welche das kartesische Produkt zweier Mengen berechnet.
 Die Methode wird sehr häufig aufgerufen, und zwar wenn es um die Berechnung der Vertiefungsgebiete geht.
@@ -652,7 +663,7 @@ Genau diese Varianten berechnet das kartesische Produkt.
 Für diese Methode werden wir nun beispielhaft den Input testen.
 Als Eingabe werden 2 Arrays erwartet, welche jeweils eine Menge darstellen.
 
-Wir haben uns für eine Partitionierung nach der Größe der Inputarrays entschieden.
+Wir haben uns für eine Partitionierung nach der Größe der Inputarrays ent\-schie\-den.
 Dabei haben wir versucht die Randfälle wie keine Elemente oder nur 1 Element eine Partition zu widmen, da diese oftmals zu Fehler führen.
 Im Folgenden sind alle Partintionen dargestellt, wobei \emph{$|A1|$} die Größe vom ersten Inputarray und \emph{$|A2|$} die Größe vom zweiten Inputarray darstellt.
 \begin{itemize}
@@ -677,7 +688,7 @@ Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementi
 \subsection{Mutation Coverage}
 Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} die Mutation Coverage der von uns geschriebenen Tests ermittelt.
 Dabei haben wurde die Coverage von 0~\% auf 45~\% gesteigert (siehe Abbildung~\ref{fig:mutation}).
-Das von uns verwendete Tool \texttt{grunt-mutation-testing} bietet folgende Mutationen an: Austauschen/Verändern von arithmetischen, logischen oder Vergleichs-Operatoren, Entfernen von Elementen eines Arrays, Entfernen von Statements, Verändern von Funktionsparamtern, Ändern von Literalen, sowie das Entfernen von Eigenschaften eines Objektes.
+Das von uns verwendete Tool \texttt{grunt-mutation-testing} bietet folgende Mutationen an: Austauschen/Ver\-än\-dern von arithmetischen, logischen oder Vergleichs-Operatoren, Entfernen von Elementen eines Arrays, Entfernen von Statements, Verändern von Funktionsparamtern, Ändern von Literalen, sowie das Entfernen von Eigenschaften eines Objektes.
 Wir haben alle diese Mutationarten angewandt.
 Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden.
 In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt.
@@ -686,8 +697,10 @@ In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt we
 \centering
 \includegraphics[width=0.5\textwidth]{figures/mutation_tests.pdf}
 \caption{Ergebnisse der Mutations-Tests mit \texttt{grunt-mutation-testing}: Es wurden direkt 45 \% aller Mutanten getötet.}
-\label{fig:mutation_truth_table}
+\label{fig:mutation}
 \end{figure}
+
+Das Ergebnis zeigt, dass die vorher angewandten Testmethoden gut funktionieren. Besonders die Methoden für welche die Testpfade und Requirements mit Hilfe einer vorgestellten Methode entwickelt und dann umgesetzt wurden, töten sehr viele Mutanten. Somit hilft Mutation Coverage auch zu zeigen, bei welchen Programmteilen weitere Testmethoden angewandt werden sollten.
 
 
 \section{Statische Analyse}
@@ -732,7 +745,7 @@ VII  & \texttt{Benutze !== um auf 0 zu prüfen}              & 1          \\
 \paragraph{\texttt{Fehler I: Bereits definierte Variablen.}}
 Diesen Fehler haben wir in 16 der 17 Fälle ignoriert, weil die Regel weitgehend interpretiert wird.
 Enthält eine Methode zwei Schleifen, in denen in beiden Fällen die gleiche Schleifenvariable verwendet wird, wird ein Fehler geworfen.
-Da \texttt{i} eine gängige Schleifenvariable ist, sehr oft verwendet wird und daher den Code besser lesbar macht als künstlich eingeführte andere Buchstaben, haben wir die diese Regel in diesen Fällen ignoriert.
+Da \texttt{i} eine gängige Schleifenvariable ist, sehr oft verwendet wird und daher den Code besser lesbar macht als künstlich eingeführte andere Buchstaben, haben wir diese Regel in diesen Fällen ignoriert.
 In einem Fall wurde allerdings wirklich eine Variable an einer späteren Stelle überschrieben, und mit einer neuen Bedeutung neu eingeführt.
 Hier hat das Tool geholfen.
 
@@ -748,7 +761,7 @@ Dieses Problem besteht allerdings bei 180 nicht, da alle verwendeten Bibliotheke
 Daher ignorieren wir diese Meldung.
 
 \paragraph{\texttt{Fehler VI: Definiere keine Funktionen in Schleifen}}
-In der bemängelten Code-Stelle, siehe Listing \ref{lst:error_6}, wurde eine Funktion innerhalb einer Schleife definiert.
+In der be\-män\-gel\-ten Code-Stelle, siehe Listing \ref{lst:error_6}, wurde eine Funktion innerhalb einer Schleife definiert.
 Dies ist nicht gut, da in JavaScript die Funktion nicht nur einmal definiert wird, sondern wirklich in jedem Schleifendurchlauf eine neue Funktion mit identischem Code erzeugt wird.
 Desweiteren kann es zu unerwarteten Seiteneffekten zwischen den Funktionen kommen \footnote{siehe \url{https://jslinterrors.com/dont-make-functions-within-a-loop}}.
 
@@ -788,6 +801,8 @@ Das führt zu mitunder merkwürdigen Ergebnissen, wie Abbildung \ref{fig:javascr
 
 Dieser Fall ist leicht zu beheben, indem einfach === verwendet wird.
 
+Alle hier verwendeten Analyse-Tools sind eher pessimistisch, da sie auch nur potentielle Fehler wie zum Beispiel der vorgestellte Fehler V, erkennen. Ob sich nur pessimistisch sind können wir nicht sagen, da es unserer Meinung vielleicht auch sein kann, dass sie nicht alle Fehler finden.
+
 \subsubsection{Google Closure Compiler}
 Der \emph{Google Closure Compiler} ist kein klassisches Code Analyse Tool.
 Die eigentliche Funktion des Tools ist es, JavaScript code so zu compilieren, dass er schneller herunterlad- und ausführbar ist.
@@ -798,6 +813,8 @@ Neuere Versionen stellen allerdings kein Problem dar.
 Wir haben dies nicht weiter verfolgt, da wir keine solch alten Versionen unterstützen möchten.
 Mitgenommen haben wir allerdings die Erkenntnis, dass der Code problemlos auf neueren Browsern laufen sollte.
 
+Der Google Closure Compiler ist ein optisches Analyse Tool. Er komipiliert den Code jedeglich so, dass er optimal in einer bestimmten Browser Version laufen müsste. Allerdings prüft er nur, ob richtig komipiliert wird und kann damit nicht garantieren, dass es wirklich in dem Browser läuft.
+
 \subsubsection{Einbindung in den Entwicklungsprozess}
 Nach Testen aller Tools haben wir uns entschieden, JSHint und ESLint automatisiert in den Entwicklungsprozess zu integrieren.
 Diese Integration beinhaltet eine fertige Konfiguration der zu testenden Regeln und Dateien.
@@ -807,6 +824,23 @@ Die statische Analyse kann nun automatisch mit dem Befehl \texttt{grunt jshint} 
 \section{Verifikation}
 
 \section{Zusammenfassung}
+
+Nach Anwendung verschiedener Test Coverage Methoden, statischer Analyse Tools und Betrachtung der Verifikation haben wir keinen richtigen Bug gefunden. 
+
+Es wurde beim Testen Graph Coverage mit Hilfe von Control Flow Coverage und Use Cases angewandt. Diese Methoden konnten wir beispielhaft bei \emph{onehundretandeighty} an ausgewählten Programmteilen erfolgreich umsetzen. Dabei halfen die Methoden die richtigen Testpfade und Requirements zu finden. Allerdings sind die Methoden sehr aufwändig, so dass sie nicht für das ganze Programm umgesetzt wurden. Logik Coverage haben wir an 2 verschiedenen Regeln umgesetzt. Dabei stellte sich heraus, das 180 zwar viel Logik enthält, diese allerdings im Großteil nur Verundungen der einzelnen Bedingungen sind. Daher kann die komplette Mächtigkeit von Logik Coverage hier nicht ausgeschöpft werden.
+Eine weitere benutzte Testmethode ist das Inputtesting. Dabei haben wir exemplarisch eine Helfermethode, die Berechnung des kartesischen Produkts, getestet.  
+
+Insgesamt haben wir die Testanzahl von 0 zu Begin des Seminars auf 34 erhöht. Die Mutation Coverage erreichte 45\%. Besonders die Methoden, welche mit bestimmten Coverage Methoden getestet wurden, konnte viele Mutaten töten.
+
+Im Bereich der statischen Analyse wurden 4 verschiedene Tools, JSLint, JSHint, ESlint und Google Closure Compiler angewandt. Diese ermittelten in einige Warnungen, welche allerdings nie einen ernsthaften Fehler im Programm hervorgerufen hätten. Sie haben eher dazu beigetragen, den Programmierstil sauberer zu gestalten. Von der Integration von JSHint und ESLint erhoffen wir uns allerdings, dass bereits in der Vergangenheit aufgetretene Fehler in der Syntax in Zukunft zu vermeiden. Da einige Tools mit pessimistischer Ungenauigkeit angewandt wurden und keine richtigen Fehler mehr auftreten, können alle damit geprüften Regeln im Programm als richtig angesehen werden.
+
+Im Rahmen des Seminares konnten leider nur einige beispielhafte Programmteile geprüft werden. Außerdem wurde generell nur die Logik angeschaut und das komplette Frontend außenvor gelassen. Für eine Gesamtheitliche Testung müssten die ausgelassenen Programme auch betrachtet werden.
+
+Bei der Analyse der Anforderungen kam die Anforderung der sicheren Behandlung der Daten auf. Hier wird gefordert, dass die Daten den Rechner des Endanwenders nicht verlassen. Diese Anforderung wurde bei Testen hier komplett ignoriert, da keine passenden Methoden gefunden wurden.
+
+Abschließend kann man sagen, dass die angewandten Methoden das Programm nun deutlich besser testen.
+Aber die Webanwendung war schon so gut entwickelt, dass keine Fehler gefunden werden konnten.
+
 \begin{itemize}
     \item Vergleich verschiedener Methoden
     \item Was war gut, was war schlecht

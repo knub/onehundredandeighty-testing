@@ -752,7 +752,7 @@ In der bemängelten Code-Stelle, siehe Listing \ref{lst:error_6}, wurde eine Fun
 Dies ist nicht gut, da in JavaScript die Funktion nicht nur einmal definiert wird, sondern wirklich in jedem Schleifendurchlauf eine neue Funktion mit identischem Code erzeugt wird.
 Desweiteren kann es zu unerwarteten Seiteneffekten zwischen den Funktionen kommen \footnote{siehe \url{https://jslinterrors.com/dont-make-functions-within-a-loop}}.
 
-\begin{lstlisting}[caption=Ausschnitt aus \texttt{data.js},numbers=left,label={lst:error_6},frame=single]
+\begin{lstlisting}[caption=Funktion zum Löschen von Semestern,numbers=left,label={lst:error_6},frame=single]
 // removes `number` semesters from the selection,
 // e.g. if number = 2 and there initially were 8 semesters
 // to choose from, then there are only 6 left
@@ -805,6 +805,45 @@ Eine weitere Integration von JSLint wurde nicht durchgeführt, da die beiden ers
 Die statische Analyse kann nun automatisch mit dem Befehl \texttt{grunt jshint} bzw. \texttt{eslint js/} aus dem Root-Verzeichnis des Repositories gestartet werden.
 
 \section{Verifikation}
+Leider gibt es keine Verifikations-Tools für JavaScript.
+Es existiert zwar ein Paper ``A Symbolic Execution Framework for JavaScript'' mit vielen Zitierungen, das zugehörige Tool Kudzu konnten wir aber nicht online finden.
+
+Unter der Annahme, dass ein entsprechendes Code-Verifikations-Tool existiert, haben wir im Folgenden einen Teil unseres Codes identifiziert, den wir verifizieren würden.
+Es handelt sich um den komplexesten Teil des Codes, die Verifizierung der Vertiefungsgebiete, die insgesamt über 350 Zeilen einnimmt.
+Die Überprüfung erfolgt schrittweise, indem zunächst das Kreuzprodukt aller möglichen Belegungen gebildet wird, und dann Schritt für Schritt ungültige Kombinationen ausgefiltert werden.
+Listing~\ref{lst:vertiefung} zeigt den Algorithmus in Pseudo-Code.
+
+\begin{lstlisting}[caption=Pseudo-Code zur Prüfung von Vertiefungsgebieten,numbers=left,label={lst:vertiefung},frame=single]
+function checkSpecialisationArea(chosenCourses) {
+    var cp = cartesianProduct(chosenCourses);
+    cp = filter24CP(cp);
+    cp = filterHaveTwoSpecialisationAreas(cp);
+    cp = cleanup(cp);
+    cp = haveLecture(cp);
+}
+\end{lstlisting}
+
+Der Aufbau der Methode erlaubt es, für die einzelnen Schritt gute Vor- und Nachbedingungen angegeben, die automatisch überprüft werden können.
+\begin{itemize}
+    \item
+        \textbf{Zeile 2:} \\
+        Vorbedingung: \texttt{chosenCourses} ist eine Liste der vom Nutzer gewählten Kurse, zusammen mit den möglichen Vertiefungsgebieten dieser Kurse
+        Nachbedingung: \texttt{cp} enthält das kartesische Produkt der Belegungen
+    \item
+        \textbf{Zeile 3:} \\
+        Nachbedingung: Keine der Kombination in \texttt{cp} enthält eine Kombination, in der weniger als 24 LP gewählt wurden.
+    \item
+        \textbf{Zeile 4:} \\
+        Nachbedingung: Alle Kombinationen in \texttt{cp} enthalten genug Kurse, um die LP-Anforderungen für zwei Vertiefungsgebiete zu erfüllen.
+    \item
+        \textbf{Zeile 5:} \\
+        Nachbedingung: \texttt{cp} enthält keine Duplikate und auch keine Belegungen, die Teilmengen anderer in \texttt{cp} enthaltenen Belegungen sind.
+    \item
+        \textbf{Zeile 6:} \\
+        Nachbedingung: \texttt{cp} enthält mind. eine Vorlesung für alle Paare von Vertiefungsgebieten aus Zeile 4
+\end{itemize}
+Der Aufbau der Listen funktioniert in allen Schritten so, dass eine neue, leere Liste angelegt wird, und dann schrittweise mit den Kombinationen aus dem vorigen Schritt gefüllt wird, die die neue Bedingung erfüllen.
+    % // keine Belegung ist subset einer anderen gültigen Belegung
 
 \section{Zusammenfassung}
 \begin{itemize}
@@ -815,6 +854,7 @@ Die statische Analyse kann nun automatisch mit dem Befehl \texttt{grunt jshint} 
     \item Optimistic/pessimistic inaccuracies
     \item Fazit: Was wir geschafft haben
     \item Nicht getestete Sachen, z.b. Security aussen vor gelassen
+    \item Semikolons sind without optimitistic inaccuracy (irgendwo hin schreiben)
 \end{itemize}
 
 \end{document}

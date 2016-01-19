@@ -866,14 +866,32 @@ Symbolische Ausführung würde sich für diese Methoden ebenfalls anbieten, da d
 
 \section{Zusammenfassung}
 
-Nach Anwendung verschiedener Test Coverage Methoden, statischer Analyse Tools und Betrachtung der Verifikation haben wir keinen richtigen Bug gefunden. 
+Wir haben nach Anwendung verschiedener Test-Coverage-Methoden, der Tools zur statischen Analyse sowie der Betrachtung der Verifikation keinen Bug gefunden.
+Allerdings sind einige Unsauberkeiten in der Programmierung entfernt.
 
-Es wurde beim Testen Graph Coverage mit Hilfe von Control Flow Coverage und Use Cases angewandt. Diese Methoden konnten wir beispielhaft bei \emph{onehundretandeighty} an ausgewählten Programmteilen erfolgreich umsetzen. Dabei halfen die Methoden die richtigen Testpfade und Requirements zu finden. Allerdings sind die Methoden sehr aufwändig, so dass sie nicht für das ganze Programm umgesetzt wurden. Logik Coverage haben wir an 2 verschiedenen Regeln umgesetzt. Dabei stellte sich heraus, das 180 zwar viel Logik enthält, diese allerdings im Großteil nur Verundungen der einzelnen Bedingungen sind. Daher kann die komplette Mächtigkeit von Logik Coverage hier nicht ausgeschöpft werden.
-Eine weitere benutzte Testmethode ist das Inputtesting. Dabei haben wir exemplarisch eine Helfermethode, die Berechnung des kartesischen Produkts, getestet.  
+Beim Teste haben wir uns auf Graph Coverage an den beiden beispielhaften Fällen Control Flow Coverage und Use Cases konzentriert.
+Diese Methoden konnten wir beispielhaft bei \emph{onehundredandeighty} an ausgewählten Programmteilen erfolgreich umsetzen.
+Dabei halfen uns die Methoden dabei, die richtigen Testpfade und Requirements zu finden.
+Allerdings sind die Methoden sehr aufwändig, so dass sie nicht für das ganze Programm umgesetzt wurden.
+Logik Coverage haben wir an zwei verschiedenen Beispielen umgesetzt.
+Dabei stellte sich heraus, dass 180 zwar viel Logik enthält, diese sich allerdings in recht einfachen bool'schen Ausdrücken umsetzen lässt (z.B. nur eine größe Konjunktion bei den Vertiefungsgebieten).
+Daher konnten wir die Möglichkeiten der Logik Coverage nicht komplett ausreizen.
+Desweiteren haben wir Input-Testing am Beispiel der Berechnung des kartesischen Produkts getestet.
+Diese Methode war hilfreich und hat uns geholfen, ein hohes Vertrauen in das Funktionieren der Methode zu gewinnen.
+Input-Testing lässt sich auch recht leicht und damit für viele Methoden anwenden.
 
-Insgesamt haben wir die Testanzahl von 0 zu Begin des Seminars auf 34 erhöht. Die Mutation Coverage erreichte 45\%. Besonders die Methoden, welche mit bestimmten Coverage Methoden getestet wurden, konnte viele Mutaten töten.
+Insgesamt haben wir die Testanzahl von 0 zu Beginn des Seminars auf 38 erhöht.
+Die Mutation Coverage erreichte 45~\%.
+Besonders die Methoden, welche mit bestimmten Coverage Methoden getestet wurden, konnte viele Mutanten töten.
+Dies bestätigt, dass die vorgestellten und genutzten Coverage-Methoden eine gute Testabdeckung erzeugen.
 
-Im Bereich der statischen Analyse wurden 4 verschiedene Tools, JSLint, JSHint, ESlint und Google Closure Compiler angewandt. Diese ermittelten in einige Warnungen, welche allerdings nie einen ernsthaften Fehler im Programm hervorgerufen hätten. Sie haben eher dazu beigetragen, den Programmierstil sauberer zu gestalten. Von der Integration von JSHint und ESLint erhoffen wir uns allerdings, dass bereits in der Vergangenheit aufgetretene Fehler in der Syntax in Zukunft zu vermeiden. Da einige Tools mit pessimistischer Ungenauigkeit angewandt wurden und keine richtigen Fehler mehr auftreten, können alle damit geprüften Regeln im Programm als richtig angesehen werden.
+Im Bereich der statischen Analyse wurden vier verschiedene Tools angewandt: JSLint, JSHint, ESlint und Google Closure Compiler.
+Diese ermittelten einige Warnungen, welche allerdings nie ein externes, vom Nutzer sichtbares Fehlverhalten im Programm hervorgerufen hätten.
+Sie haben eher dazu beigetragen, unseren Programmierstil sauberer zu gestalten, und damit in Zukunft vielleicht weniger neue Bugs zu erzeugen.
+Von der Integration von JSHint und ESLint erhoffen wir uns allerdings, dass bereits in der Vergangenheit aufgetretene Fehler in der Syntax in Zukunft vermieden werden.
+Da diese Tools mit \emph{pessimistic inaccuracy} arbeiten, und jetzt keine Fehler mehr melden, können wir davon ausgehen, dass die getesteten Fehlertypen 
+TODO
+en, können alle damit geprüften Regeln im Programm als richtig angesehen werden.
 
 Im Rahmen des Seminares konnten leider nur einige beispielhafte Programmteile geprüft werden. Außerdem wurde generell nur die Logik angeschaut und das komplette Frontend außenvor gelassen. Für eine Gesamtheitliche Testung müssten die ausgelassenen Programme auch betrachtet werden.
 

@@ -551,6 +551,7 @@ Es ergibt sich folgende Reihenfolge von Knoten:
 \subsection{Logik Coverage}
 
 \subsubsection{Regel für Wirtschaftliche Grundlagen}
+\label{sec:wirtschaft}
 
 Die Veranstaltung Wirtschaftliche Grundlagen wurde traditionell als zwei Veranstaltungen mit jeweils 3LP durchgeführt.
 Zum Wintersemester WS13/14 wurde dies geäendert, und die Veranstaltung wurde fortan als eine Veranstaltung mit 6LP angeboten.
@@ -822,7 +823,9 @@ Eine weitere Integration von JSLint wurde nicht durchgeführt, da die beiden ers
 Die statische Analyse kann nun automatisch mit dem Befehl \texttt{grunt jshint} bzw. \texttt{eslint js/} aus dem Root-Verzeichnis des Repositories gestartet werden.
 
 \section{Verifikation}
-Leider gibt es keine Verifikations-Tools für JavaScript.
+
+\subsection{Symbolic Execution}
+Für Javascript gibt es leider kein Tool zur symbolischen Ausführung des Codes.
 Es existiert zwar ein Paper ``A Symbolic Execution Framework for JavaScript'' mit vielen Zitierungen, das zugehörige Tool Kudzu konnten wir aber nicht online finden.
 
 Unter der Annahme, dass ein entsprechendes Code-Verifikations-Tool existiert, haben wir im Folgenden einen Teil unseres Codes identifiziert, den wir verifizieren würden.
@@ -864,10 +867,27 @@ Insofern würden sich auch gute Schleifeninvarianten ergeben.
 Symbolische Ausführung würde sich für diese Methoden ebenfalls anbieten, da damit Test-Daten generiert werden könnten, die die Vertiefungsgebiete-Regel abtesten könnten.
     % // keine Belegung ist subset einer anderen gültigen Belegung
 
-\todo{tajs: tool vorstellen
-bild flowgraph wirtschatfsrule --> zuweisungen, abhängigkeiten, ... short circiut operation, car-decl, var-init, read....,
-analysiert variable genutzt declaration --> nichts gefunden --> pessimistisch --> sicher das nicht drinnen ist
- }
+
+\subsection{Type Analysis}
+Das Tool \emph{Tajs}\footnote{http://www.brics.dk/TAJS/} ist ein Type Analizer für Javascript. Man kann damit Call-Graphen sehen oder auch Datenflussanalysen durchführen.
+
+Wir haben uns verschiedene Flussgraphen der einzelnen Programme angeschaut. In Abbildung \ref{fig:tajs} ist beispielhaft der Flussgraph der in Kapitel \ref{sec:wirtschaft} vorgestellten Wirtschaftsregel zu sehen.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/tajs.pdf}
+\caption{Flow Graph der Wirtschaftsregel, analysiert von Tajs}
+\label{fig:tajs}
+\end{figure}
+
+Man erkennt klar die Deklaration (vardecl) der einzelnen Variablen, sowie die verschiedenen Initialisierungen(write-variable) und wann eine Variable gelesen wird (read-variable). Genauso sind verschiedene Funktionsaufrufe, Konstantendefinitionen enthalten.
+Gegen Ende der Funktion kann erkannt werden, dass Short Circiut Operationen enthalten sind.
+
+Diese Art von Ausgabe stellt sehr schön graphisch dar, welche Schritte die einzelnen Variablen durchlaufen. Allerdings können diese Diagramme sehr schnell sehr groß und unübersichtlich werden, so dass sie nur für die Analyse von kleinen Programmabschnitten geeignet sind.
+
+Diese Analyse ist gleichzeitig ein Vorverarbeitungsschritt von Tajs, um die ungültige Verwendung, gelesen bevor geschrieben wird oder geschrieben aber nie gelesen, von Variablen zu analysieren.
+
+Bei 180 wurden einige Variablen als nie gelesen markiert. Allerdings, wurden diese dann doch zu einem späteren Zeitpunkt, unter anderem als globale Variable in einer anderen Methode, doch gelesen. Dadurch ist die Ausgabe nicht sehr hilfreich.
 
 \section{Zusammenfassung}
 

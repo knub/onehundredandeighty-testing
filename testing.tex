@@ -869,25 +869,32 @@ Symbolische Ausführung würde sich für diese Methoden ebenfalls anbieten, da d
 
 
 \subsection{Type Analysis}
-Das Tool \emph{Tajs}\footnote{http://www.brics.dk/TAJS/} ist ein Type Analizer für Javascript. Man kann damit Call-Graphen sehen oder auch Datenflussanalysen durchführen.
+Das Tool \emph{TAJS}\footnote{http://www.brics.dk/TAJS/} ist ein Type Analyzer für Javascript, entwickelt von Anders Møller et al.
+Man kann damit Call-Graphen sehen oder auch Datenflussanalysen durchführen.
 
-Wir haben uns verschiedene Flussgraphen der einzelnen Programme angeschaut. In Abbildung \ref{fig:tajs} ist beispielhaft der Flussgraph der in Kapitel \ref{sec:wirtschaft} vorgestellten Wirtschaftsregel zu sehen.
+Wir haben uns verschiedene Flussgraphen der einzelnen Programme angeschaut.
+In Abbildung \ref{fig:tajs} ist beispielhaft der Flussgraph der in Kapitel \ref{sec:wirtschaft} vorgestellten Wirtschaftsregel\footnote{Code siehe \url{https://github.com/knub/onehundredandeighty/blob/testing/js/logic.js\#L674-L679}} zu sehen.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.5\textwidth]{figures/tajs.pdf}
-\caption{Flow Graph der Wirtschaftsregel, analysiert von Tajs}
+\caption{Flow Graph der Wirtschaftsregel, analysiert von TAJS}
 \label{fig:tajs}
 \end{figure}
 
-Man erkennt klar die Deklaration (vardecl) der einzelnen Variablen, sowie die verschiedenen Initialisierungen(write-variable) und wann eine Variable gelesen wird (read-variable). Genauso sind verschiedene Funktionsaufrufe, Konstantendefinitionen enthalten.
+Man erkennt klar die Deklaration (vardecl) der einzelnen Variablen, sowie die verschiedenen Initialisierungen (write-variable) und wann eine Variable gelesen wird (read-variable).
+Genauso sind verschiedene Funktionsaufrufe (\texttt{getSemester}) und Konstantendefinitionen (\texttt{Literal 1}) enthalten.
 Gegen Ende der Funktion kann erkannt werden, dass Short Circiut Operationen enthalten sind.
+Diese Art von Ausgabe stellt sehr schön graphisch dar, welche Schritte die einzelnen Variablen durchlaufen.
+Man erkennt auch die Short-Circuit Auswertung des logischen Ausdrucks am Ende der Funktion.
+Allerdings können diese Diagramme sehr schnell sehr groß und unübersichtlich werden, so dass sie nur für die Analyse von kleinen Programmabschnitten geeignet sind.
+Diese Analyse ist gleichzeitig ein Vorverarbeitungsschritt von TAJS, um die ungültige Verwendung von Variablen zu erkennen, z. B. ob sie gelesen wird bevor sie geschrieben wird oder nie verwendet wird.
+Wir haben TAJS auf unser Projekt angewandt, diese Art von Fehler tritt allerdings bei 180 nicht auf.
 
-Diese Art von Ausgabe stellt sehr schön graphisch dar, welche Schritte die einzelnen Variablen durchlaufen. Allerdings können diese Diagramme sehr schnell sehr groß und unübersichtlich werden, so dass sie nur für die Analyse von kleinen Programmabschnitten geeignet sind.
-
-Diese Analyse ist gleichzeitig ein Vorverarbeitungsschritt von Tajs, um die ungültige Verwendung, gelesen bevor geschrieben wird oder geschrieben aber nie gelesen, von Variablen zu analysieren.
-
-Bei 180 wurden einige Variablen als nie gelesen markiert. Allerdings, wurden diese dann doch zu einem späteren Zeitpunkt, unter anderem als globale Variable in einer anderen Methode, doch gelesen. Dadurch ist die Ausgabe nicht sehr hilfreich.
+Unser Fazit ist, dass Verifikations-Tools deutlich schwieriger einzurichten sind, als die bisher genutzten Tools.
+Auch ist es nicht leicht die Ausgaben zu verstehen.
+Das Kosten-Nutzen-Verhältnis hat sich in unserem Projekt nicht rentiert.
+Wir würden solche Werkzeuge nur für wirklich kritischen Code nutzen, und wenn genug Einarbeitungszeit zur Verfügung steht.
 
 \section{Zusammenfassung}
 

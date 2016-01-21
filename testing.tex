@@ -914,26 +914,18 @@ Im Bereich der statischen Analyse wurden vier verschiedene Tools angewandt: JSLi
 Diese ermittelten einige Warnungen, welche allerdings nie ein externes, vom Nutzer sichtbares Fehlverhalten im Programm hervorgerufen hätten.
 Sie haben eher dazu beigetragen, unseren Programmierstil sauberer zu gestalten, und damit in Zukunft vielleicht weniger neue Bugs zu erzeugen.
 Von der Integration von JSHint und ESLint erhoffen wir uns allerdings, dass bereits in der Vergangenheit aufgetretene Fehler in der Syntax in Zukunft vermieden werden.
-Da diese Tools mit \emph{pessimistic inaccuracy} arbeiten, und jetzt keine Fehler mehr melden, können wir davon ausgehen, dass die getesteten Fehlertypen 
-TODO
-en, können alle damit geprüften Regeln im Programm als richtig angesehen werden.
+Da diese Tools mit \emph{pessimistic inaccuracy} arbeiten, und jetzt keine Fehler mehr melden, können wir davon ausgehen, dass die getesteten Fehlertypen in unserem Programm nicht auftreten.
+Insgesamt sind wir mit der Nutzung der Analyse-Tools zufrieden und werden diese oder ähnliche Tools in Zukunft auch bei anderen Projekten einsetzen.
+Die Schwierigkeit liegt lediglich im Aufsetzen der Tools und der Konfiguration.
+Ist dies einmal geschehen, hat man eine Infrastruktur aufgebaut die ohne großen Wartungsaufwand auch in Zukunft potentielle Defekte schnell aufdecken kann.
 
-Im Rahmen des Seminares konnten leider nur einige beispielhafte Programmteile geprüft werden. Außerdem wurde generell nur die Logik angeschaut und das komplette Frontend außenvor gelassen. Für eine Gesamtheitliche Testung müssten die ausgelassenen Programme auch betrachtet werden.
+Im Rahmen des Seminares konnten wir nur einige beispielhafte Programmteile prüfen.
+Des weiteren haben wir uns nur mit der Logik beschäftigt und das Frontend außen vor gelassen.
+Für gesamtheitliches Testen müssten auch die ausgelassenen Programmteile betrachtet werden.
+Bei der Analyse der Anforderungen kam auch die Anforderung auf, dass mit den Daten des Nutzers verantwortlich umgegangen wird und diese den Rechner des Nutzers nie verlassen.
+Diese Anforderung wurde beim Testen hier ignoriert, da wir dafür nicht die passenden Werkzeuge gefunden haben.
 
-Bei der Analyse der Anforderungen kam die Anforderung der sicheren Behandlung der Daten auf. Hier wird gefordert, dass die Daten den Rechner des Endanwenders nicht verlassen. Diese Anforderung wurde bei Testen hier komplett ignoriert, da keine passenden Methoden gefunden wurden.
-
-Abschließend kann man sagen, dass die angewandten Methoden das Programm nun deutlich besser testen.
-Aber die Webanwendung war schon so gut entwickelt, dass keine Fehler gefunden werden konnten.
-
-\begin{itemize}
-    \item Vergleich verschiedener Methoden
-    \item Was war gut, was war schlecht
-    \item Bezug zwischen TVA
-    \item Was probiert, was gut, was schlecht
-    \item Optimistic/pessimistic inaccuracies
-    \item Fazit: Was wir geschafft haben
-    \item Nicht getestete Sachen, z.b. Security aussen vor gelassen
-    \item Semikolons sind without optimitistic inaccuracy (irgendwo hin schreiben)
-\end{itemize}
+Abschließend kann man sagen, dass die angewandten Methoden das Programm nun deutlich besser testen und wir höheres Vertrauen in die Korrektheit der Anwendung gewinnen konnten.
+Die Anwendung war allerdings schon recht gut entwickelt, sodass wir in den von uns untersuchten Teilen keine Fehler finden konnten.
 
 \end{document}

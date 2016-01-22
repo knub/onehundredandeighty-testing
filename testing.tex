@@ -192,7 +192,7 @@ Prüfungen dürfen maximal dreimal wie\-der\-holt werden.
 
 \textbf{§~9(1) Module des Bachelorstudiums}
 \switchcolumn
-Die Veranstaltungen PT1\footnote{Erläuterung der Abkürzungen im Anhang} \todo{Abkürzungsanhang}, PT2, GDS, SWA, MOD1, MOD2, SWT1, Mathe1, Mathe2, TI1, TI2 müssen belegt werden.
+Die Veranstaltungen PT1, PT2, GDS, SWA, MOD1, MOD2, SWT1, Mathe1, Mathe2, TI1, TI2 müssen belegt werden.
 Das gleiche gilt für die Veranstaltungen ``Wirtschaftliche Grundlagen'' und ``Rechtliche Grundlagen''.
 \\
 \switchcolumn*
@@ -377,8 +377,9 @@ Zwei Ideen dafür wären:
     \item Unabhängige Updates: Zwei Personen aktualisieren unabhängig voneinander die Veranstaltungsdatenbank. Erst wenn beide Updates semantisch identisch sind, werden die Änderungen in das System übernommen.
 \end{itemize}
 
-Geht man davon aus, dass eine solche Anwendung neu entwickelt witd, würden wir den Entwicklungsprozess des Testdrivendevelopments(TDD) vorschlagen. 
-Dadurch würde jede Anforderung direkt mit einem Test geprüft und die Korrektheit der Anwendung sicher gestellt. Wie bereits beschrieben ist, die Korrektheit der wichtigste Punkt in der Anwendung, so dass TDD die Validation und die Readiness aktiv unterstützt.
+Geht man davon aus, dass eine solche Anwendung neu entwickelt wird, würden wir Test-Driven-Developments (TDD) vorschlagen. 
+Dadurch würde jede Anforderung direkt mit einem Test geprüft und die Korrektheit der Anwendung sicher gestellt.
+Wie bereits beschrieben ist, die Korrektheit der wichtigste Punkt in der Anwendung, so dass TDD die Validation und die Readiness der Anwendung aktiv unterstützt.
 
 \subsection{Klassifizierung nach verschiedenen Test-Kriterien}
 
@@ -402,9 +403,9 @@ Spezielle Tests vor einem Deployment werden nicht durchgeführt, ebenso keine Te
 Im Folgenden fassen wir zusammen, wie wir den Status quo durch unseren initialen Test-Plan verbessern möchten.
 
 \begin{itemize}
-    \item Mapping zwischen Regeln und Paragraphen, zeigen dass vollständig (Va\-li\-da\-tion-Testing)
+    \item Vollständiges Mapping zwischen Regeln und Paragraphen (dies wurde bereits in Kapitel~\ref{sec:verification_and_validation} gezeigt)
     \item
-        Defekt-Testing: Durch statische Analyse erkennen, ob die data.js, die schon mehrfach Syntax-Fehler enthielt, diese behinhaltet
+        Defekt-Testing: Durch statische Analyse erkennen, ob die Datei \texttt{data.js} Syntax-Fehler enthält
     \item
         Unit-Tests für jede Regel im Programm
     \item
@@ -806,15 +807,14 @@ Alle hier verwendeten Analyse-Tools sind eher pessimistisch, da sie auch nur pot
 
 \subsubsection{Google Closure Compiler}
 Der \emph{Google Closure Compiler} ist kein klassisches Code Analyse Tool.
-Die eigentliche Funktion des Tools ist es, JavaScript code so zu compilieren, dass er schneller herunterlad- und ausführbar ist.
+Die eigentliche Funktion des Tools ist es, JavaScript Code so zu compilieren, dass er schneller herunterlad- und ausführbar ist.
 Dieses Compilieren benutzt allerdings auch eine statische Analyse, welche analysiert, zu welchen Browser-Versionen das JavaScript kompatibel ist.
 Wir haben dieses Teil benutzt um unsere Anwendung überprüfen zu lassen.
 Dabei kam heraus, dass die Anwendung nicht kompatibel zum Internet Explorer 8 oder älter geschrieben wurde, da inkompatibles JavaScript verwendet wird.
 Neuere Versionen stellen allerdings kein Problem dar.
 Wir haben dies nicht weiter verfolgt, da wir keine solch alten Versionen unterstützen möchten.
-Mitgenommen haben wir allerdings die Erkenntnis, dass der Code problemlos auf neueren Browsern laufen sollte.
-
-Der Google Closure Compiler ist ein optisches Analyse Tool. Er komipiliert den Code jedeglich so, dass er optimal in einer bestimmten Browser Version laufen müsste. Allerdings prüft er nur, ob richtig komipiliert wird und kann damit nicht garantieren, dass es wirklich in dem Browser läuft.
+Das Tool arbeitet mit \emph{optimistic inaccuracy}, d.h. wenn eine Meldung auftritt, wissen wir, dass es ein Problem gibt.
+Aus der Tatsache, dass für andere Browser keine Fehler gemeldet wurden, können wir aber nicht schließen, dass 180 auf diesen problemlos läuft.
 
 \subsubsection{Einbindung in den Entwicklungsprozess}
 Nach Testen aller Tools haben wir uns entschieden, JSHint und ESLint automatisiert in den Entwicklungsprozess zu integrieren.

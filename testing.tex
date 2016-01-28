@@ -125,7 +125,7 @@ Daher widmen wir uns dieser Regel auch in einem eigenen Abschnitt (\ref{sec:vert
 %    \captionof{floatquote}{Output of the Program}\label{quo1}
 %\end{quote}
 
-In diesem Bereich lässt die Studienordnung einen großen Spielraum zu, der entsprechend der eigenen Interesseren ausgefüllt werden kann aber auch muss.
+In diesem Bereich lässt die Studienordnung einen großen Spielraum zu, der entsprechend der eigenen Interessen ausgefüllt werden kann aber auch muss.
 Die Menge aller gültigen Belegungen ist damit sehr groß, übersieht man allerdings eine einzige Bedingung führt dies zu einem ungültigen Belegungsplan.
 Merkt man dies nicht rechtzeitig, muss im schlimmsten Fall ein weiteres Semester im Bachelorstudium eingeplant werden.
 
@@ -249,7 +249,7 @@ Um die Anwendung richtig zu bauen, folgt man der Spezifikation.
 In diesem Fall gibt es keine interne, von den Entwicklern gemeinsam mit den Anwendern festgelegte Spezifikation.
 Allerdings gibt es eine externe Spezifikation: die Studienordnung.
 Diese wurde zwar nicht mit dem Ziel geschrieben, als Grundlage für die Entwicklung einer Anwendung zu stehen, doch definiert sie sehr genau die Anforderungen an einen korrekten Belegungsplan.
-Wir betrachen daher im Folgenden die Studienordnung als die Spezifikation für 180.
+Wir betrachten daher im Folgenden die Studienordnung als die Spezifikation für 180.
 Erfüllt 180 am Ende alle Paragraphen der Studienordnung mit im Programm implementierten Regeln, ist das Programm korrekt.
 
 Die Studienordnung ist als Artefakt sehr statisch, sie ändert sich nahezu nie.
@@ -274,7 +274,7 @@ Dabei werden im Rahmen dieses Dokuments auch Mutation Tests ausprobieren.
 Dabei werden minimale Änderungen im Programm vorgenommen und geschaut, ob ein Test die entsprechende Änderung abfängt.
 Wir denken, dies ist eine gute Möglichkeit um einzuschätzen, wie abdeckend unsere Tests sind.
 Randomisiertes Testing bietet sich bei dem Projekt nicht an.
-Die Testfälle, also konkrete Belegungspläne, müssen sehr genau auspezifiert sein, um bestimmte Grenzfälle abzudecken.
+Die Testfälle, also konkrete Belegungspläne, müssen sehr genau ausspezifiziert sein, um bestimmte Grenzfälle abzudecken.
 Eine zufällige Belegung wird nahezu immer nicht valide sein.
 
 Statische Analyse kann ebenfalls helfen Bugs oder Unsauberkeiten im Programm zu finden.
@@ -297,7 +297,7 @@ Wir definieren Fertigkeit (``readiness'') auf Basis von drei Faktoren:
 \begin{itemize}
     \item \textbf{Korrektheit}:
         Wie bereits im ersten Abschnitt erwähnt ist die Korrektheit der Anwendung das wichtigste Kriterium.
-        Alle Regeln der Studienordung müssen korrekt implementiert und abgedeckt sein.
+        Alle Regeln der Studienordnung müssen korrekt implementiert und abgedeckt sein.
     \item \textbf{Vertraulichkeit}:
         Die Daten des Nutzers verbleiben immer auf dem lokalen Rechner und werden insbesondere nicht in einer Datenbank gespeichert.
         Der Belegungsplan eines Nutzers sollte privat bleiben und für den Betreiber des Servers niemals einsehbar sein.
@@ -306,7 +306,7 @@ Wir definieren Fertigkeit (``readiness'') auf Basis von drei Faktoren:
         Insbesondere muss zu jedem Zeitpunkt klar sein, was die aktuelle Belegung ist, und ob diese korrekt ist oder nicht.
 \end{itemize}
 
-Von den drei Fertigkeits-Kritieren ist die Usability am schwierigsten zu erfassen, da dieses subjektive Empfinden nur über eine User-Study ermittelt werden kann.
+Von den drei Fertigkeits-Kriterien ist die Usability am schwierigsten zu erfassen, da dieses subjektive Empfinden nur über eine User-Study ermittelt werden kann.
 Dies geschieht nicht im Rahmen dieses Projektes.
 Bei der Vertraulichkeit geht es darum, dass wir sensibel mit den Daten des Nutzers.
 Insbesondere ist wichtig, dass wir den Belegungsplan des Nutzers nicht auf dem Server speichern.
@@ -394,7 +394,7 @@ Schlussendlich testen wir aber auch die Integration aller Regel-Komponenten, ind
 Lediglich System-Testing werden bei uns nicht durchgeführt, da wir keine Front\-end-Tests schreiben und damit nicht das System dem User Interface testen.
 
 \paragraph{Development-, Release- oder Usertesting}
-Unsere Tests lassen sich all als Development-Tests kategorisieren.
+Unsere Tests lassen sich als Development-Tests kategorisieren.
 Spezielle Tests vor einem Deployment werden nicht durchgeführt, ebenso keine Tests mit echten Nutzern.
 
 \subsection{Zusammenfassung}
@@ -415,7 +415,7 @@ Im Folgenden fassen wir zusammen, wie wir den Status quo durch unseren initialen
 
 \section{Testing}
 
-In diesem Kapitel werden Beispiele für verschiedene Testarten dargestellt. Dabei wurde versucht die Anwendung in die breite hin zu testen. Das heißt für die verschiedenen Ansätze wurde jeweils eine Funktion von 180 herausgenommen. In den meisten Fällen gibt es weitere Programmteile, welche genau so getestet werden können. Es geht in diesem Abschnitt aber viel mehr darum, einen Überblick zu geben, was überhaupt möglich ist.
+In diesem Kapitel werden Beispiele für verschiedene Testarten dargestellt. Dabei wurde versucht die Anwendung in die breite hin zu testen. Das heißt für die verschiedenen Ansätze wurde jeweils eine Funktion von 180 ausgewählt. In den meisten Fällen gibt es weitere Programmteile, welche genau so getestet werden können. Es geht in diesem Abschnitt aber viel mehr darum, einen Überblick zu geben, was überhaupt möglich ist.
 GUI-Testing haben wir in diesem Abschnitt erst einmal nicht betrachtet, sondern uns auf die Logik im Hintergrund konzentriert.
 
 \subsection{Graph Coverage}
@@ -463,8 +463,8 @@ Der Algorithmus zur Prüfung ist in Pseudocode in Algorithmus \ref{algo:time_rul
 \end{figure}
 
 Wir möchten Edge-Pair-Coverage für diese Regel erreichen, da damit alle Fälle abgedeckt sind.
-Dazu müssen Kanten-Kanten-Kombinationen in der Testsuit enthalten sein.
-Nachfolgend sind alle Test Requirements und Testpfade abgebildet. Die Testpfade, welche zusammen alle Fälle abdecken, wurden mit automatistierten Tests umgesetzt \footnote{Tests siehe \url{https://github.com/knub/onehundredandeighty/blob/testing/test/cfg_test.js}}.
+Dazu müssen Kanten-Kanten-Kombinationen in der Testsuite enthalten sein.
+Nachfolgend sind alle Test Requirements und Testpfade abgebildet. Die Testpfade, welche zusammen alle Fälle abdecken, wurden mit automatisierten Tests umgesetzt \footnote{Tests siehe \url{https://github.com/knub/onehundredandeighty/blob/testing/test/cfg_test.js}}.
 
 
 \vspace{1em}
@@ -511,7 +511,7 @@ Coverage & A, B, C, D, E, F, G, H, I, J, K, H\\ \hline
 
 \end{paracol}
 
-Die Methode ging sehr gut mit Control Flow Coverage zu testen. Es gibt noch viele weitere logische Programmabschnitte, welche ähnlich aufgebaut sind und damit gut mit Control Flow Coverage die Testpfade und Requirements gefunden werden können. Allerdings ist diese Methode auch recht aufwendig durchzuführen. 
+Die Methode war sehr gut mit Control Flow Coverage testbar. Es gibt noch viele weitere logische Programmabschnitte, welche ähnlich aufgebaut sind und damit gut mit Control Flow Coverage die Testpfade und Requirements gefunden werden können. Allerdings ist diese Methode auch recht aufwendig durchzuführen. 
 
 % \subsubsection{Finite State Machines}
 % Veranstaltungsstatus: gewählt, wählbar, gefiltert...
@@ -524,7 +524,7 @@ Für \emph{onehundredandeighty} haben wir die folgenden Use Cases ermittelt:
     \item Semester wählen
     \item Semesteranzahl verändern
     \item Belegung wählen
-    \item Prüfung validieren
+    \item Belegung validieren
     \item Filtern nach verfügbaren Kursen
 \end{itemize}
 
@@ -648,12 +648,12 @@ Wir werden also im Folgenden pro Klausel zwei Testfälle entwickeln, einmal ist 
 
 Mit dieser Menge an Testpfaden spielt jede Bedingung einmal eine aktive Rolle.
 
-Die Anwendung der Logic Coverage ist für \emph{onehundreteighty} sinnvoll. Es gibt viele Regeln welche richtig geprüft werden müssen. Allerdings sind die meisten Regeln mit einem "Und" verbunden, so dass es keine richtig komplizierten zu prüfenden Klauseln gibt.
+Die Anwendung der Logic Coverage ist für \emph{onehundredandeighty} sinnvoll. Es gibt viele Regeln welche richtig geprüft werden müssen. Allerdings sind die meisten Regeln mit einem "Und" verbunden, so dass es keine komplizierteren zu prüfenden Klauseln gibt.
 
 \subsection{Input}
 Der Input kann von Methoden, Modulen und dem ganzen System getestet werden.
 Das System hat als Input ganze Belegungspläne.
-Diese sind sehr verschienen und können sehr komplex ausfallen.
+Diese sind sehr verschieden und können sehr komplex ausfallen.
 Diese werden hier nicht weiter betrachtet, könnten aber eine interessante Prüfung des kompletten Eingabebereiches sein.
 
 Es gibt in 180 Helfermethoden, welche in vielen Programmteilen benötigt werden. Eine Methode ist die \emph{cartesianProduct}-Methode, welche das kartesische Produkt zweier Mengen berechnet.
@@ -667,7 +667,7 @@ Als Eingabe werden 2 Arrays erwartet, welche jeweils eine Menge darstellen.
 
 Wir haben uns für eine Partitionierung nach der Größe der Inputarrays ent\-schie\-den.
 Dabei haben wir versucht die Randfälle wie keine Elemente oder nur 1 Element eine Partition zu widmen, da diese oftmals zu Fehler führen.
-Im Folgenden sind alle Partintionen dargestellt, wobei \emph{$|A1|$} die Größe vom ersten Inputarray und \emph{$|A2|$} die Größe vom zweiten Inputarray darstellt.
+Im Folgenden sind alle Partitionen dargestellt, wobei \emph{$|A1|$} die Größe vom ersten Inputarray und \emph{$|A2|$} die Größe vom zweiten Inputarray darstellt.
 \begin{itemize}
 \item $|A1|$ undefined und $|A2|$ undefined
 \item $|A1| \geq$ 0 und $|A2|$ = undefined
@@ -683,7 +683,7 @@ Im Folgenden sind alle Partintionen dargestellt, wobei \emph{$|A1|$} die Größe
 \item $|A1| \geq 2$ und $|A2| \geq $ 2
 \end{itemize}
 
-Diese Partitionierung erfüllt die Kriterien für eine gültige Partitionierung zum Inputtesten, in dem sie paarweise disjunkt sind und zusammen alle möglichen Eingaben der Methode abbilden.
+Diese Partitionierung erfüllt die Kriterien für eine gültige Partitionierung zum Inputtesten, indem sie paarweise disjunkt sind und zusammen alle möglichen Eingaben der Methode abbilden.
 Andere Partitionierungen, wie zum Beispiel die Reihenfolge der Elemente haben wir nicht betrachtet, da die Reihenfolge überhaupt keine Rolle spielt.
 Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementiert \footnote{https://github.com/knub/onehundredandeighty/blob/testing/test/input.js}.
 
@@ -691,7 +691,7 @@ Die entsprechenden Tests für ein Beispiel aus jeder Partition wurden implementi
 Wir haben mit Hilfe von \emph{grunt-mutation-testing} \footnote{https://www.npmjs.com/package/grunt-mutation-testing} die Mutation Coverage der von uns geschriebenen Tests ermittelt.
 Dabei haben wurde die Coverage von 0~\% auf 45~\% gesteigert (siehe Abbildung~\ref{fig:mutation}).
 Das von uns verwendete Tool \texttt{grunt-mutation-testing} bietet folgende Mutationen an: Austauschen/Ver\-än\-dern von arithmetischen, logischen oder Vergleichs-Operatoren, Entfernen von Elementen eines Arrays, Entfernen von Statements, Verändern von Funktionsparamtern, Ändern von Literalen, sowie das Entfernen von Eigenschaften eines Objektes.
-Wir haben alle diese Mutationarten angewandt.
+Wir haben alle diese Mutationsarten angewandt.
 Dabei kann man sehen, dass einige Methoden schon fast vollständig abgedeckt sind, andere Methoden hingegen noch gar nicht getestet werden.
 In vielen Methoden sind einzelne Vergleiche (z.B. $<$ kann mit $\leq$ ersetzt werden) nicht vollständing abgedeckt.
 
@@ -712,7 +712,7 @@ Wir haben uns 3 Tools angeschaut, die sich auf die statische Analyse spezialisie
 Desweiteren haben wir uns den \emph{Google Closure Compiler} angeschaut, welcher keine klassische statische Analyse durchführt, allerdings trotzdem für diesen Zweck verwendet werden kann.
 
 Bisher wurde im Projekt keine statische Analyse automatisiert in den Entwicklungsprozess eingeführt.
-Allerdings wurde der Code bei der Entwicklung sporadisch manuell getestet, in dem er online auf \url{http://jslint.com/} kopiert wurde.
+Allerdings wurde der Code bei der Entwicklung sporadisch manuell getestet, indem er online auf \url{http://jslint.com/} kopiert wurde.
 Wie bereits erwähnt, geschah dies allerdings nicht systematisch.
 
 Eine automatische statische Analyse hätte bereits einmal einen Fehler verhindern können.
@@ -783,7 +783,7 @@ removeSemester: function(number) {
 }
 \end{lstlisting}
 
-Dementsprechen haben wir dieses Problem behoben, in dem wir die Funktion als eigenständige Funktion ausgelagert haben.
+Dementsprechend haben wir dieses Problem behoben, indem wir die Funktion als eigenständige Funktion ausgelagert haben.
 Die betreffende Codezeile 7 liest sich nach der Änderung wie folgt:
 \texttt{[...].each(removeListFromSemester);}
 
@@ -792,7 +792,7 @@ Die betreffende Codezeile 7 liest sich nach der Änderung wie folgt:
 Dies ist ein typischer Fehler in JavaScript, der zu schwer zu debuggenden Programmen führen kann.
 JavaScript zwischen zwei Vergleichsoperatoren == (!=) und === (!==).
 Ersterer führt vor der Gleichheit eventuell Typumwandlungen um, um die beiden Operanden vergleichbar zu machen.
-Das führt zu mitunder merkwürdigen Ergebnissen, wie Abbildung \ref{fig:javascript_truth_table} zeigt.
+Das führt zu mitunter merkwürdigen Ergebnissen, wie Abbildung \ref{fig:javascript_truth_table} zeigt.
 
 \begin{figure}[h!]
 \centering
@@ -807,14 +807,26 @@ Alle hier verwendeten Analyse-Tools sind eher pessimistisch, da sie auch nur pot
 
 \subsubsection{Google Closure Compiler}
 Der \emph{Google Closure Compiler} ist kein klassisches Code Analyse Tool.
-Die eigentliche Funktion des Tools ist es, JavaScript Code so zu compilieren, dass er schneller herunterlad- und ausführbar ist.
-Dieses Compilieren benutzt allerdings auch eine statische Analyse, welche analysiert, zu welchen Browser-Versionen das JavaScript kompatibel ist.
+Die eigentliche Funktion des Tools ist es, JavaScript Code so zu kompilieren, dass er schneller herunterlad- und ausführbar ist.
+Dieses Kompilieren benutzt allerdings auch eine statische Analyse, welche analysiert, zu welchen Browser-Versionen das JavaScript kompatibel ist.
 Wir haben dieses Teil benutzt um unsere Anwendung überprüfen zu lassen.
 Dabei kam heraus, dass die Anwendung nicht kompatibel zum Internet Explorer 8 oder älter geschrieben wurde, da inkompatibles JavaScript verwendet wird.
 Neuere Versionen stellen allerdings kein Problem dar.
 Wir haben dies nicht weiter verfolgt, da wir keine solch alten Versionen unterstützen möchten.
 Das Tool arbeitet mit \emph{optimistic inaccuracy}, d.h. wenn eine Meldung auftritt, wissen wir, dass es ein Problem gibt.
 Aus der Tatsache, dass für andere Browser keine Fehler gemeldet wurden, können wir aber nicht schließen, dass 180 auf diesen problemlos läuft.
+
+\subsubsection{Domänenspezifische Analyse für \texttt{data.js}}
+Wie bereits erwähnt ist das Hauptproblem in der Wartungsphase die Änderungen an \texttt{data.js}, die in jedem Semester vorgenommen werden müssen.
+Hierfür bietet sich eine domänenspezifische Analyse an, die immer bei Änderungen an der Datei durchgeführt wird.
+Diese kann als Plausibilitätsprüfung verstanden werden.
+In folgenden Fällen ist ein Fehler zum Beispiel wahrscheinlich:
+\begin{itemize}
+    \item Ein Professor bietet eine Vorlesung in einem fachfremden Vertiefungsgebiet an.
+    \item Es gibt einen Rechtschreibfehler im Namen einer Veranstaltung
+    \item Veranstaltungen haben weniger als zwei oder mehr als drei Vertiefungsgebiete
+\end{itemize}
+Das Tool würde mit \emph{pessimistic inaccuracy} arbeiten, da nicht jeder Fehler wirklich ein Fehler sein muss.
 
 \subsubsection{Einbindung in den Entwicklungsprozess}
 Nach Testen aller Tools haben wir uns entschieden, JSHint und ESLint automatisiert in den Entwicklungsprozess zu integrieren.
@@ -869,11 +881,11 @@ Symbolische Ausführung würde sich für diese Methoden ebenfalls anbieten, da d
 
 
 \subsection{Type Analysis}
-Das Tool \emph{TAJS}\footnote{http://www.brics.dk/TAJS/} ist ein Type Analyzer für Javascript, entwickelt von Anders Møller et al.
+Das Tool \emph{TAJS} (\url{http://www.brics.dk/TAJS/}) ist ein Type Analyzer für Javascript, entwickelt von Anders Møller et al.
 Man kann damit Call-Graphen sehen oder auch Datenflussanalysen durchführen.
 
 Wir haben uns verschiedene Flussgraphen der einzelnen Programme angeschaut.
-In Abbildung \ref{fig:tajs} ist beispielhaft der Flussgraph der in Kapitel \ref{sec:wirtschaft} vorgestellten Wirtschaftsregel\footnote{Code siehe \url{https://github.com/knub/onehundredandeighty/blob/testing/js/logic.js\#L674-L679}} zu sehen.
+In Abbildung \ref{fig:tajs} ist beispielhaft der Flussgraph der in Kapitel \ref{sec:wirtschaft} vorgestellten Wirtschaftsregel\footnote{\url{https://github.com/knub/onehundredandeighty/blob/testing/js/logic.js\#L674-L679}} zu sehen.
 
 \begin{figure}[h!]
 \centering
@@ -884,7 +896,7 @@ In Abbildung \ref{fig:tajs} ist beispielhaft der Flussgraph der in Kapitel \ref{
 
 Man erkennt klar die Deklaration (vardecl) der einzelnen Variablen, sowie die verschiedenen Initialisierungen (write-variable) und wann eine Variable gelesen wird (read-variable).
 Genauso sind verschiedene Funktionsaufrufe (\texttt{getSemester}) und Konstantendefinitionen (\texttt{Literal 1}) enthalten.
-Gegen Ende der Funktion kann erkannt werden, dass Short Circiut Operationen enthalten sind.
+Gegen Ende der Funktion kann erkannt werden, dass Short-Circuit Operationen enthalten sind.
 Diese Art von Ausgabe stellt sehr schön graphisch dar, welche Schritte die einzelnen Variablen durchlaufen.
 Man erkennt auch die Short-Circuit Auswertung des logischen Ausdrucks am Ende der Funktion.
 Allerdings können diese Diagramme sehr schnell sehr groß und unübersichtlich werden, so dass sie nur für die Analyse von kleinen Programmabschnitten geeignet sind.
@@ -901,7 +913,7 @@ Wir würden solche Werkzeuge nur für wirklich kritischen Code nutzen, und wenn 
 Wir haben nach Anwendung verschiedener Test-Coverage-Methoden, der Tools zur statischen Analyse sowie der Betrachtung der Verifikation keinen Bug gefunden.
 Allerdings sind einige Unsauberkeiten in der Programmierung entfernt.
 
-Beim Testen haben wir uns auf Graph Coverage an den beiden beispielhaften Fällen Control Flow Coverage und Use Cases konzentriert.
+Beim Testen haben wir uns auf Graph Coverage an den beiden Fällen Control Flow Coverage und Use Cases konzentriert.
 Diese Methoden konnten wir beispielhaft bei \emph{onehundredandeighty} an ausgewählten Programmteilen erfolgreich umsetzen.
 Dabei halfen uns die Methoden dabei, die richtigen Testpfade und Requirements zu finden.
 Allerdings sind die Methoden sehr aufwändig, so dass sie nicht für das ganze Programm umgesetzt wurden.
